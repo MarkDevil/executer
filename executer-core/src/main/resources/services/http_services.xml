@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services>
+
+	<!--签约参数测试-->
+	<http id="registerUser"
+		  url="http://10.100.142.117:22223/financial-web/api/customer/bindAccount"
+		  method="POST"
+		  desc="签约接口"
+	/>
+
+	<http id="ubindUser"
+		  url="http://10.100.142.117:22223/financial-web/api/customer/unbindAccount"
+		  method="POST"
+		  desc="解约接口"
+	/>
+
+	<http id="queryLoan"
+		  url="http://10.100.142.117:22223/financial-web/api/queryLoan"
+		  method="POST"
+		  desc="查询放款接口"
+	/>
+
+	<http id="queryRepayment"
+		  url="http://10.100.142.117:22223/financial-web/api/queryRepayment"
+		  method="POST"
+		  desc="查询还款接口"
+	/>
+
+	<http id="loanCallBack"
+		  url="http://10.100.142.117:22223/financial-web/api/loan/callBack/loanAmount"
+		  method="POST"
+		  desc="本金回调"
+	/>
+
+	<http id="feeCallBack"
+		  url="http://10.100.142.117:22223/financial-web/api/loan/callBack/fee"
+		  method="POST"
+		  desc="利息回调"
+	/>
+
+	<http id="loan"
+		  url="http://10.100.142.117:22223/financial-web/api/loan"
+		  method="POST"
+		  desc="放款接口"
+	/>
+
+	<http id="repayment"
+		  url="http://10.100.142.117:22223/financial-web/api/repay"
+		  method="POST"
+		  desc="还款接口"
+	/>
+
+
+	<!--<http id="repayment"-->
+		  <!--url="http://10.10.153.130:8080/financial-web/api/repay"-->
+		  <!--method="POST"-->
+		  <!--desc="还款接口"-->
+	<!--/>-->
+
+	<http id="querySubAccount"
+		  url="http://10.100.142.117:22223/financial-web/api/querySubAccount"
+		  method="POST"
+		  desc="查询附属子账户信息"
+	/>
+
+	<http id="queryBankRepayment"
+		  url="http://10.100.142.117:22223/financial-web/api/queryBankRepayment"
+		  method="POST"
+		  desc="查询附属子账户信息"
+	/>
+
+	<!--自由调账接口-->
+	<http id="adjust"
+		  url="http://10.100.142.117:22223/financial-web/api/adjust"
+		  method="POST"
+		  desc="自由调账接口"
+	/>
+
+	<http id="queryAdjust"
+		  url="http://10.100.142.117:22223/financial-web/api/queryAdjust"
+		  method="POST"
+		  desc="查询调账记录"
+	/>
+	<!--<http 	id="queryAdjust"-->
+			<!--url="http://10.10.153.95:8080/financial-web/api/queryAdjust"-->
+			<!--method="POST"-->
+			<!--desc="查询附属子账户信息"-->
+	<!--/>-->
+
+	<!--展期接口-->
+	<!--<http id="extension"-->
+		  <!--url="http://localhost:8233/financial-web/api/extension"-->
+		  <!--method="POST"-->
+		  <!--desc="展期接口"-->
+	<!--/>-->
+
+	<http id="extension"
+		  url="http://10.100.142.117:22223/financial-web/api/extension"
+		  method="POST"
+		  desc="展期接口"
+	/>
+
+
+	<!--118开发环境-->
+
+	<!--<http id="loan"-->
+		  <!--url="http://10.100.142.118:8031/financial-web/api/loan"-->
+		  <!--method="POST"-->
+		  <!--desc="放款接口"-->
+	<!--/>-->
+
+	<!--<http id="repayment"-->
+		  <!--url="http://10.100.142.118:8031/financial-web/api/repay"-->
+		  <!--method="POST"-->
+		  <!--desc="还款接口"-->
+	<!--/>-->
+
+	<!--<http id="querySubAccount"-->
+		  <!--url="http://10.100.142.118:8031/financial-web/api/querySubAccount"-->
+		  <!--method="POST"-->
+		  <!--desc="查询附属子账户信息"-->
+	<!--/>-->
+
+	<!--<http id="queryBankRepayment"-->
+		  <!--url="http://10.100.142.118:8031/financial-web/api/queryBankRepayment"-->
+		  <!--method="POST"-->
+		  <!--desc="查询附属子账户信息"-->
+	<!--/>-->
+
+	<!--<http id="queryLoan"-->
+		<!--url="http://10.100.142.118:8031/financial-web/api/queryLoan"-->
+		<!--method="POST"-->
+		<!--desc="查询放款接口"-->
+	<!--/>-->
+
+	<!--<http id="queryRepayment"-->
+		<!--url="http://10.100.142.118:8031/financial-web/api/queryRepayment"-->
+		<!--method="POST"-->
+		<!--desc="查询还款接口"-->
+	<!--/>-->
+
+
+</services>
