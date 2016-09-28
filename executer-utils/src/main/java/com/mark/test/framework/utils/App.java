@@ -1,4 +1,4 @@
-package com.mark.test.framework;
+package com.mark.test.framework.utils;
 
 /**
  * Hello world!
