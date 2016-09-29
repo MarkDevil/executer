@@ -35,6 +35,7 @@
     <orderEntry type="library" name="Spring-4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Spring MVC-4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.0.1" level="project" />
+    <orderEntry type="module" module-name="executer-core" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.6" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.12" level="project" />

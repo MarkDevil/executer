@@ -1,9 +1,9 @@
 package com.mark.test.framework.core.service.impl;
 
-import com.mark.test.framework.core.service.intf.IGatewayService;
-
-import java.util.List;
-import java.util.Map;
+import com.mark.test.framework.core.dto.GwTransfers;
+import com.mark.test.framework.core.service.intf.GwTransfersMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by MingfengMa .
@@ -11,21 +11,34 @@ import java.util.Map;
  * Project : executer
  * Desc :
  */
-public class GatewayService implements IGatewayService {
+@Service("GatewayService")
+public class GatewayService implements GwTransfersMapper {
 
-    public boolean updateGwTransferOrder(String requestNo) {
-        return false;
+    @Autowired
+    GwTransfersMapper gwTransfersMapper;
+
+    public int deleteByPrimaryKey(Long id) {
+
+        return 0;
     }
 
-    public boolean updateGwPaymentOrder(String requestNo) {
-        return false;
+    public int insert(GwTransfers record) {
+        return 0;
     }
 
-    public List<Map<String, Object>> queryGwTransferOrder(String requestNo) {
-        return null;
+    public int insertSelective(GwTransfers record) {
+        return 0;
     }
 
-    public List<Map<String, Object>> queryGwPaymentOrder(String requestNo) {
-        return null;
+    public GwTransfers selectByPrimaryKey(Long id) {
+        return gwTransfersMapper.selectByPrimaryKey(id);
+    }
+
+    public int updateByPrimaryKeySelective(GwTransfers record) {
+        return 0;
+    }
+
+    public int updateByPrimaryKey(GwTransfers record) {
+        return 0;
     }
 }

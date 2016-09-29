@@ -87,7 +87,7 @@
 
 
 
-        <table tableName="loan_order" schema="pay_financial" >
+        <table tableName="gw_transfers" schema="pay_fund_gateway" >
 
             <!-- optional   , only for mybatis3 runtime
                  自动生成的键值（identity,或者序列值）

@@ -17,6 +17,11 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.mark.test.framework</groupId>
+            <artifactId>executer-core</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>executer-web</finalName>
