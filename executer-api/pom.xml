@@ -3,11 +3,10 @@
     <parent>
         <artifactId>executer</artifactId>
         <groupId>com.mark.test.framework</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mark.test.framework</groupId>
     <artifactId>executer-api</artifactId>
     <packaging>jar</packaging>
 

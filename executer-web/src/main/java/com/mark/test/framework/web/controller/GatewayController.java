@@ -1,7 +1,8 @@
 package com.mark.test.framework.web.controller;
 
 
-import com.mark.test.framework.core.service.impl.GatewayService;
+
+import com.mark.test.framework.web.service.GwTransferService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/api")
 public class GatewayController {
 
-    private static Logger logger = LogManager.getLogger("HelloWorld");
+    private static Logger logger = LogManager.getLogger("test");
 
     @Autowired
-    private GatewayService gwService;
+    private GwTransferService queryGwTransfer;
 
     @RequestMapping(method = RequestMethod.POST,value = "/updateGatewayStatus")
     @ResponseBody
@@ -45,7 +46,7 @@ public class GatewayController {
     @ResponseBody
     public String queryGwTransfers(){
         logger.info("query page");
-        return String.valueOf(gwService.selectByPrimaryKey((long)854));
+        return String.valueOf(queryGwTransfer.queryGwTransfers((long)854).getChannelCode());
     }
 
 

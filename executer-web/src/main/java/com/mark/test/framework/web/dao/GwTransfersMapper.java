@@ -1,7 +1,7 @@
-package com.mark.test.framework.core.service.intf;
+package com.mark.test.framework.web.dao;
 
 
-import com.mark.test.framework.core.dto.GwTransfers;
+import com.mark.test.framework.web.dto.GwTransfers;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

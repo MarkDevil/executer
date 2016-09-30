@@ -4,15 +4,6 @@
 
 <web-app>
     <display-name>executer</display-name>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:spring-xml/applicationContext.xml</param-value>
-    </context-param>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
 
     <filter>
         <filter-name>HiddenHttpMethodFilter</filter-name>
@@ -49,10 +40,20 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:spring-xml/executer-servlet.xml</param-value>
+            <param-value>classpath*:spring-xml/*.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:spring-xml/*.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <servlet-mapping>
         <servlet-name>executer</servlet-name>
         <url-pattern>/</url-pattern>
