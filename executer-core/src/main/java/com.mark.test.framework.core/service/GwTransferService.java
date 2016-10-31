@@ -1,6 +1,6 @@
-package com.mark.test.framework.web.service;
+package com.mark.test.framework.core.service;
 
-import com.mark.test.framework.web.dto.GwTransfers;
+import com.mark.test.framework.core.dto.GwTransfers;
 
 /**
  * Created by MingfengMa .

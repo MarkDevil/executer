@@ -1,4 +1,4 @@
-package com.mark.test.framework.web.dto;
+package com.mark.test.framework.core.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;

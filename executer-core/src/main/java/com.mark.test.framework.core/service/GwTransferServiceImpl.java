@@ -1,7 +1,7 @@
-package com.mark.test.framework.web.service;
+package com.mark.test.framework.core.service;
 
-import com.mark.test.framework.web.dao.GwTransfersMapper;
-import com.mark.test.framework.web.dto.GwTransfers;
+import com.mark.test.framework.core.dao.GwTransfersMapper;
+import com.mark.test.framework.core.dto.GwTransfers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,6 @@ public class GwTransferServiceImpl implements GwTransferService {
     private GwTransfersMapper gwTransfermaper;
 
     public GwTransfers queryGwTransfers(long id) {
-
         return gwTransfermaper.selectByPrimaryKey(id);
     }
 }

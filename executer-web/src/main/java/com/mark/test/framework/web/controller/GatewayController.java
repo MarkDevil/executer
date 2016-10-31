@@ -2,7 +2,7 @@ package com.mark.test.framework.web.controller;
 
 
 
-import com.mark.test.framework.web.service.GwTransferService;
+import com.mark.test.framework.core.service.GwTransferService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
