@@ -45,7 +45,7 @@ public class GatewayController {
     @ResponseBody
     public String queryGwTransfers(){
         logger.info("query page");
-        return String.valueOf(queryGwTransfer.queryGwTransfers((long)1000));
+        return String.valueOf(queryGwTransfer.queryGwTransfers((long)1000).toString());
     }
 
 

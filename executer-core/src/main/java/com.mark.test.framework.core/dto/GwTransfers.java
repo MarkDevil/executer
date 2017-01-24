@@ -1,5 +1,7 @@
 package com.mark.test.framework.core.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -474,5 +476,11 @@ public class GwTransfers {
      */
     public String getRecvBanknm() {
         return recvBanknm;
+    }
+
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(GwTransfers.this);
     }
 }

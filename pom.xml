@@ -7,7 +7,8 @@
     <packaging>pom</packaging>
     <name>executer-parent</name>
     <version>0.0.1</version>
-    <url>http://maven.apache.org</url>
+
+
     <modules>
         <module>executer-core</module>
         <module>executer-api</module>
@@ -19,7 +20,11 @@
     <properties>
             <webdriver-version>2.53.0</webdriver-version>
             <log4j12-version>1.7.12</log4j12-version>
+            <junit-versin>3.8.1</junit-versin>
+            <comm-lang3>3.4</comm-lang3>
     </properties>
+
+    <dependencyManagement>
 
 
     <dependencies>
@@ -115,16 +120,20 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${comm-lang3}</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>${junit-versin}</version>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
-
-
-
+    </dependencyManagement>
     <build>
         <finalName>executer</finalName>
     </build>
