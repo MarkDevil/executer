@@ -30,7 +30,7 @@ public class ExecuterTimeInterceptor extends HandlerInterceptorAdapter{
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
         try {
-            long startTime = new Date().getTime();
+            long startTime = (Long) request.getAttribute(START_TIME_NAME);
             long elapsedTime = System.currentTimeMillis() - startTime;
             logger.info("{} execution time: {}", new Object[] { request.getRequestURI(), elapsedTime });
         }
