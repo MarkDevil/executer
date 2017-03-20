@@ -16,7 +16,10 @@ public class PrintLogScheduleTask implements Job {
     private static String _prefix = "mark-test";
 
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        this.printName();
+    }
 
+    public void printName(){
         long nowtime = System.currentTimeMillis();
         logger.info(_prefix + String.valueOf(nowtime));
     }

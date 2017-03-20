@@ -21,6 +21,8 @@ import static org.quartz.TriggerBuilder.newTrigger;
 @RequestMapping(value = "/api")
 public class SchedulerController {
 
+    private PrintLogScheduleTask printLogScheduleTask = new PrintLogScheduleTask();
+
     @RequestMapping(value = "/schedule",method = RequestMethod.GET)
     @ResponseBody
     public String invokeSchedule() {
@@ -43,6 +45,12 @@ public class SchedulerController {
             e.printStackTrace();
         }
         return "start successfully";
+    }
+
+    @RequestMapping(value = "/schedule/onetime",method = RequestMethod.GET)
+    public String invoke1time(){
+        printLogScheduleTask.printName();
+        return "ok";
     }
 
 
