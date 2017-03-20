@@ -1,0 +1,50 @@
+package com.mark.test.framework.web.controller;
+
+import com.mark.test.framework.core.task.PrintLogScheduleTask;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
+
+/**
+ * Created by MingfengMa .
+ * Data : 2017/3/16
+ * Desc :
+ */
+@Controller
+@RequestMapping(value = "/api")
+public class SchedulerController {
+
+    @RequestMapping(value = "/schedule",method = RequestMethod.GET)
+    @ResponseBody
+    public String invokeSchedule() {
+        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+        try {
+            Scheduler scheduler = schedulerFactory.getScheduler();
+            JobDetail jobDetail = newJob(PrintLogScheduleTask.class).
+                    withIdentity("testTask").build();
+            Trigger trigger = newTrigger()
+                    .withIdentity("trigger1", "group1")
+                    .startNow()
+                    .withSchedule(simpleSchedule()
+                            .withIntervalInSeconds(40)
+                            .repeatForever())
+                    .build();
+            scheduler.scheduleJob(jobDetail,trigger);
+            scheduler.start();
+
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+        return "start successfully";
+    }
+
+
+
+}
