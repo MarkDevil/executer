@@ -20,7 +20,7 @@
     <properties>
             <webdriver-version>2.53.0</webdriver-version>
             <log4j12-version>1.7.12</log4j12-version>
-            <junit-versin>3.8.1</junit-versin>
+            <junit-versin>4.12</junit-versin>
             <comm-lang3>3.4</comm-lang3>
     </properties>
 
@@ -162,6 +162,12 @@
             <artifactId>junit</artifactId>
             <version>${junit-versin}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.Ziroom.qa</groupId>
+            <artifactId>AutomationBase</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
