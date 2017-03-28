@@ -22,7 +22,7 @@ public class GatewayController {
 
     private static Logger logger = LoggerFactory.getLogger("test");
 
-    @Autowired
+    @Autowired(required = false)
     private GwTransferService queryGwTransfer;
 
     @RequestMapping(method = RequestMethod.POST,value = "/updateGatewayStatus")
@@ -45,8 +45,9 @@ public class GatewayController {
     @ResponseBody
     public String queryGwTransfers(){
         logger.info("query page");
+        return "ok";
 
-        return String.valueOf(queryGwTransfer.queryGwTransfers((long)1000).toString());
+//        return String.valueOf(queryGwTransfer.queryGwTransfers((long)1000).toString());
     }
 
 
