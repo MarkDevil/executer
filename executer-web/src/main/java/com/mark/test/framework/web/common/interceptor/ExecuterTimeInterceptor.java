@@ -32,7 +32,7 @@ public class ExecuterTimeInterceptor extends HandlerInterceptorAdapter{
         try {
             long startTime = (Long) request.getAttribute(START_TIME_NAME);
             long elapsedTime = System.currentTimeMillis() - startTime;
-            logger.info("{} execution time: {}", new Object[] { request.getRequestURI(), elapsedTime });
+            logger.info("{} execution time: {} ms", new Object[] { request.getRequestURI(), elapsedTime });
         }
         catch (Exception ignore) {
             logger.error("Failed to calc controller elapsed time", ignore);

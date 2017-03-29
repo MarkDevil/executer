@@ -48,6 +48,7 @@ public class SchedulerController {
     }
 
     @RequestMapping(value = "/schedule/onetime",method = RequestMethod.GET)
+    @ResponseBody
     public String invoke1time(){
         printLogScheduleTask.printName();
         return "ok";
