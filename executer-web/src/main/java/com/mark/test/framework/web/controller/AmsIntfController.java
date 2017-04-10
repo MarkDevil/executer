@@ -24,7 +24,7 @@ public class AmsIntfController {
     @ResponseBody
     public JSONObject hirehourse(){
         runTestCase.run("testcase");
-        com.alibaba.fastjson.JSONObject jsonObject = new com.alibaba.fastjson.JSONObject();
+        JSONObject jsonObject = new JSONObject();
         jsonObject.put("retCode","200");
         return jsonObject;
     }
