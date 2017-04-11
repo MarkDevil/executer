@@ -14,10 +14,11 @@ import static com.codeborne.selenide.Selenide.open;
  */
 
 public class TestWeb {
+
     @Test
     public void test1(){
         Configuration.browser= "chrome";
-        System.setProperty("webdriver.chrome.driver",this.getClass().getResource("").getPath() + "/webdriver/chromedriver");
+        System.setProperty("webdriver.chrome.driver",this.getClass().getResource("/webdriver/chromedriver").getPath());
         open("https://www.baidu.com/");
         //根据id查找元素，并进行操作
         $("#kw").sendKeys("selenide");
