@@ -1,9 +1,11 @@
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -61,5 +63,17 @@ public class TestMockController extends AbstractJUnit4SpringContextTests{
         requestMap.put("mark","123");
         requestMap.put("jack","234");
         mockMvc.perform(post("/api/updateGatewayStatus",requestMap));
+    }
+
+    @Test
+    public void testRequest() throws Exception {
+        Map<String,String> requestMap = Maps.newHashMap();
+        requestMap.put("id","1");
+        requestMap.put("name","mark");
+        String jsonString = JSONObject.toJSONString(requestMap);
+        mockMvc.perform(post("/api/test")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonString)).andDo(print()).andReturn().getResponse().getContentAsString();
+
     }
 }

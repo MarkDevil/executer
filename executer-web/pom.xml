@@ -72,15 +72,17 @@
             <artifactId>jackson-core-asl</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.codeborne</groupId>
-            <artifactId>selenide</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.codeborne</groupId>-->
+            <!--<artifactId>selenide</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+
+
 
 
     </dependencies>
