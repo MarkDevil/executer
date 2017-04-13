@@ -68,7 +68,7 @@ public class TestMockController extends AbstractJUnit4SpringContextTests{
     @Test
     public void testRequest() throws Exception {
         Map<String,String> requestMap = Maps.newHashMap();
-        requestMap.put("id","1");
+        requestMap.put("id",null);
         requestMap.put("name","mark");
         String jsonString = JSONObject.toJSONString(requestMap);
         mockMvc.perform(post("/api/test")

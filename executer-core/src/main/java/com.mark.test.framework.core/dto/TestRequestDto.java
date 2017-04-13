@@ -1,5 +1,7 @@
 package com.mark.test.framework.core.dto;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by MingfengMa .
  * Data   : 2017/4/12
@@ -8,7 +10,11 @@ package com.mark.test.framework.core.dto;
  */
 
 public class TestRequestDto {
+
+    @NotNull
     private String id;
+
+    @NotNull
     private String name;
 
     public String getId() {

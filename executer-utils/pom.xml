@@ -29,5 +29,15 @@
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.3.1</version>
+        </dependency>
     </dependencies>
 </project>
