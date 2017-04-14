@@ -4,13 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
-import java.io.File;
-import java.io.IOException;
-
 /**
  * Created by MingfengMa .
  * Data : 2016/7/21
- * Project : autotest
+ * Project :
  * Desc :
  */
 public class WebDriverFactory {
@@ -44,18 +41,6 @@ public class WebDriverFactory {
             return null;
         }
 
-    }
-
-    public WebDriver createAndstartService() throws IOException {
-        service = new ChromeDriverService.Builder().
-                usingDriverExecutable(new File("src/test/resources/webdriver/chromedriver")).
-                usingAnyFreePort().build();
-        service.start();
-        return null;
-    }
-
-    public void stopService(){
-        service.stop();
     }
 
 

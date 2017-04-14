@@ -2,12 +2,16 @@ import com.mark.test.framework.utils.WebDriverFactory;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by MingfengMa .
@@ -19,17 +23,7 @@ import java.io.IOException;
 public class TestWeb {
     Logger logger = LoggerFactory.getLogger(TestWeb.class);
     WebDriver driver;
-//    @Test
-//    public void test1(){
-//        Configuration.browser= "chrome";
-//        System.setProperty("webdriver.chrome.driver",this.getClass().getResource("/webdriver/chromedriver").getPath());
-//        open("https://mail.qq.com/");
-//        //根据id查找元素，并进行操作
-//        WebDriver webDriver = new ChromeDriver();
-//        $("#u").sendKeys("575707315");
-//        $("#p").sendKeys("Crystal08102");
-//        $("#login_button").click();
-//    }
+
 
     @Test
     public void testSelenium() throws InterruptedException, IOException {
@@ -41,16 +35,47 @@ public class TestWeb {
         user.sendKeys("575707315");
         passwd.sendKeys("Crystal08102");
         driver.findElement(By.id("login_button")).click();
-//        logger.info(String.valueOf(driver.findElement(By.tagName("iframe"))));
-//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.switchTo().frame("mainFrame");
         driver.findElement(By.id("folder_1")).click();
 
     }
 
+    @Test
+    public void testHtmlDriver(){
+
+        WebDriver driver = new HtmlUnitDriver(false);
+        driver.get("https://mail.qq.com");
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.switchTo().frame("login_frame");
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        WebElement user = driver.findElement(By.id("u"));
+        WebElement passwd = driver.findElement(By.id("p"));
+        user.sendKeys("575707315");
+        passwd.sendKeys("Crystal08102");
+        driver.findElement(By.id("login_button")).click();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.switchTo().frame("mainFrame");
+        driver.findElement(By.id("folder_1")).click();
+    }
+
+    /**
+     * 使用无界面的浏览器进行UI测试 HtmlUnitDriver
+     */
+    @Test
+    public void doSearch() {
+        final String url = "http://www.baidu.com";
+        WebDriver driver = new HtmlUnitDriver(false);
+        driver.get(url);
+        driver.findElement(By.id("kw")).sendKeys("test");
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ENTER).perform();
+        System.out.println(driver.getPageSource());
+    }
+
+
     @After
     public void clean(){
-        WebDriverFactory.getWebDriverInstance().closeWebDriver();
+//        WebDriverFactory.getWebDriverInstance().closeWebDriver();
     }
 }
