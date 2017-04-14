@@ -52,7 +52,7 @@ public class TestWeb {
         WebElement user = driver.findElement(By.id("u"));
         WebElement passwd = driver.findElement(By.id("p"));
         user.sendKeys("575707315");
-        passwd.sendKeys("Crystal08102");
+        passwd.sendKeys("mmm");
         driver.findElement(By.id("login_button")).click();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.switchTo().frame("mainFrame");
