@@ -64,13 +64,13 @@ public class TestWeb {
      */
     @Test
     public void doSearch() {
-        final String url = "http://www.baidu.com";
-        WebDriver driver = new HtmlUnitDriver(false);
+        String url = "http://www.baidu.com";
+        WebDriver driver = new HtmlUnitDriver(true);
         driver.get(url);
         driver.findElement(By.id("kw")).sendKeys("test");
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ENTER).perform();
-        System.out.println(driver.getPageSource());
+//        System.out.println(driver.getPageSource());
     }
 
 

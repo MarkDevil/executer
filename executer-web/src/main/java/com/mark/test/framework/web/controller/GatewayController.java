@@ -51,8 +51,6 @@ public class GatewayController {
     public String queryGwTransfers(){
         logger.info("query page");
         return "ok";
-
-//        return String.valueOf(queryGwTransfer.queryGwTransfers((long)1000).toString());
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/test")
