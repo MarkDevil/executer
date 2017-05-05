@@ -1,4 +1,5 @@
 <html>
+    <meta name="viewport" charset="UTF-8">
     <head>
         <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" ></script>
     </head>
@@ -13,6 +14,8 @@
                 <input id="sch_btn" value="invokeSchedule" type="button">
             </tr>
         </table>
+
+
 
     </body>
 

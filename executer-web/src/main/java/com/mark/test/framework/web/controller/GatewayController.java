@@ -2,18 +2,18 @@ package com.mark.test.framework.web.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.mark.test.framework.core.constat.BaseInfo;
 import com.mark.test.framework.core.dto.TestRequestDto;
 import com.mark.test.framework.core.service.GwTransferService;
+import com.mark.test.framework.utils.SignUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * Created by MingfengMa .
@@ -26,6 +26,7 @@ import javax.validation.Valid;
 public class GatewayController {
 
     private static Logger logger = LoggerFactory.getLogger("test");
+    private BaseInfo baseInfo = new BaseInfo();
 
     @Autowired(required = false)
     private GwTransferService queryGwTransfer;
@@ -65,7 +66,20 @@ public class GatewayController {
         }else {
             return null;
         }
+    }
 
+    @RequestMapping(value = "/sign",method = RequestMethod.POST)
+    @ResponseBody
+    public String generateSign(Map requestmap){
+        logger.info("Request parameter : {}",requestmap.toString());
+        String sign = null;
+        try {
+            sign = SignUtils.sign(requestmap, baseInfo.getSecret());
+        } catch (Throwable throwable) {
+            logger.error("[sign] generate sign failed ...");
+            throwable.printStackTrace();
+        }
+        return sign;
     }
 
 
