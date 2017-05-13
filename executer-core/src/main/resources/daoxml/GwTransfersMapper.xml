@@ -34,11 +34,11 @@
 
 
 
-  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.mark.test.framework.core.dto.GwTransfers" >-->
-    <!--select-->
-    <!--*-->
-    <!--from gw_transfers-->
-    <!--WHERE id = #{id,jdbcType=BIGINT}-->
-  <!--</select>-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.mark.test.framework.core.dto.GwTransfers" >
+    select
+    *
+    from gw_transfers
+    WHERE id = #{id,jdbcType=BIGINT}
+  </select>
 
 </mapper>
