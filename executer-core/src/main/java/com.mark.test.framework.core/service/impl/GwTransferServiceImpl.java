@@ -21,4 +21,5 @@ public class GwTransferServiceImpl implements GwTransferService {
     public GwTransfers queryGwTransfers(long id) {
         return gwTransfermaper.selectByPrimaryKey(id);
     }
+
 }
