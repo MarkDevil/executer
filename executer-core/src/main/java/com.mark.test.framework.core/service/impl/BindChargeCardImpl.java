@@ -6,13 +6,12 @@ import com.mark.test.framework.core.service.IBindChargeCard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by Houbank_QA on 2017/5/27.
  */
-@Service
+@Service("BindChargeCardImpl")
 public class BindChargeCardImpl implements IBindChargeCard {
     Logger logger = LoggerFactory.getLogger(BindChargeCardImpl.class);
 
@@ -20,7 +19,7 @@ public class BindChargeCardImpl implements IBindChargeCard {
     private AccountInfoMapper accountInfoMapper;
 
     public void bindChargeCard(String applyNo) {
-        AccountInfo accountInfo = accountInfoMapper.selectByPrimaryKey("A00421003011705270003");
+        AccountInfo accountInfo = accountInfoMapper.selectByPrimaryKey(applyNo);
         logger.info(String.valueOf(accountInfo));
 
     }

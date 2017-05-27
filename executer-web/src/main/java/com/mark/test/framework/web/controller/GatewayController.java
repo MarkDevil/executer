@@ -5,12 +5,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.mark.test.framework.core.constat.BaseInfo;
 import com.mark.test.framework.core.dto.TestRequestDto;
 import com.mark.test.framework.core.service.GwTransferService;
+import com.mark.test.framework.core.service.IBindChargeCard;
+import com.mark.test.framework.core.service.impl.BindChargeCardImpl;
 import com.mark.test.framework.utils.SignUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -25,11 +30,17 @@ import java.util.Map;
 @RequestMapping(value = "/api")
 public class GatewayController {
 
-    private static Logger logger = LoggerFactory.getLogger("test");
+    private static Logger logger = LoggerFactory.getLogger(GatewayController.class);
     private BaseInfo baseInfo = new BaseInfo();
 
     @Autowired(required = false)
     private GwTransferService queryGwTransfer;
+
+    @Autowired
+    private BindChargeCardImpl bindChargeCardimpl;
+
+    @Autowired
+    private IBindChargeCard bindChargeCard;
 
     @RequestMapping(method = RequestMethod.POST,value = "/updateGatewayStatus")
     @ResponseBody
@@ -80,6 +91,20 @@ public class GatewayController {
             throwable.printStackTrace();
         }
         return sign;
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST,value = "/BindChargeCard")
+    @ResponseBody
+    public JSONObject bindChargeCard(@RequestBody Map applyNo){
+
+        logger.info("request parameter : {}",applyNo);
+        if (applyNo == null){
+            throw new IllegalArgumentException("invalid parameter");
+        }
+        bindChargeCard.bindChargeCard((String) applyNo.get("serialno"));
+        return (JSONObject) new JSONObject().put("result","ok");
+
     }
 
 

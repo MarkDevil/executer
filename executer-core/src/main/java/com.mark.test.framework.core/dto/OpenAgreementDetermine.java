@@ -1,5 +1,7 @@
 package com.mark.test.framework.core.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.Date;
 
 public class OpenAgreementDetermine {
@@ -346,5 +348,10 @@ public class OpenAgreementDetermine {
      */
     public String getSource() {
         return source;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(OpenAgreementDetermine.this);
     }
 }
