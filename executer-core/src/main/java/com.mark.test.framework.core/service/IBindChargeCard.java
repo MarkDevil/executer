@@ -1,7 +1,7 @@
 package com.mark.test.framework.core.service;
 
 /**
- * Created by Houbank_QA on 2017/5/27.
+ * Created by mark on 2017/5/27.
  */
 public interface IBindChargeCard {
     /**
