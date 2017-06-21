@@ -20,56 +20,51 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">测试平台</a>
+
+    <div class="container-fluid">
+        <form action="/api/BindChargeCard" method="post" datatype="json" class="form-horizontal " role="form">
+            <fieldset>
+                <div class="form-group " style="padding-left: 30px">
+                    <label>applyNo</label>
+                    <input type="text" class="form-control" style="width: auto "  name="applyno" placeholder="请输入申请号">
+
+                    <nobr></nobr>
+
+                    <label>bankNo</label>
+                    <input type="text" class="form-control" style="width: auto"  name="bankno" placeholder="请输入银行卡号">
+                </div>
+            </fieldset>
+            <div style="padding-left: 15px">
+                <button id="subBtn" type="submit">submit</button>
             </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">iOS</a></li>
-                    <li><a href="#">SVN</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Java
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">jmeter</a></li>
-                            <li><a href="#">EJB</a></li>
-                            <li><a href="#">Jasper Report</a></li>
-                            <li class="divider"></li>
-                            <li><a href="http://www.baidu.com">分离的链接</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">另一个分离的链接</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        </form>
+    </div>
+    <blockquote>
+    </blockquote>
+
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table id="reportTable" class="table table-hover">
+                <thead>
+                <tr>
+                    <th>放款数据</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>测试</td>
+                        <td>北京</td>
+                    </tr>
+                    <tr>
+                        <td>测试</td>
+                        <td>上海</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
         </div>
-    </nav>
-
-
-    <form action="/api/BindChargeCard" method="post" datatype="json" class="form-horizontal " role="form">
-        <fieldset>
-
-            <div class="form-group ">
-                <label>applyNo</label>
-                <input type="text" class="form-control" style="width: auto "  name="applyno" placeholder="请输入申请号">
-
-                <label>bankNo</label>
-                <input type="text" class="form-control" style="width: auto"  name="bankno" placeholder="请输入银行卡号">
-            </div>
-
-        </fieldset>
-        <div>
-            <button type="submit">submit</button>
-        </div>
-    </form>
-
-
-
-
+    </div>
 
 </body>
 </html>
