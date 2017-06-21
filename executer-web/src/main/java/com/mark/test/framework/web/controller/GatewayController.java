@@ -12,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -96,13 +93,16 @@ public class GatewayController {
 
     @RequestMapping(method = RequestMethod.POST,value = "/BindChargeCard")
     @ResponseBody
-    public JSONObject bindChargeCard(@RequestBody Map applyNo){
+    public JSONObject bindChargeCard(@RequestParam Map request){
 
-        logger.info("request parameter : {}",applyNo);
-        if (applyNo == null){
+        logger.info("request parameter : {}",request);
+        if (request == null){
             throw new IllegalArgumentException("invalid parameter");
         }
-        bindChargeCard.bindChargeCard((String) applyNo.get("serialno"));
+        String applyno = String.valueOf(request.get("applyno"));
+        String bankno = String.valueOf(request.get("bankno"));
+        logger.info("Request info : {} , {}",applyno,bankno);
+//        bindChargeCard.bindChargeCard((String) applyNo.get("serialno"));
         return (JSONObject) new JSONObject().put("result","ok");
 
     }
