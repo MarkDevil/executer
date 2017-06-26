@@ -3,6 +3,8 @@ package com.mark.test.framework.web.controller;
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,12 +22,13 @@ import static org.quartz.TriggerBuilder.newTrigger;
 @Controller
 @RequestMapping(value = "/api")
 public class SchedulerController {
-
+    Logger logger = LoggerFactory.getLogger(SchedulerController.class);
     private PrintLogScheduleTask printLogScheduleTask = new PrintLogScheduleTask();
 
     @RequestMapping(value = "/schedule",method = RequestMethod.GET)
     @ResponseBody
     public String invokeSchedule() {
+        logger.info("Start invoke task ...");
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         try {
             Scheduler scheduler = schedulerFactory.getScheduler();

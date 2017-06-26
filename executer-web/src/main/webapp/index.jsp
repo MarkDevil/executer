@@ -6,12 +6,15 @@
     <body>
         <table>
             <tr>
-                <h2>Hello World!</h2>
-                <input id="btn1" type="button" value="发送">
+                <h2>Start task</h2>
+                <input id="btn1" type="button" value="send">
             </tr>
             <tr>
-                <h3>定时任务调用</h3>
+                <h3>Schedule invoke</h3>
                 <input id="sch_btn" value="invokeSchedule" type="button">
+            </tr>
+            <tr>
+                <comment href="web-inf/html/homePage.html"></comment>
             </tr>
         </table>
 
@@ -19,35 +22,36 @@
 
     </body>
 
-    <script>
-        window.location.href='html/homePage.html';
-    </script>
+    <%--<script>--%>
+        <%--window.location.href='html/homePage.html';--%>
+    <%--</script>--%>
+</html>
 
-
-    <script>
-        $(document).ready(function(){
-            $("btn1").click(function(){
-                $.get("../../api/queryPage/",function(data,status){
-                    alert("数据: " + data + "\n状态: " + status);
-                });
+<script>
+    $(document).ready(function(){
+        $("btn1").click(function(){
+            alert("test info");
+            $.get("api/queryPage",function(data,status){
+                alert("数据: " + data + "\n 状态: " + status);
             });
         });
+    });
 
-        $(document).ready(function () {
-            $("sch_btn").click(function () {
-                $.ajax({
-                    url:'/api/schedule/onetime',
-                    type: 'get',
-                    success : function (data) {
-                        if (data.success){
-                            alert("调用成功");
-                        }
+    $(document).ready(function () {
+        $("sch_btn").click(function () {
+            $.ajax({
+                url:'api/schedule/onetime',
+                type: 'GET',
+                success : function (data) {
+                    if (data.success){
+                        alert("调用成功");
+                        print(data)
                     }
+                }
 
-                })
             })
         })
+    })
 
 
-    </script>
-</html>
+</script>
