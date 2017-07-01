@@ -22,19 +22,19 @@
     });
 
     $(document).ready(function () {
-        $("btn_invoke").click(function () {
-            $.ajax({
-                url:'/api/schedule/onetime',
-                type: 'GET',
-                success : function (data) {
-                    if (data.success){
-                        alert("调用成功");
-                        print(data)
-                    }
-                }
-
-            })
-        })
+//        $("btn_invoke").click(function () {
+//            $.ajax({
+//                url:'/api/schedule/onetime',
+//                type: 'GET',
+//                success : function (data) {
+//                    if (data.success){
+//                        alert("调用成功");
+//                        print(data)
+//                    }
+//                }
+//
+//            })
+//        })
     })
 
 
