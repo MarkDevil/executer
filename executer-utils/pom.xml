@@ -64,9 +64,10 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.8</version>
         </dependency>
+
         <dependency>
             <groupId>com.mark.test.framework</groupId>
-            <artifactId>executer-core</artifactId>
+            <artifactId>executer-api</artifactId>
             <version>0.0.1</version>
         </dependency>
 

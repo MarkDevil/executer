@@ -23,7 +23,7 @@ public class ExecuterTimeInterceptor extends HandlerInterceptorAdapter{
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Date now = new Date();
         request.setAttribute(START_TIME_NAME, now.getTime());
-        logger.info("Received request at {}", new Object[] {  now });
+        logger.info("Received request at {} ", new Object[] {  now });
         return true;
     }
 
@@ -32,7 +32,7 @@ public class ExecuterTimeInterceptor extends HandlerInterceptorAdapter{
         try {
             long startTime = (Long) request.getAttribute(START_TIME_NAME);
             long elapsedTime = System.currentTimeMillis() - startTime;
-            logger.info("{} execution time: {} ms", new Object[] { request.getRequestURI(), elapsedTime });
+            logger.info("{} execution time: {} ms ", new Object[] { request.getRequestURI(), elapsedTime });
         }
         catch (Exception ignore) {
             logger.error("Failed to calc controller elapsed time", ignore);

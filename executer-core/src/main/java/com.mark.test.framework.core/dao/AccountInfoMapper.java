@@ -1,14 +1,7 @@
 package com.mark.test.framework.core.dao;
 
-import com.mark.test.framework.core.dto.AccountInfo;
-
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.mark.test.framework.api.dto.AccountInfo;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -127,4 +120,6 @@ public interface AccountInfoMapper {
         "where SERIALNO = #{serialno,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(AccountInfo record);
+
+
 }

@@ -1,6 +1,7 @@
 package com.mark.test.framework.core.dao;
 
-import com.mark.test.framework.core.dto.OpenAgreementDetermine;
+
+import com.mark.test.framework.api.dto.OpenAgreementDetermine;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.mark.test.framework.core.dto;
+package com.mark.test.framework.api.dto;
 
 import javax.validation.constraints.NotNull;
 

@@ -1,7 +1,7 @@
 package com.mark.test.framework.core.service.impl;
 
+import com.mark.test.framework.api.dto.GwTransfers;
 import com.mark.test.framework.core.dao.GwTransfersMapper;
-import com.mark.test.framework.core.dto.GwTransfers;
 import com.mark.test.framework.core.service.GwTransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

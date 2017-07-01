@@ -1,9 +1,9 @@
 package com.mark.test.framework.core.service.impl;
 
+import com.mark.test.framework.api.dto.AccountInfo;
+import com.mark.test.framework.api.dto.OpenAgreementDetermine;
 import com.mark.test.framework.core.dao.AccountInfoMapper;
 import com.mark.test.framework.core.dao.OpenAgreementDetermineMapper;
-import com.mark.test.framework.core.dto.AccountInfo;
-import com.mark.test.framework.core.dto.OpenAgreementDetermine;
 import com.mark.test.framework.core.service.IBindChargeCard;
 import com.mark.test.framework.utils.CommUtils;
 import org.slf4j.Logger;

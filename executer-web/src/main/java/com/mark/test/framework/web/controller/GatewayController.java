@@ -2,8 +2,8 @@ package com.mark.test.framework.web.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.mark.test.framework.api.dto.TestRequestDto;
 import com.mark.test.framework.core.constat.BaseInfo;
-import com.mark.test.framework.core.dto.TestRequestDto;
 import com.mark.test.framework.core.service.GwTransferService;
 import com.mark.test.framework.core.service.IBindChargeCard;
 import com.mark.test.framework.core.service.impl.BindChargeCardImpl;
@@ -101,7 +101,6 @@ public class GatewayController {
         }
         String applyno = String.valueOf(request.get("applyno"));
         String bankno = String.valueOf(request.get("bankno"));
-        logger.info("Request info : {} , {}",applyno,bankno);
 //        bindChargeCard.bindChargeCard((String) applyNo.get("serialno"));
         return (JSONObject) new JSONObject().put("result","ok");
 
