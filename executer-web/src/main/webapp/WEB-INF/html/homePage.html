@@ -17,12 +17,17 @@
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../css/video-js.css" rel="stylesheet">
+    <!-- If you'd like to support IE8 -->
+    <script src="../js/videojs-ie8.min.js"></script>
+    <script src="../js/video.min.js"></script>
     <script src="../../index.jsp"></script>
 </head>
 
 <body>
 
     <div class="container-fluid">
+        <h1 title="绑卡工具">中邮信审系统绑卡工具</h1>
         <form action="/api/BindChargeCard" method="post" datatype="json" class="form-horizontal " role="form">
             <fieldset>
                 <div class="form-group " style="padding-left: 30px">
@@ -41,14 +46,28 @@
         </form>
     </div>
 
-    <div class="form-group">
-        <div class="col-sm-offset-2">
+    <div class="container-fluid">
+        <h2>定时任务调用方法</h2>
+        <div style="padding-left: 0">
             <button id="btn_invoke" type="submit" class="btn btn-default">invoke task</button>
         </div>
     </div>
 
     <blockquote>
     </blockquote>
+
+    <div class="container-fluid">
+            <video id="my-video" class="video-js" controls preload="auto" width="auto" height="auto"
+                   poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+                <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+                <!--<p class="vjs-no-js">-->
+                    <!--To view this video please enable JavaScript, and consider upgrading to a web browser that-->
+                    <!--<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>-->
+                <!--</p>-->
+            </video>
+
+
+    </div>
 
     <div class="container-fluid">
         <div class="table-responsive">
@@ -90,4 +109,12 @@
             }
         })
     })
+</script>
+
+<script type="text/javascript">
+    var myPlayer = videojs('my-video');
+    videojs("my-video").ready(function(){
+        var myPlayer = this;
+        myPlayer.play();
+    });
 </script>
