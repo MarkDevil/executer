@@ -35,6 +35,8 @@ public class MySQLDb {
 		dataSource.setUrl(url);
 		dataSource.setDriverClassName(driver);
 		dataSource.setMaxIdle(5);
+		dataSource.setDefaultAutoCommit(true);
+		dataSource.setMinIdle(1);
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 

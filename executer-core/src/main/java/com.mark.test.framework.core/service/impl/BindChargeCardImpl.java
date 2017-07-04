@@ -31,10 +31,19 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * @param applyno
      */
     public void bindChargeCard(String applyno) {
-        AccountInfo accountInfo = this.getAccountInfo(applyno);
-        int flag = accountInfoMapper.insert(this.populateAccoutInfo(accountInfo.getUserid(),"0","",""));
-        int flag1 = accountInfoMapper.insert(this.populateAccoutInfo(accountInfo.getUserid(),"1","",""));
-        int flag2 = openAgreementDetermineMapper.insert(this.populateOpenAgreement(accountInfo.getUserid(),""));
+        AccountInfo accountInfo = this.checkAccountInfo(applyno);
+        logger.info("");
+        int flag = accountInfoMapper.insert(
+                this.populateAccoutInfo(accountInfo.getUserid(),"001",accountInfo.getAccountno(),
+                        accountInfo.getAccountname(),accountInfo.getAccountbelong(),"0")
+        );
+        int flag1 = accountInfoMapper.insert(
+                this.populateAccoutInfo(accountInfo.getUserid(),"002",accountInfo.getAccountno(),
+                        accountInfo.getAccountname(),accountInfo.getAccountbelong(),"1")
+        );
+        int flag2 = openAgreementDetermineMapper.insert(
+                this.populateOpenAgreement(accountInfo.getUserid(),accountInfo.getAccountno(),accountInfo.getSource())
+        );
         if (flag>0 && flag1 >0 && flag2 >0){
             logger.info("Insert bankCard successfully");
         }else {
@@ -47,12 +56,11 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * @param applyNo
      * @return
      */
-    public AccountInfo getAccountInfo(String applyNo){
+    public AccountInfo checkAccountInfo(String applyNo){
         AccountInfo accountInfo = accountInfoMapper.selectByPrimaryKey(applyNo);
         if (accountInfo == null){
             throw new RuntimeException("Get accountInfo failed !");
         }
-        logger.info(String.valueOf(accountInfo));
         return accountInfo;
     }
 
@@ -86,14 +94,15 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * @param userid
      * @return
      */
-    public AccountInfo populateAccoutInfo(String userid,String accountType,String bank,String cardType){
+    public AccountInfo populateAccoutInfo(String userid,String accountType,String accountno,
+                                          String accountName,String bankname,String cardType){
         AccountInfo accountInfo = new AccountInfo();
         accountInfo.setSerialno(CommUtils.getRandomNo("ser"));
         accountInfo.setUserid(userid);
         accountInfo.setAccounttype(accountType);
-        accountInfo.setAccountno("6210985200018837055");
-        accountInfo.setAccountname("马铭锋");
-        accountInfo.setAccountbelong(bank);
+        accountInfo.setAccountno(accountno);
+        accountInfo.setAccountname(accountName);
+        accountInfo.setAccountbelong(bankname);
         accountInfo.setStatus("2");
         accountInfo.setLimitamount(null);
         accountInfo.setInputtime(null);
@@ -104,8 +113,8 @@ public class BindChargeCardImpl implements IBindChargeCard {
         accountInfo.setVerifytype(null);
         accountInfo.setIsreturncard("0");
         accountInfo.setSubaccountbelong(null);
-        accountInfo.setProvince("上海市");
-        accountInfo.setCity("上海市");
+        accountInfo.setProvince("北京市");
+        accountInfo.setCity("北京市");
         accountInfo.setChannelcardid("54931");
         accountInfo.setPhoneno("13732292939");
         accountInfo.setLoanapplyid(null);
@@ -119,11 +128,11 @@ public class BindChargeCardImpl implements IBindChargeCard {
 
 
     /**
-     * 代扣协议
+     * 代扣协议表数据
      * @param userid
      * @return
      */
-    public OpenAgreementDetermine populateOpenAgreement(String userid,String source){
+    public OpenAgreementDetermine populateOpenAgreement(String userid,String bankCardNo,String source){
         OpenAgreementDetermine openAgreementDetermine = new OpenAgreementDetermine();
         openAgreementDetermine.setReqno(CommUtils.getRandomNo("req"));
         openAgreementDetermine.setOrderno(CommUtils.getRandomNo("ord"));
@@ -132,7 +141,7 @@ public class BindChargeCardImpl implements IBindChargeCard {
         openAgreementDetermine.setAuthcode("2222");
         openAgreementDetermine.setCustaccountid("0000");
         openAgreementDetermine.setHoldername("测试");
-        openAgreementDetermine.setBankcardno("6210985200018837055");
+        openAgreementDetermine.setBankcardno(bankCardNo);
         openAgreementDetermine.setStatus("1");
         openAgreementDetermine.setTreatyno("20161192");
         openAgreementDetermine.setFailuredetails(null);
@@ -143,4 +152,5 @@ public class BindChargeCardImpl implements IBindChargeCard {
         openAgreementDetermine.setSource(source);
         return openAgreementDetermine;
     }
+
 }

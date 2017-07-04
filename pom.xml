@@ -10,10 +10,11 @@
 
 
     <modules>
-        <module>executer-core</module>
         <module>executer-api</module>
-        <module>executer-web</module>
         <module>executer-utils</module>
+        <module>executer-core</module>
+        <module>executer-web</module>
+
     </modules>
 
     <!--版本变量-->
