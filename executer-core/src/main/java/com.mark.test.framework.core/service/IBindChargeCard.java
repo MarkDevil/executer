@@ -8,11 +8,11 @@ public interface IBindChargeCard {
      * 绑定代扣卡
      * @param applyNo
      */
-    void bindChargeCard(String applyNo);
+    boolean bindChargeCard(String applyNo,String bankCardNo);
 
     /**
      * 更新卡状态
      * @param applyNo
      */
-    void updateBankCardStatus(String applyNo);
+    boolean updateBankCardStatus(String applyNo);
 }

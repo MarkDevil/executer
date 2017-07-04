@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * Project : executer
  * Desc :
  */
-@Service("GwTransferServiceImpl")
+@Service("gwTransferServiceImpl")
 public class GwTransferServiceImpl implements GwTransferService {
 
     @Autowired(required = false)

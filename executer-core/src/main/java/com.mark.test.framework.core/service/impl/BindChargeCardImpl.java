@@ -1,8 +1,10 @@
 package com.mark.test.framework.core.service.impl;
 
 import com.mark.test.framework.api.dto.AccountInfo;
+import com.mark.test.framework.api.dto.BusinessApply;
 import com.mark.test.framework.api.dto.OpenAgreementDetermine;
 import com.mark.test.framework.core.dao.AccountInfoMapper;
+import com.mark.test.framework.core.dao.BusinessApplyMapper;
 import com.mark.test.framework.core.dao.OpenAgreementDetermineMapper;
 import com.mark.test.framework.core.service.IBindChargeCard;
 import com.mark.test.framework.utils.CommUtils;
@@ -10,15 +12,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
 /**
  * Created by mark on 2017/5/27.
  */
-@Service("BindChargeCardImpl")
+@Service("bindChargeCardImpl")
 public class BindChargeCardImpl implements IBindChargeCard {
     Logger logger = LoggerFactory.getLogger(BindChargeCardImpl.class);
+
+    @Autowired
+    private BusinessApplyMapper businessApplyMapper;
 
     @Autowired
     private AccountInfoMapper accountInfoMapper;
@@ -26,28 +32,31 @@ public class BindChargeCardImpl implements IBindChargeCard {
     @Autowired
     private OpenAgreementDetermineMapper openAgreementDetermineMapper;
 
+
     /**
      * 给指定用户绑定银行卡
      * @param applyno
      */
-    public void bindChargeCard(String applyno) {
-        AccountInfo accountInfo = this.checkAccountInfo(applyno);
-        logger.info("");
+    @Transactional
+    public boolean bindChargeCard(String applyno,String bankCardNo) {
+        BusinessApply businessApply = this.getBussinessApply(applyno);
+        logger.info("查询到的申请单数据为: {}",businessApply.toString());
         int flag = accountInfoMapper.insert(
-                this.populateAccoutInfo(accountInfo.getUserid(),"001",accountInfo.getAccountno(),
-                        accountInfo.getAccountname(),accountInfo.getAccountbelong(),"0")
+                this.populateAccoutInfo(businessApply.getCustomerid(),"001",bankCardNo,
+                        businessApply.getCustomername(),"中国邮政储蓄银行","0")
         );
         int flag1 = accountInfoMapper.insert(
-                this.populateAccoutInfo(accountInfo.getUserid(),"002",accountInfo.getAccountno(),
-                        accountInfo.getAccountname(),accountInfo.getAccountbelong(),"1")
+                this.populateAccoutInfo(businessApply.getCustomerid(),"002",bankCardNo,
+                        businessApply.getCustomername(),"0403","1")
         );
         int flag2 = openAgreementDetermineMapper.insert(
-                this.populateOpenAgreement(accountInfo.getUserid(),accountInfo.getAccountno(),accountInfo.getSource())
+                this.populateOpenAgreement(businessApply.getCustomerid(),bankCardNo,businessApply.getPayLoanBrh())
         );
         if (flag>0 && flag1 >0 && flag2 >0){
             logger.info("Insert bankCard successfully");
+            return true;
         }else {
-            throw new RuntimeException("Bind card failed");
+            return false;
         }
     }
 
@@ -64,10 +73,29 @@ public class BindChargeCardImpl implements IBindChargeCard {
         return accountInfo;
     }
 
+    /**
+     * 根据订单号获取数据
+      * @param applyNo
+     * @return
+     */
+    public BusinessApply getBussinessApply(String applyNo){
+        BusinessApply businessApply = businessApplyMapper.selectByPrimaryKey(applyNo);
+        if (null == businessApply){
+            throw new RuntimeException("Get accountInfo failed !");
+        }
+        return businessApply;
+    }
 
 
-    public void updateBankCardStatus(String applyNo) {
-
+    /**
+     * 根据单号
+     * @param applyNo
+     * @return
+     */
+    public boolean updateBankCardStatus(String applyNo) {
+        BusinessApply businessApply = this.getBussinessApply(applyNo);
+        String customerid = businessApply.getCustomerid();
+        return true;
     }
 
 
