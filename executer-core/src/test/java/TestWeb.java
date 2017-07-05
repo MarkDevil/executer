@@ -52,7 +52,7 @@ public class TestWeb {
 
     @Test
     public void testTaskinterval(){
-        new SchedulerManager().addScheJob(PrintLogScheduleTask.class);
+
     }
 
 

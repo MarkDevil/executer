@@ -5,6 +5,8 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 
+import java.util.List;
+
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
@@ -15,8 +17,8 @@ public class SchedulerManager implements Job{
     private static SchedulerFactory gSchedulerFactory = new StdSchedulerFactory();
     private static String JOB_GROUP_NAME = "MARK-GROUP";
     private static String TRIGGER_GROUP_NAME = "MARK-TRIGGER";
-    Scheduler scheduler;
-    private Logger logger = org.slf4j.LoggerFactory.getLogger(SchedulerManager.class);
+    private static Scheduler scheduler;
+    private static Logger logger = org.slf4j.LoggerFactory.getLogger(SchedulerManager.class);
 
 
     /**
@@ -25,7 +27,7 @@ public class SchedulerManager implements Job{
      * @return
      */
     private JobDetail getJobDetail(Class<? extends Job> clz){
-        return newJob(clz).withIdentity(clz.getSimpleName()).build();
+        return newJob(clz).withIdentity(clz.getSimpleName()).requestRecovery().build();
     }
 
     /**
@@ -38,9 +40,9 @@ public class SchedulerManager implements Job{
                 CronScheduleBuilder.cronSchedule(cronExp).withMisfireHandlingInstructionFireAndProceed()).build();
     }
 
-    private Trigger getIntervalTrigger(){
+    private Trigger getIntervalTrigger(int interval, DateBuilder.IntervalUnit intervalUnit){
         return newTrigger().withSchedule(
-                DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule().withIntervalInSeconds(5).withRepeatCount(1000)).build();
+                DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule().onEveryDay().withInterval(interval,intervalUnit)).build();
     }
 
     /**
@@ -63,16 +65,31 @@ public class SchedulerManager implements Job{
         }
     }
 
-
-    public void addScheJob(Class<? extends Job> clz){
+    /**
+     * 新增定时任务job
+     * @param clz       定时任务实现类
+     * @param interval  时间间隔
+     * @param unitType  时间间隔单位
+     */
+    public void addScheJob(Class<? extends Job> clz,int interval,DateBuilder.IntervalUnit unitType){
         try {
 
             scheduler = gSchedulerFactory.getScheduler();
-            scheduler.scheduleJob(this.getJobDetail(clz), this.getIntervalTrigger());
+            scheduler.scheduleJob(this.getJobDetail(clz), this.getIntervalTrigger(interval,unitType));
             scheduler.start();
             if (scheduler.isStarted()){
                 logger.info("Job start up : {}",scheduler.getSchedulerName());
             }
+
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void runNow(Class<? extends Job> clz){
+        assert clz != null;
+        try {
+            scheduler = gSchedulerFactory.getScheduler();
 
         } catch (SchedulerException e) {
             e.printStackTrace();
@@ -85,9 +102,28 @@ public class SchedulerManager implements Job{
     }
 
     public static void main(String[] args) {
-        SchedulerManager schedulerManager = new SchedulerManager();
-        schedulerManager.addScheJob(SchedulerManager.class);
+
+        final SchedulerManager schedulerManager = new SchedulerManager();
+        schedulerManager.addScheJob(SchedulerManager.class,2, DateBuilder.IntervalUnit.SECOND);
         schedulerManager.addScheJob(PrintHelloTask.class,"* * * * * ?");
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (true){
+                    try {
+                        List<JobExecutionContext> list = scheduler.getCurrentlyExecutingJobs();
+                        if (list.size()>0){
+                            logger.info("Running jobs is {}",list.get(0).getJobDetail());
+                        }
+                    } catch (SchedulerException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }).start();
+
+
 
     }
 }
