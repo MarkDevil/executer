@@ -1,6 +1,8 @@
 package com.mark.test.framework.web.controller;
 
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
+import com.mark.test.framework.core.task.PrintOnceTask;
+import com.mark.test.framework.utils.SchedulerManager;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
@@ -53,10 +55,10 @@ public class SchedulerController {
     @RequestMapping(value = "/schedule/onetime",method = RequestMethod.GET)
     @ResponseBody
     public String invoke1time(){
-        printLogScheduleTask.printName();
+        final SchedulerManager schedulerManager = new SchedulerManager();
+        schedulerManager.runNowOnce(PrintOnceTask.class);
         return "ok";
     }
-
 
 
 }

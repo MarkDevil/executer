@@ -14,25 +14,42 @@ import static org.quartz.TriggerBuilder.newTrigger;
  * Created by Mark on 2017/7/3.
  */
 public class SchedulerManager implements Job{
-    private static SchedulerFactory gSchedulerFactory = new StdSchedulerFactory();
+    private static SchedulerFactory gSchedulerFactory;
+    private static Scheduler scheduler;
     private static String JOB_GROUP_NAME = "MARK-GROUP";
     private static String TRIGGER_GROUP_NAME = "MARK-TRIGGER";
-    private static Scheduler scheduler;
     private static Logger logger = org.slf4j.LoggerFactory.getLogger(SchedulerManager.class);
 
+    static {
+
+        try {
+            gSchedulerFactory = new StdSchedulerFactory();
+            scheduler = gSchedulerFactory.getScheduler();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 指定job实现类创建jobdetail对象
-     * @param clz
+     * @param clz   job实现类
      * @return
      */
     private JobDetail getJobDetail(Class<? extends Job> clz){
-        return newJob(clz).withIdentity(clz.getSimpleName()).requestRecovery().build();
+        String jobname = clz.getSimpleName();
+        logger.info("Create jobDetails successfully : {}",jobname);
+        JobDetail newjobDetail = newJob(clz).withIdentity(clz.getSimpleName()).requestRecovery().build();
+        if (!newjobDetail.equals("")){
+            return newjobDetail;
+        }else {
+            throw new RuntimeException("Create jobDetails failed");
+        }
+
     }
 
     /**
      * 获取触发器
-     * @param cronExp
+     * @param cronExp   cron表达式
      * @return
      */
     private Trigger getCronTrigger(String cronExp){
@@ -40,6 +57,12 @@ public class SchedulerManager implements Job{
                 CronScheduleBuilder.cronSchedule(cronExp).withMisfireHandlingInstructionFireAndProceed()).build();
     }
 
+    /**
+     * 创建触发器
+     * @param interval      时间间隔
+     * @param intervalUnit  单位
+     * @return
+     */
     private Trigger getIntervalTrigger(int interval, DateBuilder.IntervalUnit intervalUnit){
         return newTrigger().withSchedule(
                 DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule().onEveryDay().withInterval(interval,intervalUnit)).build();
@@ -47,13 +70,12 @@ public class SchedulerManager implements Job{
 
     /**
      * 添加调度任务
-     * @param clz
-     * @param cronExp
+     * @param clz       job实现类
+     * @param cronExp   定时任务表达式
      */
     public void addScheJob(Class<? extends Job> clz,String cronExp){
         try {
 
-            scheduler = gSchedulerFactory.getScheduler();
             scheduler.scheduleJob(this.getJobDetail(clz), this.getCronTrigger(cronExp));
             scheduler.start();
             if (scheduler.isStarted()){
@@ -74,7 +96,6 @@ public class SchedulerManager implements Job{
     public void addScheJob(Class<? extends Job> clz,int interval,DateBuilder.IntervalUnit unitType){
         try {
 
-            scheduler = gSchedulerFactory.getScheduler();
             scheduler.scheduleJob(this.getJobDetail(clz), this.getIntervalTrigger(interval,unitType));
             scheduler.start();
             if (scheduler.isStarted()){
@@ -86,11 +107,18 @@ public class SchedulerManager implements Job{
         }
     }
 
-    public void runNow(Class<? extends Job> clz){
+    /**
+     * 立即启动一次
+     * @param clz
+     */
+    public void runNowOnce(Class<? extends Job> clz){
         assert clz != null;
         try {
             scheduler = gSchedulerFactory.getScheduler();
-
+            JobDetail jobDetail = this.getJobDetail(clz);
+            logger.info("Job key : {}",jobDetail.getKey().toString());
+            scheduler.scheduleJob(jobDetail,TriggerBuilder.newTrigger().startNow().build());
+            scheduler.start();
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
@@ -122,8 +150,5 @@ public class SchedulerManager implements Job{
 
             }
         }).start();
-
-
-
     }
 }
