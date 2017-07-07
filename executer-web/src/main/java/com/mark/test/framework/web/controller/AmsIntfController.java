@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by MingfengMa .
@@ -27,5 +28,11 @@ public class AmsIntfController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("retCode","200");
         return jsonObject;
+    }
+
+    @RequestMapping(value = "/test/view" ,method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView testView(){
+        return new ModelAndView("Successfully");
     }
 }
