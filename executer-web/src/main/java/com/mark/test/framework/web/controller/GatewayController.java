@@ -6,7 +6,6 @@ import com.mark.test.framework.api.dto.TestRequestDto;
 import com.mark.test.framework.core.constat.BaseInfo;
 import com.mark.test.framework.core.service.GwTransferService;
 import com.mark.test.framework.core.service.IBindChargeCard;
-import com.mark.test.framework.core.service.impl.BindChargeCardImpl;
 import com.mark.test.framework.utils.SignUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +31,6 @@ public class GatewayController {
 
     @Autowired(required = false)
     private GwTransferService queryGwTransfer;
-
-    @Autowired
-    private BindChargeCardImpl bindChargeCardimpl;
 
     @Autowired
     private IBindChargeCard bindChargeCard;
@@ -102,7 +98,6 @@ public class GatewayController {
         String applyno = String.valueOf(request.get("applyno"));
         String bankno = String.valueOf(request.get("bankno"));
         boolean flag = bindChargeCard.bindChargeCard(applyno,bankno);
-        JSONObject ret = new JSONObject();
         if (flag){
             return "绑卡成功";
         }else {
