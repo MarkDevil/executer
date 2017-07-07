@@ -93,7 +93,7 @@ public class GatewayController {
 
     @RequestMapping(method = RequestMethod.POST,value = "/BindChargeCard")
     @ResponseBody
-    public JSONObject bindChargeCard(@RequestParam Map request){
+    public String bindChargeCard(@RequestParam Map request){
 
         logger.info("request parameter : {}",request);
         if (request == null){
@@ -101,12 +101,13 @@ public class GatewayController {
         }
         String applyno = String.valueOf(request.get("applyno"));
         String bankno = String.valueOf(request.get("bankno"));
-//        bindChargeCard.bindChargeCard((String) applyNo.get("serialno"));
-        return (JSONObject) new JSONObject().put("result","ok");
-
+        boolean flag = bindChargeCard.bindChargeCard(applyno,bankno);
+        JSONObject ret = new JSONObject();
+        if (flag){
+            return "绑卡成功";
+        }else {
+            return "绑卡失败";
+        }
     }
-
-
-
 
 }

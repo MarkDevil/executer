@@ -15,13 +15,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by mark on 2017/5/27.
  */
 @Service("bindChargeCardImpl")
+@Transactional
 public class BindChargeCardImpl implements IBindChargeCard {
     Logger logger = LoggerFactory.getLogger(BindChargeCardImpl.class);
+
+    private String customerid;
+    private String customername;
 
     @Autowired
     private BusinessApplyMapper businessApplyMapper;
@@ -33,44 +38,62 @@ public class BindChargeCardImpl implements IBindChargeCard {
     private OpenAgreementDetermineMapper openAgreementDetermineMapper;
 
 
+
     /**
      * 给指定用户绑定银行卡
      * @param applyno
      */
-    @Transactional
     public boolean bindChargeCard(String applyno,String bankCardNo) {
         BusinessApply businessApply = this.getBussinessApply(applyno);
         logger.info("查询到的申请单数据为: {}",businessApply.toString());
-        int flag = accountInfoMapper.insert(
-                this.populateAccoutInfo(businessApply.getCustomerid(),"001",bankCardNo,
-                        businessApply.getCustomername(),"中国邮政储蓄银行","0")
-        );
-        int flag1 = accountInfoMapper.insert(
-                this.populateAccoutInfo(businessApply.getCustomerid(),"002",bankCardNo,
-                        businessApply.getCustomername(),"0403","1")
-        );
-        int flag2 = openAgreementDetermineMapper.insert(
-                this.populateOpenAgreement(businessApply.getCustomerid(),bankCardNo,businessApply.getPayLoanBrh())
-        );
-        if (flag>0 && flag1 >0 && flag2 >0){
-            logger.info("Insert bankCard successfully");
+        customerid = businessApply.getCustomerid();
+        customername = businessApply.getCustomername();
+        if (checkAccountInfo(customerid)){
+            logger.info("该用户已经绑过卡");
+            updateBankCardStatus("2",customerid);
             return true;
         }else {
-            return false;
+            int flag = accountInfoMapper.insert(
+                    this.populateAccoutInfo(customerid,"001",bankCardNo,
+                            customername,"中国邮政储蓄银行","0")
+            );
+            int flag1 = accountInfoMapper.insert(
+                    this.populateAccoutInfo(customerid,"002",bankCardNo,
+                            customername,"0403","1")
+            );
+            int flag2 = openAgreementDetermineMapper.insert(
+                    this.populateOpenAgreement(customerid,bankCardNo,
+                            businessApply.getPayLoanBrh())
+            );
+            if (flag>0 && flag1 >0 && flag2 >0){
+                logger.info("Insert bankCard successfully");
+                return true;
+            }else {
+                return false;
+            }
         }
+
     }
 
     /**
      * 根据单号判断数据是否存在
-     * @param applyNo
+     * @param userid
      * @return
      */
-    public AccountInfo checkAccountInfo(String applyNo){
-        AccountInfo accountInfo = accountInfoMapper.selectByPrimaryKey(applyNo);
-        if (accountInfo == null){
-            throw new RuntimeException("Get accountInfo failed !");
-        }
-        return accountInfo;
+    public boolean checkAccountInfo(String userid){
+        List<AccountInfo> accountInfos = accountInfoMapper.selectAccountsByUserId(userid);
+        return accountInfos != null;
+    }
+
+    /**
+     * 清除无用数据
+     * @param userid
+     * @return
+     */
+    public boolean cleanAccountInfo(String userid){
+        int flag = accountInfoMapper.deleteByUserid(userid);
+        int flag1 = openAgreementDetermineMapper.deleteByUserId(userid);
+        return (flag>0) && (flag1>0);
     }
 
     /**
@@ -89,13 +112,14 @@ public class BindChargeCardImpl implements IBindChargeCard {
 
     /**
      * 根据单号
-     * @param applyNo
+     * @param userid
      * @return
      */
-    public boolean updateBankCardStatus(String applyNo) {
-        BusinessApply businessApply = this.getBussinessApply(applyNo);
-        String customerid = businessApply.getCustomerid();
-        return true;
+    public boolean updateBankCardStatus(String status,String userid) {
+        logger.info("将订单状态更新为: {}",status);
+        int ret = accountInfoMapper.updateStatusByUserid(status,userid);
+        return ret > 0;
+
     }
 
 

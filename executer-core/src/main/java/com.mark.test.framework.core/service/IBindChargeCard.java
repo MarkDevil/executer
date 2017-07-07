@@ -12,7 +12,7 @@ public interface IBindChargeCard {
 
     /**
      * 更新卡状态
-     * @param applyNo
+     * @param userid
      */
-    boolean updateBankCardStatus(String applyNo);
+    boolean updateBankCardStatus(String status,String userid);
 }
