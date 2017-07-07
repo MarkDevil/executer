@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -54,10 +58,24 @@ public class SchedulerController {
 
     @RequestMapping(value = "/schedule/onetime",method = RequestMethod.GET)
     @ResponseBody
-    public String invoke1time(){
+    public Map invoke1time(){
         final SchedulerManager schedulerManager = new SchedulerManager();
         schedulerManager.runNowOnce(PrintOnceTask.class);
-        return "ok";
+//        JSONObject ret = new JSONObject();
+        Map<String,ArrayList<String[]>> retmap= new HashMap<>();
+        ArrayList<String[]> arrayList = new ArrayList<>();
+        arrayList.add(new String[]{"mark","test"});
+        arrayList.add(new String[]{"jack","test"});
+        retmap.put("data",arrayList);
+        logger.info("Response data : {}",retmap.get("data").toString());
+//        ret.put("retmsg","ok");
+//        ret.put("retcode","00");
+
+        return retmap;
+    }
+
+    public static void main(String[] args) {
+        new SchedulerController().invoke1time();
     }
 
 
