@@ -1,5 +1,6 @@
 package com.mark.test.framework.utils;
 
+
 import com.mark.test.framework.utils.task.PrintHelloTask;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -13,7 +14,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 /**
  * Created by Mark on 2017/7/3.
  */
-public class SchedulerManager implements Job{
+public class SchedulerManager implements Job {
     private static SchedulerFactory gSchedulerFactory;
     private static Scheduler scheduler;
     private static String JOB_GROUP_NAME = "MARK-GROUP";

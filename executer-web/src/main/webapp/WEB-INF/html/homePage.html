@@ -4,36 +4,35 @@
     <meta name="viewport" charset="UTF-8">
     <title>中邮绑卡操作</title>
     <!-- 引入 Bootstrap -->
-    <link href="http://cdn.bootcss.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- 包括所有已编译的插件 -->
-    <!--<script src="../js/bootstrap.min.js"></script>-->
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="http://cdn.bootcss.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
-    <script src="http://cdn.bootcss.com/libs/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/buttons/buttons.css" rel="stylesheet" type="text/css">
+    <link href="../css/video-js.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery.js"></script>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!--引入datatables样式-->
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-    <link href="../css/video-js.css" rel="stylesheet">
     <!-- If you'd like to support IE8 -->
     <script src="../js/videojs-ie8.min.js"></script>
     <script src="../js/video.min.js"></script>
     <script src="../../index.jsp"></script>
-</head>
 
-<body>
+
+
 
     <div class="container-fluid">
-        <h1 title="信审系统绑卡工具">中邮信审系统绑卡工具</h1>
-        <form action="/api/BindChargeCard" method="post" datatype="json" class="form-horizontal " role="form">
+        <h1 title="中邮信审系统绑卡工具">中邮信审系统绑卡工具</h1>
+        <form id="bindForm" class="form-horizontal" role="form">
             <fieldset>
-                <div class="form-group " style="padding-left: 30px">
+                <div class="form-group " style="padding-left: 15px">
                     <label>applyNo</label>
                     <input type="text" class="form-control" style="width: auto "  name="applyno" placeholder="请输入申请号">
                     <nobr></nobr>
@@ -42,7 +41,7 @@
                 </div>
             </fieldset>
             <div style="padding-left: 15px">
-                <button id="subBtn" type="submit">submit</button>
+                <button id="subBtn" type="submit" class="btn btn-default" >submit</button>
             </div>
         </form>
     </div>
@@ -54,8 +53,8 @@
         </div>
     </div>
 
-    <blockquote>
-    </blockquote>
+    <blockquote></blockquote>
+
 
     <!--<div class="container-fluid">-->
             <!--<video id="my-video" class="video-js" controls preload="auto" width="auto" height="auto"-->
@@ -67,16 +66,16 @@
                 <!--&lt;!&ndash;</p>&ndash;&gt;-->
             <!--</video>-->
     <!--</div>-->
-    <div class="container-fluid">
-        <table id="reportTable1" class="display" cellspacing="0" width="100%">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-            </tr>
-            </thead>
-        </table>
-    </div>
+    <!--<div class="container-fluid">-->
+        <!--<table id="reportTable1" class="display" cellspacing="0" width="100%">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Name</th>-->
+                <!--<th>Position</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+        <!--</table>-->
+    <!--</div>-->
 
 </body>
 </html>
@@ -103,10 +102,35 @@
         "ajax":'/api/schedule/onetime'
     });
 
-    var myPlayer = videojs('my-video');
-    videojs("my-video").ready(function(){
-        var myPlayer = this;
-        myPlayer.play();
+    $.ajax(
+            url:)
+
+    $("#subBtn").click(function(){
+        var options = {
+            url:'/api/BindChargeCard',
+            type:'POST',
+            dataType:"json",
+            success:function(data){
+                alert("invoke and return data:" + data);
+                if(data == "绑卡成功"){
+                    location.href = "Successfully.html";
+                }
+            },
+            complete: function (data) {
+               alert("返回信息: " + data)
+            },
+            error: function (status,data) {
+                alert("status :" + status + "data : " + data);
+                Location.href = "failed.html";
+            }
+        };
+        $("#bindForm").submit(options);
     });
+
+//    var myPlayer = videojs('my-video');
+//    videojs("my-video").ready(function(){
+//        var myPlayer = this;
+//        myPlayer.play();
+//    });
 </script>
 
