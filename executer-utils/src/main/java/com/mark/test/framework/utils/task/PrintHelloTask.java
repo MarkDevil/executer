@@ -11,6 +11,6 @@ import org.slf4j.Logger;
 public class PrintHelloTask implements Job {
     private Logger logger = org.slf4j.LoggerFactory.getLogger(PrintHelloTask.class);
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        logger.info("hello ,this is {}", jobExecutionContext.getJobDetail().getDescription());
+        logger.info("hello ,this is {}", jobExecutionContext.getJobDetail().getKey().toString());
     }
 }
