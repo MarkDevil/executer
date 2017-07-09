@@ -1,44 +1,42 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
-    <meta name="viewport" charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>中邮绑卡操作</title>
     <!-- 引入 Bootstrap -->
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/bootstrap/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-    <link href="../css/buttons/buttons.css" rel="stylesheet" type="text/css">
-    <link href="../css/video-js.css" rel="stylesheet" type="text/css">
-</head>
-
-<body>
+    <link href="<c:url value="/resources/css/buttons/buttons.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/video-js.css"/>" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap.js"/>"></script>
     <!--引入datatables样式-->
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <!-- If you'd like to support IE8 -->
-    <script src="../js/third/video/videojs-ie8.min.js"></script>
-    <script src="../js/third/video/video.min.js"></script>
-    <script src="../../index.jsp"></script>
+    <script src="<c:url value="/resources/js/third/video/videojs-ie8.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/third/video/video.min.js"/>"></script>
 
+</head>
 
-
+<body>
 
     <div class="container-fluid">
-        <h1 title="中邮信审系统绑卡工具">中邮信审系统绑卡工具</h1>
-        <form id="bindForm" class="form-horizontal" role="form">
+        <h1>中邮信审系统绑卡工具</h1>
+        <form id="bindForm" style="align-self: baseline">
             <fieldset>
                 <div class="form-group " style="padding-left: 15px">
                     <label>applyNo</label>
-                    <input type="text" class="form-control" style="width: auto "  name="applyno" placeholder="请输入申请号">
-                    <nobr></nobr>
+                    <input  type="text" class="form-control" style="width: auto "  name="applyno" placeholder="请输入申请号">
+                    <br/>
                     <label>bankNo</label>
-                    <input type="text" class="form-control" style="width: auto"  name="bankno" placeholder="请输入银行卡号">
+                    <input  type="text" class="form-control" style="width: auto"  name="bankno" placeholder="请输入银行卡号">
                 </div>
             </fieldset>
             <div style="padding-left: 15px">
@@ -77,7 +75,10 @@
             <!--</thead>-->
         <!--</table>-->
     <!--</div>-->
-
+    <address style="padding-left: 15px " contenteditable="true"><strong>马铭锋</strong><br />
+        795 Folsom Ave, Suite 600<br />
+        San Francisco, CA 94107<br />
+        <abbr title="Phone">P:</abbr> (123) 456-7890</address>
 </body>
 </html>
 
@@ -90,11 +91,7 @@
             type: 'GET',
             dataType:"text",
             success : function (data) {
-                restR = data;
-                console.log(data);
-                if (data == "ok"){
-                    alert("调用成功");
-                }
+                alert(data)
             }
         })
     });
@@ -102,32 +99,28 @@
     $("#reportTable1").dataTable({
         "ajax":'/api/schedule/onetime'
     });
+    
 
-    document.ready(function () {
 
-    });
 
-    $("#subBtn").click(function(){
-        var options = {
-            url:'/api/BindChargeCard',
-            type:'POST',
-            dataType:"json",
-            success:function(data){
-                alert("invoke and return data:" + data);
-                if(data == "绑卡成功"){
-                    location.href = "Successfully.html";
-                }
-            },
-            complete: function (data) {
-               alert("返回信息: " + data)
-            },
-            error: function (status,data) {
-                alert("status :" + status + "data : " + data);
-                Location.href = "failed.html";
+    $("#subBtn").click(function () {
+        var applyno = $("#findForm").getElementsByName("applyno").valueOf();
+        var bankno = $("#findForm").getElementsByName("bankno").valueOf();
+        console.log(applyno,bankno);
+        $.ajax({
+            url:'/api/schedule/onetime',
+            type: 'GET',
+            dataType:"text",
+            success : function (data) {
+                alert(data)
             }
-        };
-        $("#bindForm").submit(options);
+        })
     });
+
+
+
+
+
 
 //    var myPlayer = videojs('my-video');
 //    videojs("my-video").ready(function(){

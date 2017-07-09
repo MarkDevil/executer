@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -102,11 +103,17 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * @return
      */
     public BusinessApply getBussinessApply(String applyNo){
-        BusinessApply businessApply = businessApplyMapper.selectByPrimaryKey(applyNo);
-        if (null == businessApply){
-            throw new RuntimeException("Get accountInfo failed !");
+        try {
+            BusinessApply businessApply = businessApplyMapper.selectByPrimaryKey(applyNo);
+            if (null == businessApply){
+                throw new RuntimeException("Get accountInfo failed !");
+            }
+            return businessApply;
+        }catch (Exception ex){
+            logger.error(Arrays.toString(ex.getStackTrace()));
+            return null;
         }
-        return businessApply;
+
     }
 
 

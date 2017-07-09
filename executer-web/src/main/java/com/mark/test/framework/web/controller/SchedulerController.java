@@ -67,7 +67,7 @@ public class SchedulerController {
         arrayList.add(new String[]{"mark","test"});
         arrayList.add(new String[]{"jack","test"});
         retmap.put("data",arrayList);
-        logger.info("Response data : {}",retmap.get("data").toString());
+        logger.info("Response data : {}",retmap.get("data").toArray());
 //        ret.put("retmsg","ok");
 //        ret.put("retcode","00");
 

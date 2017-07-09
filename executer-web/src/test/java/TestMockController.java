@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
  * Desc :
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath*:executer-servlet.xml")
+@ContextConfiguration("classpath*:WEB-INF/executer-servlet.xml")
 @WebAppConfiguration
 public class TestMockController extends AbstractJUnit4SpringContextTests{
 

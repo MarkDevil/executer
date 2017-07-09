@@ -35,6 +35,8 @@ public class GatewayController {
     @Autowired
     private IBindChargeCard bindChargeCard;
 
+
+
     @RequestMapping(method = RequestMethod.POST,value = "/updateGatewayStatus")
     @ResponseBody
     public String updateGatewayStatus(){
@@ -92,7 +94,7 @@ public class GatewayController {
     public String bindChargeCard(@RequestParam Map request){
 
         logger.info("request parameter : {}",request);
-        if (request == null){
+        if (request.get("applyno") == null || request.get("bankno") == null){
             throw new IllegalArgumentException("invalid parameter");
         }
         String applyno = String.valueOf(request.get("applyno"));
