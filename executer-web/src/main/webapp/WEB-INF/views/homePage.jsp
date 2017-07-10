@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -29,7 +30,7 @@
 
     <div class="container-fluid">
         <h1>中邮信审系统绑卡工具</h1>
-        <form id="bindForm" style="align-self: baseline">
+        <form id="bindForm" action="<c:url value="/api/BindChargeCard"/>" method="post" style="align-self: baseline">
             <fieldset>
                 <div class="form-group " style="padding-left: 15px">
                     <label>applyNo</label>
@@ -104,9 +105,9 @@
 
 
     $("#subBtn").click(function () {
-        var applyno = $("#findForm").getElementsByName("applyno").valueOf();
-        var bankno = $("#findForm").getElementsByName("bankno").valueOf();
-        console.log(applyno,bankno);
+        var applyno = $("input[name ='applyno']").val();
+        var bankno = $("input[name ='bankno']").val();
+        alert(applyno + bankno);
         $.ajax({
             url:'/api/schedule/onetime',
             type: 'GET',
@@ -116,16 +117,5 @@
             }
         })
     });
-
-
-
-
-
-
-//    var myPlayer = videojs('my-video');
-//    videojs("my-video").ready(function(){
-//        var myPlayer = this;
-//        myPlayer.play();
-//    });
 </script>
 
