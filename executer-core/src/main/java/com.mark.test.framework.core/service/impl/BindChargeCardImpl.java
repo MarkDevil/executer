@@ -83,7 +83,7 @@ public class BindChargeCardImpl implements IBindChargeCard {
      */
     public boolean checkAccountInfo(String userid){
         List<AccountInfo> accountInfos = accountInfoMapper.selectAccountsByUserId(userid);
-        return accountInfos != null;
+        return accountInfos.size() > 0;
     }
 
     /**
