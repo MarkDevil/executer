@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -91,7 +92,7 @@ public class GatewayController {
 
     @RequestMapping(method = RequestMethod.POST,value = "/BindChargeCard")
     @ResponseBody
-    public String bindChargeCard(@RequestParam Map request){
+    public ModelAndView bindChargeCard(@RequestParam Map request){
 
         logger.info("request parameter : {}",request);
         if (request.get("applyno") == null || request.get("bankno") == null){
@@ -101,9 +102,9 @@ public class GatewayController {
         String bankno = String.valueOf(request.get("bankno"));
         boolean flag = bindChargeCard.bindChargeCard(applyno,bankno);
         if (flag){
-            return "绑卡成功";
+            return new ModelAndView("Successfully");
         }else {
-            return "绑卡失败";
+            return new ModelAndView("failed");
         }
     }
 
