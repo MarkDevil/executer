@@ -3,16 +3,12 @@ package com.mark.test.framework.utils;
 import com.alibaba.fastjson.JSON;
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
 import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.jdbc.ScriptRunner;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -25,7 +21,6 @@ import java.util.Map;
 
 public class MySQLDb {
 	private static final Logger logger = LoggerFactory.getLogger(MySQLDb.class);
-	
 	private JdbcTemplate jdbcTemplate;
 	private static Connection connection;
 
@@ -127,25 +122,22 @@ public class MySQLDb {
 		return dataList;
 	}
 
-	/**
-	 *
-	 * @param filepaths
-     */
-	public void execute(String[] filepaths){
-		ScriptRunner scriptRunner = new ScriptRunner(connection);
-		Resources.setCharset(Charset.forName("GBK"));
-		scriptRunner.setLogWriter(null);
-		scriptRunner.setAutoCommit(true);
-		for (String f: filepaths) {
-			try {
-				scriptRunner.runScript(Resources.getResourceAsReader(f));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		scriptRunner.closeConnection();
 
-	}
+//	public void execute(String[] filepaths){
+//		ScriptRunner scriptRunner = new ScriptRunner(connection);
+//		Resources.setCharset(Charset.forName("GBK"));
+//		scriptRunner.setLogWriter(null);
+//		scriptRunner.setAutoCommit(true);
+//		for (String f: filepaths) {
+//			try {
+//				scriptRunner.runScript(Resources.getResourceAsReader(f));
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		scriptRunner.closeConnection();
+//
+//	}
 
 	@Override
 	public int hashCode() {
