@@ -41,8 +41,7 @@ public class CommUtils {
      */
     public static String getOrderNo(){
         String nowdate = CommUtils.getNowDate(1);
-        String orderNo = "ordermmf" + nowdate + Math.round(Math.random()*1000000);
-        return orderNo;
+        return "ordermmf" + nowdate + Math.round(Math.random()*1000000);
     }
 
     /**
