@@ -22,7 +22,7 @@ import java.util.Map;
 public class MySQLDb {
 	private static final Logger logger = LoggerFactory.getLogger(MySQLDb.class);
 	private JdbcTemplate jdbcTemplate;
-	private static Connection connection;
+	private Connection connection;
 
 	public MySQLDb(SQLConnectionDTO config) {
 		String url = config.getUrl();
@@ -44,6 +44,14 @@ public class MySQLDb {
 			e.printStackTrace();
 		}
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	/**
+	 * 返回连接对象
+	 * @return
+     */
+	public Connection getConnection(){
+		return connection;
 	}
 
 	public void execute(String sql){

@@ -2,10 +2,14 @@ package com.mark.test.framework.core.constat;
 
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
 import com.mark.test.framework.utils.MySQLDb;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Created by MingfengMa .
@@ -13,24 +17,31 @@ import org.springframework.context.annotation.Configuration;
  * Author : mark
  * Desc   :
  */
-@Configuration
+@Component
 public class DbFactory {
 
     private static Logger logger = LoggerFactory.getLogger(DbFactory.class);
 
-    private static SQLConnectionDTO dbinstance = new SQLConnectionDTO();
-
     @Value("${driver_87}")
-    private static String mysqldriver;
+    private String mysqldriver;
 
     @Value("${url_87}")
-    private static String url87;
+    private String url87;
 
     @Value("${username_87}")
-    private static String user87;
+    private String user87;
 
     @Value("${password_87}")
-    private static String passwd87;
+    private String passwd87;
+
+    @Autowired
+    public BasicDataSource db;
+
+
+    @PostConstruct
+    public void init(){
+        logger.info("DbFactory init database : {},{}",new String[]{mysqldriver,url87});
+    }
 
 
     /**
@@ -38,28 +49,37 @@ public class DbFactory {
      * @param dbServer
      * @return
      */
-    public static MySQLDb buildDbInstance(String dbServer){
+    public MySQLDb buildDbInstance(String dbServer){
+
+        SQLConnectionDTO dbinstance = new SQLConnectionDTO();
         switch (dbServer) {
             case "psbc":
                 dbinstance.setDriver("com.mysql.jdbc.Driver");
                 dbinstance.setUrl("jdbc:mysql://192.168.18.45:3306/hb?characterEncoding=utf8&useSSL=false");
                 dbinstance.setUserName("root");
                 dbinstance.setPassword("root");
-                logger.info("创建中邮数据库连接对象成功 :{}",dbinstance.toString());
+                logger.info("创建中邮数据库信息 :{}",dbinstance.toString());
                 break;
             case "xib":
                 dbinstance.setDriver(mysqldriver);
                 dbinstance.setUrl(url87);
                 dbinstance.setUserName(user87);
                 dbinstance.setPassword(passwd87);
-                logger.info("创建厦门数据库连接对象成功 :{}",dbinstance.toString());
+                logger.info("创建厦门数据库信息 :{}",dbinstance.toString());
                 break;
             case "dev":
                 dbinstance.setDriver("com.mysql.jdbc.Driver");
                 dbinstance.setUrl("jdbc:mysql://10.150.20.91:3306/hb?characterEncoding=utf8&useSSL=false");
                 dbinstance.setUserName("devbj");
                 dbinstance.setPassword("gb8tVSJCSw!kUPnE");
-                logger.info("创建开发数据库连接对象成功 :{}",dbinstance.toString());
+                logger.info("开发数据库信息 :{}",dbinstance.toString());
+                break;
+            case "local":
+                dbinstance.setDriver("com.mysql.jdbc.Driver");
+                dbinstance.setUrl("jdbc:mysql://localhost:3306/marktest?characterEncoding=utf8&useSSL=false");
+                dbinstance.setUserName("root");
+                dbinstance.setPassword("root");
+                logger.info("本地测试数据库信息 :{}",dbinstance.toString());
                 break;
             default:
                 logger.error("Input server parameter is incorrect: {}", dbServer);
@@ -69,11 +89,4 @@ public class DbFactory {
         return new MySQLDb(dbinstance);
     }
 
-
-    public static void main(String[] args) {
-        DbFactory.buildDbInstance("psbc");
-        DbFactory.buildDbInstance("xib");
-        DbFactory.buildDbInstance("");
-
-    }
 }

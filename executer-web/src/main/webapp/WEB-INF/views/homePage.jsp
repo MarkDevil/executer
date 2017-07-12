@@ -40,8 +40,9 @@
                     <input  type="text" class="form-control" style="width: auto"  name="bankno" placeholder="请输入银行卡号">
                 </div>
             </fieldset>
-            <div style="padding-left: 15px">
-                <button id="subBtn" type="submit" class="btn btn-default" >submit</button>
+            <div style="padding-left: 15px" class="dl-horizontal">
+                <button id="subBtn" type="submit" class="btn btn-primary" >提交</button>
+                <button id="inBtn" type="submit" class="btn btn-primary" >代扣</button>
             </div>
         </form>
     </div>
@@ -49,7 +50,7 @@
     <div class="container-fluid">
         <h2>定时任务调用方法</h2>
         <div style="padding-left: 15px">
-            <button id="btn_invoke" type="submit" class="btn btn-default">invoke task</button>
+            <button id="btn_invoke" type="submit" class="btn btn-default">调用定时任务k</button>
         </div>
     </div>
 

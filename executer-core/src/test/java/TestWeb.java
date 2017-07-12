@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  * Author : mark
  * Desc   :
  */
-
 public class TestWeb {
     Logger logger = LoggerFactory.getLogger(TestWeb.class);
     WebDriver driver;

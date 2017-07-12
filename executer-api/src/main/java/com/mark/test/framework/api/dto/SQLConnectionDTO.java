@@ -1,5 +1,7 @@
 package com.mark.test.framework.api.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Created by MingfengMa .
  * Data   : 2017/6/26
@@ -54,5 +56,8 @@ public class SQLConnectionDTO {
         this.password = password;
     }
 
-
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(SQLConnectionDTO.this);
+    }
 }

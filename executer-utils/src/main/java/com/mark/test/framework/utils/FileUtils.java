@@ -21,6 +21,7 @@ public class FileUtils {
 
     static Logger logger  = LoggerFactory.getLogger(FileUtils.class);
     static List<String> arraylist = Lists.newArrayList();
+    static List<String> directoryList = Lists.newArrayList();
 
     /**
      * 获取指定目录下所有文件
@@ -28,8 +29,6 @@ public class FileUtils {
      * @return
      */
     public static List<String> getFileList(String path){
-
-        List<String> directoryList = Lists.newArrayList();
         File file = new File(path);
         if (file.exists()){
             File[] files = file.listFiles();
@@ -49,8 +48,7 @@ public class FileUtils {
         }else {
             throw new RuntimeException("Directory is not exited");
         }
-
-//        logger.info("获取到的文件列表是:{}",arraylist);
+        logger.info("获取到的文件列表是:{}",directoryList);
         return arraylist;
     }
 
@@ -73,15 +71,12 @@ public class FileUtils {
                 str.append(new String(buff, 0, count));
             }
             sqlArr = str.toString().split(";");
-            for (String aSqlArr : sqlArr) {
-                aSqlArr = aSqlArr.trim();
-                if (aSqlArr.startsWith("/") || aSqlArr.startsWith("-") || aSqlArr.equals("")){
-                    continue;
-                }
-                logger.info("\n Found Sql is : {}",aSqlArr);
-                sqlList.add(aSqlArr+ ";");
+            for (String sql : sqlArr) {
+                sql = sql.trim();
+                logger.info("[trim拆分之后数据]: \n {}",sql);
+                sqlList.add(sql + ";");
             }
-            logger.info("Get sqls : {}",sqlList.toString());
+            logger.debug("Get sqls :\n {} \n",sqlList.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,11 +86,14 @@ public class FileUtils {
 
     public static void main(String[] args) {
         List<String> retlist = FileUtils.getFileList(
-                "/Users/mark/Downloads/hbadmin-change-list-master-485bf5c04fd73abc38bcc6faab73365f24f05ced/");
-        logger.info("Found file list: {}", retlist.toString());
+                "/Users/mark/Downloads/hbadmin-change-list-master-485bf5c04fd73abc38bcc6faab73365f24f05ced/20170706");
+        logger.info("Found file list: \n {} \n", retlist.toString());
         for (String filepath: retlist) {
-            logger.info("Found file path is {}",filepath);
             List<String> sqls = FileUtils.readSqlFile(filepath);
+            logger.debug("\n [文件目录为]：\n {} , \n [返回的SQL]: \n {}",filepath,sqls.toString());
+            for (String sql:sqls){
+                logger.info("\n [返回sql]: {}",sql);
+            }
         }
 
 
