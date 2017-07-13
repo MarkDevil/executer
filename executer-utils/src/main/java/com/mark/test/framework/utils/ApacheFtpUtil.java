@@ -4,6 +4,8 @@ import com.mark.test.framework.api.dto.FTPConfig;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.SocketException;
@@ -20,6 +22,7 @@ import java.util.List;
 
 
 public class ApacheFtpUtil {
+    Logger logger = LoggerFactory.getLogger(ApacheFtpUtil.class);
     private FTPClient ftpClient;
     public static final int BINARY_FILE_TYPE = FTP.BINARY_FILE_TYPE;
     public static final int ASCII_FILE_TYPE = FTP.ASCII_FILE_TYPE;
@@ -39,8 +42,8 @@ public class ApacheFtpUtil {
             throws SocketException, IOException {
         ftpClient = new FTPClient();
         ftpClient.connect(server, port);
-        System.out.println("Connected to " + server + ".");
-        System.out.println(ftpClient.getReplyCode());
+        logger.info("Connected to " + server + ".");
+        logger.info(String.valueOf(ftpClient.getReplyCode()));
         ftpClient.login(user, password);
         // Path is the sub-path of the FTP path
         if (path.length() != 0) {
@@ -78,14 +81,14 @@ public class ApacheFtpUtil {
 
         boolean flag = true;
         try {
-            // System.out.println("Dire=======" dire);
+            // logger.info("Dire=======" dire);
             flag = ftpClient.makeDirectory(pathName);
             if (flag) {
-                System.out.println("make Directory " +pathName +" succeed");
+                logger.info("make Directory " +pathName +" succeed");
 
             } else {
 
-                System.out.println("make Directory " +pathName+ " false");
+                logger.info("make Directory " +pathName+ " false");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,12 +115,13 @@ public class ApacheFtpUtil {
         for (FTPFile ftpFile : ftpFileArr) {
             String name = ftpFile.getName();
             if (ftpFile.isDirectory()) {
-                System.out.println("* [sD]Delete subPath [" + path + "/" + name + "]");
+                logger.info("* [sD]Delete subPath [" + path + "/" + name + "]");
                 removeDirectory(path + "/" + name, true);
             } else if (ftpFile.isFile()) {
-                System.out.println("* [sF]Delete file [" + path + "/" + name + "]");
+                logger.info("* [sF]Delete file [" + path + "/" + name + "]");
                 deleteFile(path + "/" + name);
             } else if (ftpFile.isSymbolicLink()) {
+                logger.error("");
 
             } else if (ftpFile.isUnknown()) {
 
