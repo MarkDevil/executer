@@ -19,6 +19,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.mark.test.framework</groupId>
+            <artifactId>executer-api</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>
@@ -66,12 +72,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.mark.test.framework</groupId>
-            <artifactId>executer-api</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
         </dependency>
@@ -80,10 +80,10 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
         </dependency>
+
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
-            <version>3.5</version>
         </dependency>
 
 

@@ -1,7 +1,9 @@
 package com.mark.test.framework.web.controller;
 
+import com.beust.jcommander.internal.Maps;
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
 import com.mark.test.framework.core.task.PrintOnceTask;
+import com.mark.test.framework.core.task.SynDataBaseTask;
 import com.mark.test.framework.utils.SchedulerManager;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,6 +75,25 @@ public class SchedulerController {
 //        ret.put("retcode","00");
 
         return retmap;
+    }
+
+    @RequestMapping(value = "/schedule/sysData",method = RequestMethod.GET)
+    @ResponseBody
+        public ModelAndView sysData(){
+        Map<String,Object> ret = Maps.newHashMap();
+        ModelAndView view;
+        try {
+            SynDataBaseTask synDataBaseTask = new SynDataBaseTask();
+            synDataBaseTask.run();
+        }catch (Exception ex){
+            ret.put("operatid","同步数据");
+            view = new ModelAndView("failed",ret);
+            return view;
+        }
+        ret.put("operatid","同步数据");
+        view = new ModelAndView("Successfully",ret);
+        return view;
+
     }
 
     public static void main(String[] args) {

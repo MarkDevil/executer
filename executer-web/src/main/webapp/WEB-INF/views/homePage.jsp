@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;" pageEncoding="utf-8" %>
+<%@ page isELIgnored ="false" %>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -13,6 +14,11 @@
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/buttons/buttons.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/video-js.css"/>" rel="stylesheet" type="text/css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap-select.min.css"/>">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap-select.min.js"/>"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
@@ -55,6 +61,21 @@
     </div>
 
     <blockquote></blockquote>
+
+    <form id="dbs" style="padding-left: 15px">
+        <label>
+            <select name="databases">
+                <option value="dev">dev</option>
+                <option value="saab">xib</option>
+                <option value="psbc">psbc</option>
+                <option value="local">local</option>
+            </select>
+        </label>
+    </form>
+
+    <button id="selectValue" class="btn-primary" style="padding-left: 15px" >selectValue</button>
+
+
 
 
     <!--<div class="container-fluid">-->
@@ -118,5 +139,17 @@
             }
         })
     });
+
+
+    /**
+     * 获取下拉框中的值
+     */
+    $("#selectValue").click(function () {
+        var db = $("select[name ='databases'] option:selected").text();
+    })
+
+
+
+
 </script>
 

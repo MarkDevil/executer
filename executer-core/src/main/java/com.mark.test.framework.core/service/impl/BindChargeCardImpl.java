@@ -44,15 +44,18 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * 给指定用户绑定银行卡
      * @param applyno
      */
-    public boolean bindChargeCard(String applyno,String bankCardNo) {
+    public void bindChargeCard(String applyno,String bankCardNo) {
+
         BusinessApply businessApply = this.getBussinessApply(applyno);
+        if (businessApply == null || businessApply.equals("")){
+            throw new RuntimeException("贷款信息未找到");
+        }
         logger.info("查询到的申请单数据为: {}",businessApply.toString());
         customerid = businessApply.getCustomerid();
         customername = businessApply.getCustomername();
         if (checkAccountInfo(customerid)){
             logger.info("该用户已经绑过卡");
             updateBankCardStatus("2",customerid);
-            return true;
         }else {
             int flag = accountInfoMapper.insert(
                     this.populateAccoutInfo(customerid,"001",bankCardNo,
@@ -68,9 +71,9 @@ public class BindChargeCardImpl implements IBindChargeCard {
             );
             if (flag>0 && flag1 >0 && flag2 >0){
                 logger.info("Insert bankCard successfully");
-                return true;
             }else {
-                return false;
+                logger.info("Insert bankCard failed");
+                throw new RuntimeException("绑卡失败");
             }
         }
 
@@ -104,11 +107,7 @@ public class BindChargeCardImpl implements IBindChargeCard {
      */
     public BusinessApply getBussinessApply(String applyNo){
         try {
-            BusinessApply businessApply = businessApplyMapper.selectByPrimaryKey(applyNo);
-            if (null == businessApply){
-                throw new RuntimeException("Get accountInfo failed !");
-            }
-            return businessApply;
+            return businessApplyMapper.selectByPrimaryKey(applyNo);
         }catch (Exception ex){
             logger.error(Arrays.toString(ex.getStackTrace()));
             return null;

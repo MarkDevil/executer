@@ -1,6 +1,8 @@
 package com.mark.test.framework.core.task;
 
+import com.mark.test.framework.core.constat.DbFactory;
 import com.mark.test.framework.utils.FileUtils;
+import com.mark.test.framework.utils.MySQLDb;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -19,7 +21,8 @@ import java.util.List;
 public class SynDataBaseTask implements Job {
 
     Logger logger = LoggerFactory.getLogger(SynDataBaseTask.class);
-    final String filepath = "/Users/mark/Downloads/hbadmin-change-list-master-485bf5c04fd73abc38bcc6faab73365f24f05ced";
+    final String filepath = "/Users/mark/tool/shell";
+    private MySQLDb dbins = new DbFactory().buildDbInstance("local");
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -37,7 +40,9 @@ public class SynDataBaseTask implements Job {
             List<String> sqls = FileUtils.readSqlFile(filepath);
             for (String sql:sqls){
                 logger.info("\n [返回sql]: {}",sql);
+                dbins.queryForList(sql);
             }
+
         }
     }
 

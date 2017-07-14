@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -71,13 +72,15 @@ public class FileUtils {
                 str.append(new String(buff, 0, count));
             }
             sqlArr = str.toString().split(";");
+            logger.info("\n 分割后的数据: \n {}", Arrays.toString(sqlArr));
             for (String sql : sqlArr) {
                 sql = sql.trim();
-                logger.info("[trim拆分之后数据]: \n {}",sql);
-                sqlList.add(sql + ";");
+                logger.info("\n 数组中的数据: \n {}",sql);
+                if (sql.equals("")){
+                    continue;
+                }
+                sqlList.add(sql);
             }
-            logger.debug("Get sqls :\n {} \n",sqlList.toString());
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,7 +89,7 @@ public class FileUtils {
 
     public static void main(String[] args) {
         List<String> retlist = FileUtils.getFileList(
-                "/Users/mark/Downloads/hbadmin-change-list-master-485bf5c04fd73abc38bcc6faab73365f24f05ced/20170706");
+                "/Users/mark/tool/shell");
         logger.info("Found file list: \n {} \n", retlist.toString());
         for (String filepath: retlist) {
             List<String> sqls = FileUtils.readSqlFile(filepath);

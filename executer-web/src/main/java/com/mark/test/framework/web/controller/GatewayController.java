@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -100,12 +101,14 @@ public class GatewayController {
         }
         String applyno = String.valueOf(request.get("applyno"));
         String bankno = String.valueOf(request.get("bankno"));
-        boolean flag = bindChargeCard.bindChargeCard(applyno,bankno);
-        if (flag){
-            return new ModelAndView("Successfully");
-        }else {
-            return new ModelAndView("failed");
+        try {
+             bindChargeCard.bindChargeCard(applyno,bankno);
+        }catch (Exception ex){
+            logger.error("\n 绑卡失败: \n {},{}", ex.getMessage(), Arrays.toString(ex.getStackTrace()));
+            return new ModelAndView("failed","operatid",ex.getMessage());
         }
+        return new ModelAndView("Successfully");
+
     }
 
 
