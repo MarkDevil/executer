@@ -16,20 +16,6 @@
     <link href="<c:url value="/resources/css/video-js.css"/>" rel="stylesheet" type="text/css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap-select.min.css"/>">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap-select.min.js"/>"></script>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap.js"/>"></script>
-    <!--引入datatables样式-->
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <!-- If you'd like to support IE8 -->
-    <script src="<c:url value="/resources/js/third/video/videojs-ie8.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/third/video/video.min.js"/>"></script>
-
 </head>
 
 <body>
@@ -44,11 +30,21 @@
                     <br/>
                     <label>bankNo</label>
                     <input  type="text" class="form-control" style="width: auto"  name="bankno" placeholder="请输入银行卡号">
+                    <br/>
+                    <label>DataBase</label>
+                    <label>
+                        <select name="databases">
+                            <option value="dev">dev</option>
+                            <option value="xib">xib</option>
+                            <option value="psbc">psbc</option>
+                            <option value="local">local</option>
+                        </select>
+                    </label>
                 </div>
             </fieldset>
             <div style="padding-left: 15px" class="dl-horizontal">
                 <button id="subBtn" type="submit" class="btn btn-primary" >提交</button>
-                <button id="inBtn" type="submit" class="btn btn-primary" >代扣</button>
+                <button id="updateBtn" type="button" class="btn btn-primary" >代扣</button>
             </div>
         </form>
     </div>
@@ -56,52 +52,30 @@
     <div class="container-fluid">
         <h2>定时任务调用方法</h2>
         <div style="padding-left: 15px">
-            <button id="btn_invoke" type="submit" class="btn btn-default">调用定时任务k</button>
+            <button id="btn_invoke" type="submit" class="btn btn-primary">调用定时任务k</button>
         </div>
     </div>
 
     <blockquote></blockquote>
+    <br/>
 
-    <form id="dbs" style="padding-left: 15px">
-        <label>
-            <select name="databases">
-                <option value="dev">dev</option>
-                <option value="saab">xib</option>
-                <option value="psbc">psbc</option>
-                <option value="local">local</option>
-            </select>
-        </label>
-    </form>
-
-    <button id="selectValue" class="btn-primary" style="padding-left: 15px" >selectValue</button>
-
-
-
-
-    <!--<div class="container-fluid">-->
-            <!--<video id="my-video" class="video-js" controls preload="auto" width="auto" height="auto"-->
-                   <!--poster="MY_VIDEO_POSTER.jpg" data-setup="{}">-->
-                <!--<source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">-->
-                <!--&lt;!&ndash;<p class="vjs-no-js">&ndash;&gt;-->
-                    <!--&lt;!&ndash;To view this video please enable JavaScript, and consider upgrading to a web browser that&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>&ndash;&gt;-->
-                <!--&lt;!&ndash;</p>&ndash;&gt;-->
-            <!--</video>-->
-    <!--</div>-->
-    <!--<div class="container-fluid">-->
-        <!--<table id="reportTable1" class="display" cellspacing="0" width="100%">-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th>Name</th>-->
-                <!--<th>Position</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-        <!--</table>-->
-    <!--</div>-->
     <address style="padding-left: 15px " contenteditable="true"><strong>马铭锋</strong><br />
-        795 Folsom Ave, Suite 600<br />
-        San Francisco, CA 94107<br />
-        <abbr title="Phone">P:</abbr> (123) 456-7890</address>
+        厚本金融<br />
+        <abbr title="email">Email:</abbr> mamingfeng@houbank.cn</address>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap-select.min.js"/>"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap.js"/>"></script>
+    <!--引入datatables样式-->
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <!-- If you'd like to support IE8 -->
+    <script src="<c:url value="/resources/js/third/video/videojs-ie8.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/third/video/video.min.js"/>"></script>
 </body>
 </html>
 
@@ -114,7 +88,12 @@
             type: 'GET',
             dataType:"text",
             success : function (data) {
-                alert(data)
+                if(data.get("retcode").eq("00")){
+                    alert("调用成功");
+                }else {
+                    alert("调用失败");
+                }
+
             }
         })
     });
@@ -124,20 +103,23 @@
     });
     
 
-
-
-    $("#subBtn").click(function () {
+    $("#updateBtn").click(function () {
         var applyno = $("input[name ='applyno']").val();
-        var bankno = $("input[name ='bankno']").val();
-        alert(applyno + bankno);
-        $.ajax({
-            url:'/api/schedule/onetime',
-            type: 'GET',
-            dataType:"text",
-            success : function (data) {
-                alert(data)
-            }
-        })
+        var request = {applyNo:applyno};
+        console.log("请求数据:" + request.toString());
+        if (confirm("是否要更新订单代扣状态" + applyno + "?")){
+            $.ajax({
+                url:'/api/updateCardStatus',
+                type:'POST',
+                dataType:'JSON',
+                data:request,
+                success: function (data) {
+                    if (data.get("retcode") === "successfully"){
+                        alert("更新数据成功!")
+                    }
+                }
+            })
+        }
     });
 
 
@@ -145,7 +127,7 @@
      * 获取下拉框中的值
      */
     $("#selectValue").click(function () {
-        var db = $("select[name ='databases'] option:selected").text();
+//        var db = $("select[name ='databases'] option:selected").text();
     })
 
 

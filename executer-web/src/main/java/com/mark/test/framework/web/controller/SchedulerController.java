@@ -1,5 +1,6 @@
 package com.mark.test.framework.web.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.beust.jcommander.internal.Maps;
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
 import com.mark.test.framework.core.task.PrintOnceTask;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.quartz.JobBuilder.newJob;
@@ -64,17 +63,10 @@ public class SchedulerController {
     public Map invoke1time(){
         final SchedulerManager schedulerManager = new SchedulerManager();
         schedulerManager.runNowOnce(PrintOnceTask.class);
-//        JSONObject ret = new JSONObject();
-        Map<String,ArrayList<String[]>> retmap= new HashMap<>();
-        ArrayList<String[]> arrayList = new ArrayList<>();
-        arrayList.add(new String[]{"mark","test"});
-        arrayList.add(new String[]{"jack","test"});
-        retmap.put("data",arrayList);
-        logger.info("Response data : {}",retmap.get("data").toArray());
-//        ret.put("retmsg","ok");
-//        ret.put("retcode","00");
-
-        return retmap;
+        JSONObject ret = new JSONObject();
+        ret.put("retmsg","ok");
+        ret.put("retcode","00");
+        return ret;
     }
 
     @RequestMapping(value = "/schedule/sysData",method = RequestMethod.GET)

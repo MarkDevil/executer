@@ -111,5 +111,23 @@ public class GatewayController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST,value="/updateCardStatus")
+    @ResponseBody
+    public JSONObject updateCardStatus(@RequestParam Map request){
+        logger.info("request parameter : {}",request);
+        JSONObject ret = new JSONObject();
+        String applyNo = request.get("applyNo").toString();
+        assert applyNo != null;
+        try {
+            bindChargeCard.updateBankCardStatus("2",applyNo);
+        }catch (Exception ex){
+            logger.error("\n 更新卡失败: \n {}",ex);
+            ret.put("retcode","failed");
+            return ret;
+        }
+        ret.put("retcode","successfully");
+        return ret;
+    }
+
 
 }

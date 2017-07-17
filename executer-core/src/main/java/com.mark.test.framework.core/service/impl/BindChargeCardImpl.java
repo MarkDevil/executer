@@ -117,12 +117,14 @@ public class BindChargeCardImpl implements IBindChargeCard {
 
 
     /**
-     * 根据单号
-     * @param userid
+     * 根据数据更新单号
+     * @param status
+     * @param applyNo
      * @return
      */
-    public boolean updateBankCardStatus(String status,String userid) {
+    public boolean updateBankCardStatus(String status,String applyNo) {
         logger.info("将订单状态更新为: {}",status);
+        String userid = businessApplyMapper.selectByPrimaryKey(applyNo).getCustomerid();
         int ret = accountInfoMapper.updateStatusByUserid(status,userid);
         return ret > 0;
 

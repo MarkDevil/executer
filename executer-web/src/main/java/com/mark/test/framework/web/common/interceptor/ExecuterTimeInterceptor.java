@@ -23,7 +23,8 @@ public class ExecuterTimeInterceptor extends HandlerInterceptorAdapter{
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Date now = new Date();
         request.setAttribute(START_TIME_NAME, now.getTime());
-        logger.info("Received request at {} ", new Object[] {  now });
+        String realip = request.getRemoteAddr();
+        logger.info("Received request at {} remote ip : {}", new Object[] {  now ,realip});
         return true;
     }
 
