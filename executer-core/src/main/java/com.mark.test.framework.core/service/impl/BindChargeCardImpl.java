@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,9 +24,6 @@ import java.util.List;
 @Transactional
 public class BindChargeCardImpl implements IBindChargeCard {
     Logger logger = LoggerFactory.getLogger(BindChargeCardImpl.class);
-
-    private String customerid;
-    private String customername;
 
     @Autowired
     private BusinessApplyMapper businessApplyMapper;
@@ -51,11 +47,11 @@ public class BindChargeCardImpl implements IBindChargeCard {
             throw new RuntimeException("贷款信息未找到");
         }
         logger.info("查询到的申请单数据为: {}",businessApply.toString());
-        customerid = businessApply.getCustomerid();
-        customername = businessApply.getCustomername();
+        String customerid = businessApply.getCustomerid();
+        String customername = businessApply.getCustomername();
         if (checkAccountInfo(customerid)){
             logger.info("该用户已经绑过卡");
-            updateBankCardStatus("2",customerid);
+            updateBankCardStatus("2", customerid);
         }else {
             int flag = accountInfoMapper.insert(
                     this.populateAccoutInfo(customerid,"001",bankCardNo,
@@ -106,13 +102,7 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * @return
      */
     public BusinessApply getBussinessApply(String applyNo){
-        try {
-            return businessApplyMapper.selectByPrimaryKey(applyNo);
-        }catch (Exception ex){
-            logger.error(Arrays.toString(ex.getStackTrace()));
-            return null;
-        }
-
+        return businessApplyMapper.selectByPrimaryKey(applyNo);
     }
 
 
