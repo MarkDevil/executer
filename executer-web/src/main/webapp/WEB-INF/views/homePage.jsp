@@ -20,7 +20,7 @@
 
 <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid pull-left">
         <h1>中邮信审系统绑卡工具</h1>
         <form id="bindForm" action="<c:url value="/api/BindChargeCard"/>" method="post" style="align-self: baseline">
             <fieldset>
@@ -47,21 +47,23 @@
                 <button id="updateBtn" type="button" class="btn btn-primary" >代扣</button>
             </div>
         </form>
+        <br>
+        <address style="padding-left: 15px " contenteditable="true"><strong>马铭锋</strong><br />
+            厚本金融<br />
+            <abbr title="email">Email:</abbr> mamingfeng@houbank.cn</address>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid pull-right">
         <h2>定时任务调用方法</h2>
         <div style="padding-left: 15px">
-            <button id="btn_invoke" type="submit" class="btn btn-primary">调用定时任务k</button>
+            <button id="btn_invoke" type="submit" class="btn btn-primary">调用定时任务</button>
         </div>
     </div>
 
     <blockquote></blockquote>
     <br/>
 
-    <address style="padding-left: 15px " contenteditable="true"><strong>马铭锋</strong><br />
-        厚本金融<br />
-        <abbr title="email">Email:</abbr> mamingfeng@houbank.cn</address>
+
 
 
     <!-- Latest compiled and minified JavaScript -->
@@ -102,20 +104,24 @@
         "ajax":'/api/schedule/onetime'
     });
     
-
+    var ret = "";
     $("#updateBtn").click(function () {
         var applyno = $("input[name ='applyno']").val();
         var request = {applyNo:applyno};
+
         console.log("请求数据:" + request.toString());
         if (confirm("是否要更新订单代扣状态" + applyno + "?")){
             $.ajax({
+                async: false,
                 url:'/api/updateCardStatus',
                 type:'POST',
-                dataType:'JSON',
+                dataType:"text",
                 data:request,
                 success: function (data) {
-                    if (data.get("retcode") === "successfully"){
-                        alert("更新数据成功!")
+                    if(data.indexOf("successfully") > -1){
+                        alert("更新成功");
+                    }else {
+                        alert("更新失败")
                     }
                 }
             })

@@ -113,7 +113,7 @@ public class GatewayController {
 
     @RequestMapping(method = RequestMethod.POST,value="/updateCardStatus")
     @ResponseBody
-    public JSONObject updateCardStatus(@RequestParam Map request){
+    public String updateCardStatus(@RequestParam Map request){
         logger.info("request parameter : {}",request);
         JSONObject ret = new JSONObject();
         String applyNo = request.get("applyNo").toString();
@@ -123,10 +123,10 @@ public class GatewayController {
         }catch (Exception ex){
             logger.error("\n 更新卡失败: \n {}",ex);
             ret.put("retcode","failed");
-            return ret;
+            return ret.toJSONString();
         }
         ret.put("retcode","successfully");
-        return ret;
+        return ret.toJSONString();
     }
 
 
