@@ -9,3 +9,4 @@ out
 gen
 .gitignore
 .idea/
+/executer-web/src/main/resources/docker/executer-web.war
