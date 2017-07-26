@@ -63,7 +63,7 @@
     <blockquote></blockquote>
     <br/>
 
-
+    <button id="btn_add" type="button" class="btn btn-primary" onclick="openNewPage()">跳转</button>
 
 
     <!-- Latest compiled and minified JavaScript -->
@@ -134,7 +134,25 @@
      */
     $("#selectValue").click(function () {
 //        var db = $("select[name ='databases'] option:selected").text();
-    })
+    });
+
+
+    function openNewPage(){
+        $.ajax({
+            async: false,
+            url:'/nav',
+            type:'get',
+            dataType:"text",
+            success: function (data) {
+                
+            },
+            error: function (data) {
+                
+            }
+        })
+    }
+
+
 
 
 

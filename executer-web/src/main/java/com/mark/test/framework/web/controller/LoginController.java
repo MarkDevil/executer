@@ -19,4 +19,10 @@ public class LoginController {
     public ModelAndView index(){
         return new ModelAndView("homePage");
     }
+
+    @RequestMapping(value = "/nav")
+    @ResponseBody
+    public ModelAndView nav(){
+        return new ModelAndView("navPage");
+    }
 }

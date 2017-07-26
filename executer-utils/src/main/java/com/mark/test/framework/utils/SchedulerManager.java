@@ -80,7 +80,7 @@ public class SchedulerManager implements Job {
             scheduler.scheduleJob(this.getJobDetail(clz), this.getCronTrigger(cronExp));
             scheduler.start();
             if (scheduler.isStarted()){
-                logger.info("Job start up : {}",scheduler.getSchedulerName());
+                logger.info("Schedule Job : {} start up",scheduler.getSchedulerName());
             }
 
         } catch (SchedulerException e) {
@@ -100,7 +100,7 @@ public class SchedulerManager implements Job {
             scheduler.scheduleJob(this.getJobDetail(clz), this.getIntervalTrigger(interval,unitType));
             scheduler.start();
             if (scheduler.isStarted()){
-                logger.info("Job start up : {}",scheduler.getSchedulerName());
+                logger.info("Schedule Job : {} start up",scheduler.getSchedulerName());
             }
 
         } catch (SchedulerException e) {
