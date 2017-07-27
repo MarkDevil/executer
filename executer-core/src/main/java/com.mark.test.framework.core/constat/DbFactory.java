@@ -40,7 +40,7 @@ public class DbFactory {
 
     @PostConstruct
     public void init(){
-        logger.info("DbFactory init database : {},{}",new String[]{mysqldriver,url87});
+        logger.info("DbFactory init database : {},{}",mysqldriver,url87);
     }
 
 

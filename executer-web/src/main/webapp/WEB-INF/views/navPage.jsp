@@ -27,7 +27,7 @@
                 测试工具集
             </a>
         </li>
-        <li><a href="#ios" data-toggle="tab">中邮银行</a></li>
+        <li><a href="#psbc" data-toggle="tab">中邮银行</a></li>
         <li class="dropdown">
             <a href="#" id="myTabDrop1" class="dropdown-toggle"
                data-toggle="dropdown">厦门国际
@@ -109,8 +109,62 @@
 
             </table>
         </div>
-        <div class="tab-pane fade" id="ios">
-            <button class="btn-primary" type="button">test</button>
+        <div class="tab-pane fade" id="psbc">
+
+            <form id="form_db" autocomplete="on">
+                <table>
+                    <tr>
+                        <td>数据库类型:</td>
+                        <td><input type="text" id="dbType1" name="dbType1" value="mysql" size="60" /></td>
+                        <td>数据库类型,例如:mysql,oracle</td>
+                    </tr>
+
+                    <tr>
+                        <td>ip地址:</td>
+                        <td><input type="text" id="ip1" name="ip1" value="10.150.20.87" size="60" /></td>
+                        <td>IP地址</td>
+                    </tr>
+
+                    <tr>
+                        <td>端口号:</td>
+                        <td><input type="text" id="port1" name="port1" value="3306" size="60" /></td>
+                        <td>端口号</td>
+                    </tr>
+
+                    <tr>
+                        <td>数据库库名:</td>
+                        <td><input type="text" id="dbname1" name="dbname1" value="hb" size="60" /></td>
+                        <td>数据库库名</td>
+                    </tr>
+
+                    <tr>
+                        <td>数据库用户名:</td>
+                        <td><input type="text" id="username1" name="username1" value="root" size="60" /></td>
+                        <td>数据库用户名</td>
+                    </tr>
+
+                    <tr>
+                        <td>数据库密码:</td>
+                        <td><input type="text" id="passwd1" name="passwd1" value="root" size="60" /></td>
+                        <td>数据库密码</td>
+                    </tr>
+
+                    <tr>
+                        <td>执行sql:</td>
+                        <td><textarea id="sql" name="sql" class="input-lg"></textarea></td>
+                    </tr>
+
+                    <tr style="text-align: left">
+                        <td></td>
+                        <td><input type="button" value="提交" class="btn-primary"
+                                   onclick="invoke('form_db','db/exec')">&nbsp;&nbsp;
+                        </td>
+
+                    </tr>
+
+                </table>
+            </form>
+
         </div>
         <div class="tab-pane fade" id="jmeter">
             <p>jMeter</p>
@@ -126,6 +180,37 @@
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="<c:url value="/resources/js/third/video/videojs-ie8.min.js"/>"></script>
     <script src="<c:url value="/resources/js/third/video/video.min.js"/>"></script>
+    <script src="http://cdn.bootcss.com/jquery.form/4.2.1/jquery.form.min.js"></script>
+
+    <script>
+        function invoke(formid,url){
+            var form = $('#form_db').formSerialize();
+            console.log(form);
+            $.ajax({
+                url:url,
+                data:form,
+                cache:false,//false是不缓存，true为缓存
+                async:true,//true为异步，false为同步
+                beforeSend:function(){
+                    //请求前
+                },
+                success:function(result){
+                    //请求成功时
+                },
+                complete:function(){
+                    //请求结束时
+                },
+                error:function(){
+                    //请求失败时
+                }
+            });
+
+        }
+
+        function invokeA(){
+
+        }
+    </script>
 
 </body>
 </html>

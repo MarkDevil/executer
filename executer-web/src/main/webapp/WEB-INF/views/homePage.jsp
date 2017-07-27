@@ -20,7 +20,7 @@
 
 <body>
 
-    <div class="container-fluid pull-left">
+    <div class="container-fluid pull-left col-lg-12">
         <h1>中邮信审系统绑卡工具</h1>
         <form id="bindForm" action="<c:url value="/api/BindChargeCard"/>" method="post" style="align-self: baseline">
             <fieldset>
@@ -53,26 +53,23 @@
             <abbr title="email">Email:</abbr> mamingfeng@houbank.cn</address>
     </div>
 
-    <div class="container-fluid pull-right">
+    <div class="container-fluid col-lg-12" >
         <h2>定时任务调用方法</h2>
         <div style="padding-left: 15px">
             <button id="btn_invoke" type="submit" class="btn btn-primary">调用定时任务</button>
         </div>
     </div>
 
-    <blockquote></blockquote>
-    <br/>
+    <div class="container-fluid ">
+        <button id="btn_add" type="button" class="btn btn-primary" onclick="openNewPage()">跳转</button>
+    </div>
 
-    <button id="btn_add" type="button" class="btn btn-primary" onclick="openNewPage()">跳转</button>
 
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap-select.min.js"/>"></script>
-    <script src="https://code.jquery.com/jquery.js"></script>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap-select.min.js"/>"></script>
     <script src="<c:url value="/resources/js/third/bootstrap/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/third/bootstrap/bootstrap.js"/>"></script>
     <!--引入datatables样式-->
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <!-- If you'd like to support IE8 -->
@@ -82,7 +79,6 @@
 </html>
 
 <script type="text/javascript">
-
     var restR = null;
     $("#btn_invoke").click(function () {
         $.ajax({
@@ -95,7 +91,6 @@
                 }else {
                     alert("调用失败");
                 }
-
             }
         })
     });
@@ -138,18 +133,7 @@
 
 
     function openNewPage(){
-        $.ajax({
-            async: false,
-            url:'/nav',
-            type:'get',
-            dataType:"text",
-            success: function (data) {
-                
-            },
-            error: function (data) {
-                
-            }
-        })
+        window.location.href = '/executer-web/nav'
     }
 
 

@@ -43,7 +43,7 @@
     <!--拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/api/*" />
+            <mvc:mapping path="/**" />
             <ref bean="timeInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
