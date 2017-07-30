@@ -18,9 +18,9 @@ import java.util.Map;
  */
 @Service
 public class DbExecuterImpl implements IDbExecuter{
-    Logger logger = LoggerFactory.getLogger(DbExecuterImpl.class);
+    private Logger logger = LoggerFactory.getLogger(DbExecuterImpl.class);
 
-    MySQLDb mySQLDb;
+    private MySQLDb mySQLDb;
 
     @Override
     public boolean runsql(Map connectionDTO, String sql) {

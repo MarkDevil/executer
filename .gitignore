@@ -10,3 +10,9 @@ gen
 .gitignore
 .idea/
 /executer-web/src/main/resources/docker/executer-web.war
+executer-api/src/main/resources/
+executer-api/src/test/
+executer-api/target/
+executer-core/target/
+executer-utils/target/
+executer-web/target/

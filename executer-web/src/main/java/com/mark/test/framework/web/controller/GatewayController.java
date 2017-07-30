@@ -13,9 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.testng.collections.Lists;
+import org.testng.collections.Maps;
 
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -75,6 +78,29 @@ public class GatewayController {
         }else {
             return null;
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/testList")
+    @ResponseBody
+    public ModelAndView testlist(){
+        List<TestRequestDto> retlist= Lists.newArrayList();
+        Map<String,Object> jsonObject = Maps.newLinkedHashMap();
+        jsonObject.put("1","mark");
+        jsonObject.put("2","jack");
+        Map<String,Object> jsonObject1 = Maps.newLinkedHashMap();
+        jsonObject1.put("3","lucy");
+        jsonObject1.put("4","mock");
+        for (Map.Entry entry:jsonObject.entrySet()) {
+            String key = (String) entry.getKey();
+            String value = (String) entry.getValue();
+            TestRequestDto requestDto = new TestRequestDto();
+            requestDto.setId(key);
+            requestDto.setName(value);
+            retlist.add(requestDto);
+        }
+        ModelAndView modelAndView = new ModelAndView("showList");
+        modelAndView.addObject("retlist",retlist);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/sign",method = RequestMethod.POST)
