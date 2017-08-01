@@ -103,6 +103,24 @@ public class GatewayController {
         return modelAndView;
     }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/testDataList")
+    @ResponseBody
+    public List<TestRequestDto> getBootstrapdata(){
+        List<TestRequestDto> retlist= Lists.newArrayList();
+        Map<String,Object> jsonObject = Maps.newLinkedHashMap();
+        jsonObject.put("1","mark");
+        jsonObject.put("2","jack");
+        for (Map.Entry entry:jsonObject.entrySet()) {
+            String key = (String) entry.getKey();
+            String value = (String) entry.getValue();
+            TestRequestDto requestDto = new TestRequestDto();
+            requestDto.setId(key);
+            requestDto.setName(value);
+            retlist.add(requestDto);
+        }
+        return retlist;
+    }
+
     @RequestMapping(value = "/sign",method = RequestMethod.POST)
     @ResponseBody
     public String generateSign(Map requestmap){

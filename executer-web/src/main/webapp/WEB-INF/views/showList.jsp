@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="homePage.jsp"></jsp:include>
+<jsp:include page="homePage.jsp"/>
 <%--
   Created by IntelliJ IDEA.
   User: Mark

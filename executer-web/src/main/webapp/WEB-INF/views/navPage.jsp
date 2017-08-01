@@ -18,6 +18,7 @@
     <link href="<c:url value="/resources/css/video-js.css"/>" rel="stylesheet" type="text/css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap-select.min.css"/>">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
     <title>Nav testing tool</title>
 </head>
 <body>
@@ -34,7 +35,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                <li><a href="#jmeter"  data-toggle="tab">jmeter</a></li>
+                <li><a href="#jmeter"  data-toggle="tab">bootStrap数据测试</a></li>
                 <li><a href="#ejb"  data-toggle="tab">ejb</a></li>
             </ul>
         </li>
@@ -43,7 +44,7 @@
         <div class="tab-pane fade in active" id="home">
             <h1>厦门银行修改三方状态</h1>
             <div>
-                <form name="form1" method="post" autocomplete="on">
+                <form id="form1" method="post" autocomplete="on">
                     <table>
                         <tr>
                             <td>申请单号:</td>
@@ -151,7 +152,7 @@
 
                     <tr>
                         <td>执行sql:</td>
-                        <td><textarea id="sql" name="sql" class="input-lg"></textarea></td>
+                        <td><textarea id="sql" name="sql" class="input-lg" style = "width: 808px; height: 597px;"></textarea></td>
                     </tr>
 
                     <tr style="text-align: left">
@@ -167,8 +168,17 @@
 
         </div>
         <div class="tab-pane fade" id="jmeter">
-            <p>jMeter</p>
+            <table id="bt-table" data-toggle="table" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th data-field="id">编号</th>
+                        <th data-field="name">姓名</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
+
+
         <div class="tab-pane fade" id="ejb">
             <p>Enterprise Java Beans</p>
         </div>
@@ -181,10 +191,12 @@
     <script src="<c:url value="/resources/js/third/video/videojs-ie8.min.js"/>"></script>
     <script src="<c:url value="/resources/js/third/video/video.min.js"/>"></script>
     <script src="http://cdn.bootcss.com/jquery.form/4.2.1/jquery.form.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
 
     <script>
         function invoke(formid,url){
-            var form = $('#form_db').formSerialize();
+            var form = $('#'+ formid).formSerialize();
             console.log(form);
             $.ajax({
                 url:url,
@@ -195,7 +207,7 @@
                     //请求前
                 },
                 success:function(result){
-                    //请求成功时
+                    alert("调用成功");
                 },
                 complete:function(){
                     //请求结束时
@@ -207,9 +219,19 @@
 
         }
 
-        function invokeA(){
+        $.ajax({
+            type:"get",
+            url:"/executer-web/api/testDataList",
+            dataType:"json",
+            success: function (data) {
+                $("#bt-table").bootstrapTable('load',data);
+            }
 
-        }
+        });
+
+
+
+
     </script>
 
 </body>
