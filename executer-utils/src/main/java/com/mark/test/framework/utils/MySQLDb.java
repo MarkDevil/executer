@@ -1,14 +1,21 @@
 package com.mark.test.framework.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.beust.jcommander.internal.Lists;
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
 import org.apache.commons.dbcp.BasicDataSource;
-
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -130,22 +137,33 @@ public class MySQLDb {
 		return dataList;
 	}
 
-
-//	public void execute(String[] filepaths){
-//		ScriptRunner scriptRunner = new ScriptRunner(connection);
-//		Resources.setCharset(Charset.forName("GBK"));
-//		scriptRunner.setLogWriter(null);
-//		scriptRunner.setAutoCommit(true);
-//		for (String f: filepaths) {
-//			try {
-//				scriptRunner.runScript(Resources.getResourceAsReader(f));
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		scriptRunner.closeConnection();
-//
-//	}
+	/**
+	 * 执行指定文件的sql
+	 * @param filepaths
+     */
+	public void executeSqlFile(List<String> filepaths){
+		List<String> faillist = Lists.newLinkedList();
+		ScriptRunner scriptRunner = new ScriptRunner(this.getConnection());
+		Resources.setCharset(Charset.forName("utf8"));
+		scriptRunner.setLogWriter(null);
+		scriptRunner.setAutoCommit(true);
+		scriptRunner.setSendFullScript(true);
+		scriptRunner.setEscapeProcessing(true);
+		for (String f: filepaths) {
+			try {
+				logger.info("开始执行数据库文件: [{}]", f);
+				File file = new File(f);
+				FileReader fileReader = new FileReader(file);
+				scriptRunner.runScript(fileReader);
+			} catch (IOException e) {
+				logger.error("读取文件异常 :{}",f);
+				faillist.add(f);
+				e.printStackTrace();
+			}
+		}
+		logger.info("读取失败的文件为:{}",faillist);
+		scriptRunner.closeConnection();
+	}
 
 	@Override
 	public int hashCode() {

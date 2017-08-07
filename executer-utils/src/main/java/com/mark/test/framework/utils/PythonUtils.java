@@ -20,7 +20,10 @@ public class PythonUtils {
 
     private static Process process;
 
-
+    /**
+     * 执行cmd shell命令
+     * @param cmd
+     */
     public static void runPy(String cmd){
         try {
             process = Runtime.getRuntime().exec(cmd);
@@ -29,7 +32,7 @@ public class PythonUtils {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = bufferedReader.readLine())!= null){
-                logger.info("Input:" + line);
+                logger.info(line);
             }
             bufferedReader.close();
             process.waitFor();
@@ -44,7 +47,11 @@ public class PythonUtils {
     }
 
 
+
+
     public static void main(String[] args) {
-        PythonUtils.runPy("python /Users/mark/tool/datax/bin/datax.py /Users/Shared/gitWorkspace/executer/test.json");
+//        PythonUtils.runPy("python /Users/mark/tool/datax/bin/datax.py /Users/Shared/gitWorkspace/executer/test.json");
+        logger.info(PythonUtils.class.getResource("/shell/syscChangeList.sh").getPath());
+        PythonUtils.runPy("sh " + PythonUtils.class.getResource("/shell/syscChangeList.sh").getPath());
     }
 }

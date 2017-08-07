@@ -1,8 +1,6 @@
 package com.mark.test.framework.utils;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 
 /**
  * Created by MingfengMa .
@@ -14,7 +12,6 @@ public class WebDriverFactory {
 
     private static WebDriverFactory webDriverFactory = null;
     private WebDriver webDriver;
-    private ChromeDriverService service;
     private WebDriverFactory(){
 
     }
@@ -35,7 +32,7 @@ public class WebDriverFactory {
     public WebDriver getWebDriver(String browser){
         if (browser.equalsIgnoreCase("chrome")){
             System.setProperty("webdriver.chrome.driver", "src/test/resources/webdriver/chromedriver");
-            webDriver = new ChromeDriver();
+//            webDriver = (WebDriver) new ChromeDriver();
             return webDriver;
         }else {
             return null;

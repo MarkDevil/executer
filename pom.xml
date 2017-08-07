@@ -116,11 +116,6 @@
             <version>20030825.184428</version>
         </dependency>
 
-        <dependency>
-            <groupId>commons-pool</groupId>
-            <artifactId>commons-pool</artifactId>
-            <version>20030825.183949</version>
-        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
@@ -268,6 +263,14 @@
             <artifactId>commons-net</artifactId>
             <version>3.5</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-pool/commons-pool -->
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.6</version>
+        </dependency>
+
 
 
 

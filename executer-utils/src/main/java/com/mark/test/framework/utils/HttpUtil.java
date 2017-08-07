@@ -1,9 +1,10 @@
 package com.mark.test.framework.utils;
 
-import com.google.common.collect.Maps;
+
 import com.squareup.okhttp.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.collections.Maps;
 
 import java.io.IOException;
 import java.util.Map;
@@ -75,8 +76,7 @@ public class HttpUtil {
             long startTime = System.currentTimeMillis();
             Response response = okHttpClient.newCall(request).execute();
             long escapseTime = System.currentTimeMillis() - startTime;
-            logger.info(String.format(
-                        "\n  [Escapse Time ] : %s ms \n  [Return message ] : %s" ,
+            logger.info(String.format("\n  [Escapse Time ] : %s ms \n  [Return message ] : %s" ,
                         escapseTime,response.toString()));
             return response.toString();
         } catch (IOException e) {
