@@ -32,8 +32,9 @@ public abstract class AbstractServer {
             ServerSocket socket = new ServerSocket(port);
             while (true){
                 Socket client = socket.accept();
-
-
+                HandlerService handlerService = new HandlerService(client);
+                Thread thread = new Thread(handlerService);
+                thread.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
