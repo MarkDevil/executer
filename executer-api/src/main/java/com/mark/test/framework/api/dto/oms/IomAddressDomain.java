@@ -4,7 +4,7 @@ package com.mark.test.framework.api.dto.oms;
  * 
  * 
  * Description:iom模块地址封装对象
- * @author dafang
+ * @author
  * @date 2017年4月14日 下午1:57:45
  *
  */

@@ -7,7 +7,7 @@ import java.util.Map;
  * 
  * 
  * Description:iom模块用于接收请求的申请表domain
- * @author dafang
+ * @author mark
  * @date 2017年4月14日 下午2:01:14
  *
  */

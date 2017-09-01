@@ -6,7 +6,7 @@ import java.math.BigDecimal;
  * 
  * 
  * Description:iom申请表domain
- * @author dafang
+ * @author
  * @date 2017年4月14日 下午1:59:02
  *
  */

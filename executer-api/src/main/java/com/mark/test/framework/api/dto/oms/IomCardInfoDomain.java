@@ -4,7 +4,7 @@ package com.mark.test.framework.api.dto.oms;
  * 
  * 
  * Description:iom模块银行卡信息domain
- * @author dafang
+ * @author mark
  * @date 2017年4月14日 下午3:16:04
  *
  */

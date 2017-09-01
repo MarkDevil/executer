@@ -4,7 +4,7 @@ package com.mark.test.framework.api.dto.oms;
  * 
  * 
  * Description:iom模块联系电话信息
- * @author dafang
+ * @author mark
  * @date 2017年4月14日 下午3:19:01
  *
  */

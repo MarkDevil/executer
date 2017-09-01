@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * 
  * 
  * Description:iom模块还款计划domain
- * @author dafang
+ * @author mark
  * @date 2017年4月14日 下午3:18:09
  *
  */

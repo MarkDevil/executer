@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 
  * Description:iom模块请求对象
- * @author dafang
+ * @author
  * @date 2017年4月14日 下午2:13:20
  * 
  */

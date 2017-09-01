@@ -6,7 +6,7 @@ import java.math.BigDecimal;
  * 
  * 
  * Description:iom模块联系人信息domain
- * @author dafang
+ * @author mark
  * @date 2017年4月14日 下午3:17:07
  *
  */
