@@ -104,7 +104,7 @@ public class FileUtils {
         sqlConnectionDTO.setDriver("com.mysql.jdbc.Driver");
         sqlConnectionDTO.setUserName("root");
         sqlConnectionDTO.setPassword("root");
-        MySQLDb mySQLDb = new MySQLDb(sqlConnectionDTO);
+        DbFactory mySQLDb = new DbFactory(sqlConnectionDTO);
         List<String> retlist = FileUtils.getFileList(testPath);
         logger.info("\nFound file list: \n {} \n", retlist.toString());
         mySQLDb.executeSqlFile(retlist);

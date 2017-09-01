@@ -40,8 +40,7 @@ public class HttpUtil {
             ResponseBody res = response.body();
             if (res != null){
                 long escapseTime = System.currentTimeMillis() - startTime;
-                logger.info(String.format("[Escapse Time ] : %s ms", escapseTime));
-                logger.info("Response msg is ",res);
+                logger.info(String.format("[Escapse Time ] : %s ms ，message is %s", escapseTime,res));
                 String resContent = res.string();
                 System.out.println(resContent);
                 return resContent;
@@ -60,7 +59,6 @@ public class HttpUtil {
      * @return
      */
     public static String get(String url) throws IOException {
-
         if (url == null){
             try {
                 throw new Exception("Input parameter is incorrect");
@@ -68,7 +66,6 @@ public class HttpUtil {
                 e.printStackTrace();
             }
         }
-
         OkHttpClient okHttpClient = new OkHttpClient();
         assert url != null;
         Request request = new Request.Builder().url(url).get().build();
@@ -76,9 +73,13 @@ public class HttpUtil {
             long startTime = System.currentTimeMillis();
             Response response = okHttpClient.newCall(request).execute();
             long escapseTime = System.currentTimeMillis() - startTime;
-            logger.info(String.format("\n  [Escapse Time ] : %s ms \n  [Return message ] : %s" ,
+            logger.info(String.format("\n[Escapse Time ] : %s ms \n[Return message ] : %s" ,
                         escapseTime,response.toString()));
-            return response.toString();
+            if (response.isSuccessful()){
+                return response.toString();
+            }else {
+                return null;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

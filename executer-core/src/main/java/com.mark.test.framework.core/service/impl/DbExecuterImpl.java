@@ -2,7 +2,7 @@ package com.mark.test.framework.core.service.impl;
 
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
 import com.mark.test.framework.core.service.IDbExecuter;
-import com.mark.test.framework.utils.MySQLDb;
+import com.mark.test.framework.utils.DbFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,12 @@ import java.util.Map;
 public class DbExecuterImpl implements IDbExecuter{
     private Logger logger = LoggerFactory.getLogger(DbExecuterImpl.class);
 
-    private MySQLDb mySQLDb;
+    private DbFactory mySQLDb;
 
     @Override
     public boolean runsql(Map connectionDTO, String sql) {
         try {
-            mySQLDb = new MySQLDb(this.buildDbDto(connectionDTO));
+            mySQLDb = new DbFactory(this.buildDbDto(connectionDTO));
             mySQLDb.execute(sql);
         }catch (Exception ex){
             logger.info("执行sql: {} 失败. {} ", sql,ex);
@@ -38,7 +38,7 @@ public class DbExecuterImpl implements IDbExecuter{
     public List<Map<String, Object>> query(Map connectionDTO, String sql) {
         List<Map<String,Object>> retlist;
         try {
-            mySQLDb = new MySQLDb(this.buildDbDto(connectionDTO));
+            mySQLDb = new DbFactory(this.buildDbDto(connectionDTO));
             retlist = mySQLDb.queryForList(sql);
         }catch (Exception ex){
             logger.info("执行sql: {} 失败. {} ", sql,ex);

@@ -1,8 +1,8 @@
 package com.mark.test.framework.core.task;
 
-import com.mark.test.framework.core.constat.DbFactory;
+import com.mark.test.framework.core.constat.DbFactoryC;
+import com.mark.test.framework.utils.DbFactory;
 import com.mark.test.framework.utils.FileUtils;
-import com.mark.test.framework.utils.MySQLDb;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -22,7 +22,7 @@ public class SynDataBaseTask implements Job {
 
     Logger logger = LoggerFactory.getLogger(SynDataBaseTask.class);
     final String filepath = "/Users/mark/tool/shell";
-    private MySQLDb dbins = new DbFactory().buildDbInstance("local");
+    private DbFactory dbins = new DbFactoryC().buildDbInstance("local");
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {

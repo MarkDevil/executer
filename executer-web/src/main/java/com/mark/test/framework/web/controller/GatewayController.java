@@ -2,21 +2,25 @@ package com.mark.test.framework.web.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.mark.test.framework.api.dto.CreateAccDto;
 import com.mark.test.framework.api.dto.TestRequestDto;
 import com.mark.test.framework.core.constat.BaseInfo;
 import com.mark.test.framework.core.service.GwTransferService;
 import com.mark.test.framework.core.service.IBindChargeCard;
+import com.mark.test.framework.core.service.ICreateAccount;
 import com.mark.test.framework.utils.SignUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.collections.Lists;
 import org.testng.collections.Maps;
 
-import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -34,51 +38,19 @@ public class GatewayController {
     private static Logger logger = LoggerFactory.getLogger(GatewayController.class);
     private BaseInfo baseInfo = new BaseInfo();
 
+    private final GwTransferService queryGwTransfer;
+
+    private final IBindChargeCard bindChargeCard;
+
+    private final ICreateAccount createAccount;
+
     @Autowired(required = false)
-    private GwTransferService queryGwTransfer;
-
-    @Autowired
-    private IBindChargeCard bindChargeCard;
-
-
-
-    @RequestMapping(method = RequestMethod.POST,value = "/updateGatewayStatus")
-    @ResponseBody
-    public String updateGatewayStatus(){
-        logger.info("updateGatewayStatus page");
-        return "hello";
+    public GatewayController(GwTransferService queryGwTransfer, IBindChargeCard bindChargeCard, ICreateAccount createAccount) {
+        this.queryGwTransfer = queryGwTransfer;
+        this.bindChargeCard = bindChargeCard;
+        this.createAccount = createAccount;
     }
 
-
-
-    @RequestMapping(method = RequestMethod.GET,value = "/updatePaymentOrder")
-    @ResponseBody
-    public String updatePaymentOrder(){
-        logger.info("updatePaymentOrder page");
-        return "hello";
-    }
-
-
-    @RequestMapping(method = RequestMethod.GET,value = "/queryPage")
-    @ResponseBody
-    public String queryGwTransfers(){
-        logger.info("query page");
-        return "ok";
-    }
-
-    @RequestMapping(method = RequestMethod.POST,value = "/test")
-    @ResponseBody
-    public JSONObject getTestMethod(@RequestBody @Valid TestRequestDto testRequestDto){
-        logger.info("Request parameter : {}",testRequestDto.toString());
-        if (testRequestDto.getName().contains("mark")){
-            JSONObject jsonObject = new JSONObject(true);
-            jsonObject.put("1","mark");
-            jsonObject.put("2","jack");
-            return jsonObject;
-        }else {
-            return null;
-        }
-    }
 
     @RequestMapping(method = RequestMethod.GET,value = "/testList")
     @ResponseBody
@@ -174,5 +146,31 @@ public class GatewayController {
         return ret.toJSONString();
     }
 
+    @RequestMapping(method = RequestMethod.POST,value = "/createAccInfo")
+    @ResponseBody
+    public String createAcc(CreateAccDto createAccDto){
+        logger.info("Request paramenter : {}", createAccDto);
+        JSONObject ret = new JSONObject();
+        try {
+            createAccount.createAcc(createAccDto);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            logger.error("Create account failed");
+            ret.put("retcode","failed");
+            return ret.toJSONString();
+        }
+        ret.put("retcode","successfully");
+        return ret.toJSONString();
+    }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/startBatchCreateAcc")
+    @ResponseBody
+    public String startBatchCreateAcc(){
+        boolean flag = createAccount.startBatch();
+        if (flag){
+            return "执行成功".toString();
+        }else {
+            return "执行失败".toString();
+        }
+    }
 }

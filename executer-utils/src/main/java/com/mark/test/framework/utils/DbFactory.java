@@ -26,12 +26,12 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MySQLDb {
-	private static final Logger logger = LoggerFactory.getLogger(MySQLDb.class);
+public class DbFactory {
+	private static final Logger logger = LoggerFactory.getLogger(DbFactory.class);
 	private JdbcTemplate jdbcTemplate;
 	private Connection connection;
 
-	public MySQLDb(SQLConnectionDTO config) {
+	public DbFactory(SQLConnectionDTO config) {
 		String url = config.getUrl();
 		String userName = config.getUserName();
 		String password = config.getPassword();
@@ -41,6 +41,11 @@ public class MySQLDb {
 		dataSource.setUsername(userName);
 		dataSource.setPassword(password);
 		dataSource.setUrl(url);
+		if (driver.contains("mysql")){
+			logger.info("Init mysql instance successfully");
+		}else if (driver.contains("oracle")){
+			logger.info("Init oracle instance successfully");
+		}
 		dataSource.setDriverClassName(driver);
 		dataSource.setMaxIdle(5);
 		dataSource.setDefaultAutoCommit(true);

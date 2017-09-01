@@ -76,6 +76,9 @@ public class CommUtils {
         }else if (type == 4){
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             return df.format(date);
+        }else if (type == 5){
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+            return df.format(date);
         } else {
             return null;
         }

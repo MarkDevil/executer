@@ -1,7 +1,7 @@
 package com.mark.test.framework.core.constat;
 
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
-import com.mark.test.framework.utils.MySQLDb;
+import com.mark.test.framework.utils.DbFactory;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +18,9 @@ import javax.annotation.PostConstruct;
  * Desc   :
  */
 @Component
-public class DbFactory {
+public class DbFactoryC {
 
-    private static Logger logger = LoggerFactory.getLogger(DbFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(DbFactoryC.class);
 
     @Value("${driver_87}")
     private String mysqldriver;
@@ -49,7 +49,7 @@ public class DbFactory {
      * @param dbServer
      * @return
      */
-    public MySQLDb buildDbInstance(String dbServer){
+    public DbFactory buildDbInstance(String dbServer){
 
         SQLConnectionDTO dbinstance = new SQLConnectionDTO();
         switch (dbServer) {
@@ -86,7 +86,7 @@ public class DbFactory {
                 break;
         }
 
-        return new MySQLDb(dbinstance);
+        return new DbFactory(dbinstance);
     }
 
 }
