@@ -1,7 +1,7 @@
 package com.mark.test.framework.utils;
 
 
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

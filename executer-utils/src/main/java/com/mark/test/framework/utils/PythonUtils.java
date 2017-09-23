@@ -1,5 +1,7 @@
 package com.mark.test.framework.utils;
 
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,15 +20,13 @@ public class PythonUtils {
 
     private static Logger logger = LoggerFactory.getLogger(PythonUtils.class);
 
-    private static Process process;
-
     /**
      * 执行cmd shell命令
      * @param cmd
      */
-    public static void runPy(String cmd){
+    private static void runPy(String cmd){
         try {
-            process = Runtime.getRuntime().exec(cmd);
+            Process process = Runtime.getRuntime().exec(cmd);
             assert process != null;
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));

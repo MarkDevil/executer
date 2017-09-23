@@ -127,9 +127,9 @@ public class createAccountImpl implements ICreateAccount {
         iomReqApplicationDomain.setMaxPutoutDays("3");
         iomReqApplicationDomain.setRepayMethod("RPT000010");
         iomReqApplicationDomain.setMethodFlag("0");
-        iomReqApplicationDomain.setBusinessType("B0007");
+        iomReqApplicationDomain.setBusinessType("A0007");
 //      测试放款渠道中邮 FK011 和 厦门国际FK012
-        iomReqApplicationDomain.setProductName("公积金(期缴)");
+        iomReqApplicationDomain.setProductName("公积金");
         iomReqApplicationDomain.setPayLoanBrh(createAccDto.getPayLoanBrh());
         iomReqApplicationDomain.setBusinessResource("1");
         iomReqApplicationDomain.setInputOrgId("2015072200000003");
@@ -247,13 +247,14 @@ public class createAccountImpl implements ICreateAccount {
             repayPlanRequest.setSignTerm(Integer.valueOf("36"));
             repayPlanRequest.setL070Rate(new BigDecimal("0.015"));
             repayPlanRequest.setL080Rate(new BigDecimal("0.0150"));
-            repayPlanRequest.setMethodFlag("0");
+//          缴费方式
+            repayPlanRequest.setMethodFlag("1");
             repayPlanRequest.setMaxPutoutDays(1);
             repayPlanRequest.setSignSum(new BigDecimal("50000"));
             repayPlanRequest.setRepaymentMethod("RPT000010");
             repayPlanRequest.setLoanDate(new Date().toLocaleString());
             repayPlanRequest.setL080RateFlag("1");
-            repayPlanRequest.setChannel("FK012");
+            repayPlanRequest.setChannel("FK020");
             repayPlanRequest.setSignYearRate(new BigDecimal("0.0015"));
             repayPlanRequest.setL050RateJson(l50rateJson);
             repayPlanRequest.setL055RateJson(l55rateJson);

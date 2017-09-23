@@ -1,7 +1,6 @@
 package com.mark.test.framework.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.beust.jcommander.internal.Maps;
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
 import com.mark.test.framework.core.task.PrintOnceTask;
 import com.mark.test.framework.core.task.SynDataBaseTask;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.testng.collections.Maps;
 
 import java.util.Map;
 

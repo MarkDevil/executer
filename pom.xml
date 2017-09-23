@@ -28,10 +28,7 @@
 
     <dependencyManagement>
 
-
-    <dependencies>
-
-
+        <dependencies>
         <!-- log4j2 denpendencies -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -279,10 +276,7 @@
         </dependency>
 
 
-
-
-
-    </dependencies>
+        </dependencies>
     </dependencyManagement>
     <build>
         <finalName>executer</finalName>
