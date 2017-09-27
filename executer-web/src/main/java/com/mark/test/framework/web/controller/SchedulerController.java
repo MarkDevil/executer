@@ -23,7 +23,7 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
- * Created by MingfengMa .
+ * Created by mark .
  * Data : 2017/3/16
  * Desc :
  */

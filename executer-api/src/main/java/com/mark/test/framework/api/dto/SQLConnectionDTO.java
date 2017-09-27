@@ -3,7 +3,7 @@ package com.mark.test.framework.api.dto;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * Created by MingfengMa .
+ * Created by mark .
  * Data   : 2017/6/26
  * Author : mark
  * Desc   :

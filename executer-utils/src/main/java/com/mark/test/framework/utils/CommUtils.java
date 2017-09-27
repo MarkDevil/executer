@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by MingfengMa .
+ * Created by mark .
  * Data   : 2017/5/13
  * Author : mark
  * Desc   :
@@ -18,7 +18,7 @@ public class CommUtils {
     static Logger logger = LoggerFactory.getLogger(CommUtils.class);
 
     /**
-     * @Author MingfengMa
+     * @Author mark
      * @Date 2016/4/22
      * @param
      * @Description  获取放款单号
@@ -33,7 +33,7 @@ public class CommUtils {
     }
 
     /**
-     * @Author MingfengMa
+     * @Author mark
      * @Date 2016/4/22
      * @param
      * @Description 获取订单号
@@ -55,7 +55,7 @@ public class CommUtils {
     }
 
     /**
-     * @Author MingfengMa
+     * @Author mark
      * @Date 2016/4/22
      * @param type 1:返回当前时间
      *            2：返回当前时间戳

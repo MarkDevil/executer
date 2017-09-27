@@ -1,7 +1,7 @@
 package com.mark.test.framework.core.constat;
 
 /**
- * Created by MingfengMa .
+ * Created by mark .
  * Data   : 2017/4/21
  * Author : mark
  * Desc   :
