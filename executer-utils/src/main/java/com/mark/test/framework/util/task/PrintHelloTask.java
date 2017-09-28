@@ -1,4 +1,4 @@
-package com.mark.test.framework.utils.task;
+package com.mark.test.framework.util.task;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

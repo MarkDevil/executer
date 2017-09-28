@@ -8,7 +8,7 @@ import com.mark.test.framework.core.constat.BaseInfo;
 import com.mark.test.framework.core.service.GwTransferService;
 import com.mark.test.framework.core.service.IBindChargeCard;
 import com.mark.test.framework.core.service.ICreateAccount;
-import com.mark.test.framework.utils.SignUtils;
+import com.mark.test.framework.util.SignUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

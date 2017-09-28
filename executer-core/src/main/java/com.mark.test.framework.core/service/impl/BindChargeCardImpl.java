@@ -7,7 +7,7 @@ import com.mark.test.framework.core.dao.AccountInfoMapper;
 import com.mark.test.framework.core.dao.BusinessApplyMapper;
 import com.mark.test.framework.core.dao.OpenAgreementDetermineMapper;
 import com.mark.test.framework.core.service.IBindChargeCard;
-import com.mark.test.framework.utils.CommUtils;
+import com.mark.test.framework.util.CommUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.mark.test.framework.core.task;
 
 import com.mark.test.framework.core.constat.DbFactoryC;
-import com.mark.test.framework.utils.DbFactory;
-import com.mark.test.framework.utils.FileUtils;
+import com.mark.test.framework.util.DbFactory;
+import com.mark.test.framework.util.FileUtils;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

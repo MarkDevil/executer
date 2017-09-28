@@ -1,4 +1,4 @@
-package com.mark.test.framework.utils;
+package com.mark.test.framework.util;
 
 import org.openqa.selenium.WebDriver;
 

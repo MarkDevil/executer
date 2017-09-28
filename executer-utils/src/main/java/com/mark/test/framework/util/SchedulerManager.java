@@ -1,7 +1,7 @@
-package com.mark.test.framework.utils;
+package com.mark.test.framework.util;
 
 
-import com.mark.test.framework.utils.task.PrintHelloTask;
+import com.mark.test.framework.util.task.PrintHelloTask;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;

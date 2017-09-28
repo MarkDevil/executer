@@ -1,6 +1,6 @@
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
-import com.mark.test.framework.utils.SchedulerManager;
-import com.mark.test.framework.utils.WebDriverFactory;
+import com.mark.test.framework.util.SchedulerManager;
+import com.mark.test.framework.util.WebDriverFactory;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.By;

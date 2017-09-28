@@ -1,4 +1,4 @@
-package com.mark.test.framework.utils;
+package com.mark.test.framework.util;
 
 
 import io.minio.MinioClient;
@@ -80,8 +80,11 @@ public class MinioUtils {
 
     }
 
-
-    public static void getFileList(String bucketname){
+    /**
+     * 获取bucket下的所有文件名
+     * @param bucketname
+     */
+    public static void getFileListUnderBucket(String bucketname){
         try {
             boolean flag = minioClient.bucketExists(bucketname);
             if (!flag){
@@ -122,6 +125,6 @@ public class MinioUtils {
         String bucketname = "mark-test";
         File file = new File("/Users/Shared/gitWorkspace/executer/test.json");
 //        MinioUtils.fileUpload(bucketname,file);
-        MinioUtils.getFileList(bucketname);
+        MinioUtils.getFileListUnderBucket(bucketname);
     }
 }

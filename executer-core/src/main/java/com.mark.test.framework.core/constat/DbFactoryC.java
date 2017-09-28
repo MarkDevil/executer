@@ -1,7 +1,7 @@
 package com.mark.test.framework.core.constat;
 
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
-import com.mark.test.framework.utils.DbFactory;
+import com.mark.test.framework.util.DbFactory;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.mark.test.framework.utils;
+package com.mark.test.framework.util;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;

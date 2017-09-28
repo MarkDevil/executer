@@ -8,10 +8,10 @@ import com.mark.test.framework.api.dto.oms.*;
 import com.mark.test.framework.api.dto.oms.request.IomReqApplicationDomain;
 import com.mark.test.framework.api.dto.oms.request.IomRequest;
 import com.mark.test.framework.core.service.ICreateAccount;
-import com.mark.test.framework.utils.CommUtils;
-import com.mark.test.framework.utils.HttpUtil;
-import com.mark.test.framework.utils.MapUtil;
-import com.mark.test.framework.utils.SignUtils;
+import com.mark.test.framework.util.CommUtils;
+import com.mark.test.framework.util.HttpUtils;
+import com.mark.test.framework.util.MapUtil;
+import com.mark.test.framework.util.SignUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +23,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
+
+
+
 
 /**
  * Created by mark .
@@ -59,7 +62,7 @@ public class createAccountImpl implements ICreateAccount {
         String request = JSONObject.toJSONString(iomRequest);
         logger.info("请求贷后建账接口参数request：{}",request);
         try {
-            String ret = HttpUtil.postJson(plasUrl,request);
+            String ret = HttpUtils.postJson(plasUrl,request);
             logger.info("Return message : {}",ret);
             JSONObject retobj = JSONObject.parseObject(ret);
             String retcode = JSONObject.parseObject(ret).get("respCode").toString();
@@ -74,7 +77,7 @@ public class createAccountImpl implements ICreateAccount {
     @Override
     public boolean startBatch() {
         try {
-            HttpUtil.get(lasStartBatchUrl);
+            HttpUtils.get(lasStartBatchUrl);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -269,7 +272,7 @@ public class createAccountImpl implements ICreateAccount {
             logger.error("生成签名出错,请检查!");
         }
         String param = JSONObject.toJSONString(repayPlanRequest);
-        String retStr = HttpUtil.postJson(repaymentUrl,param);
+        String retStr = HttpUtils.postJson(repaymentUrl,param);
         JSONObject ret = JSONObject.parseObject(retStr);
         logger.info("Bank api return message is :{}",ret);
         if (ret.get("code").equals("0000")){

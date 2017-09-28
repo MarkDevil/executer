@@ -1,22 +1,22 @@
-package com.mark.test.framework.utils;
+package com.mark.test.framework.util;
 
 
 import com.squareup.okhttp.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.collections.Maps;
 
 import java.io.IOException;
 import java.util.Map;
 
 /**
- * Created by Mark .
- * Data : 2016/11/28
- * Desc :
+ * Created by mark .
+ * Data   : 2017/9/28
+ * Author : mark
+ * Desc   :
  */
-public class HttpUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(HttpUtil.class);
+public class HttpUtils {
+    private static Logger logger = LoggerFactory.getLogger(HttpUtils.class);
     private static final MediaType JSONTYPE = MediaType.parse("application/json; charset=utf-8");
 
     /**
@@ -74,7 +74,7 @@ public class HttpUtil {
             Response response = okHttpClient.newCall(request).execute();
             long escapseTime = System.currentTimeMillis() - startTime;
             logger.info(String.format("\n[Escapse Time ] : %s ms \n[Return message ] : %s" ,
-                        escapseTime,response.toString()));
+                    escapseTime,response.toString()));
             if (response.isSuccessful()){
                 return response.toString();
             }else {
@@ -102,7 +102,7 @@ public class HttpUtil {
             requestBody.add(key,value);
         }
         logger.info("Print requestBody: {}",requestBody);
-        RequestBody formbody = requestBody.build();
+        com.squareup.okhttp.RequestBody formbody = requestBody.build();
         assert url != null;
         Request request = new Request.Builder()
                 .url(url)
@@ -121,11 +121,5 @@ public class HttpUtil {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        Map<String,String> req = Maps.newLinkedHashMap();
-        req.put("11","22");
-        postForm("http://www.baidu.com",req);
     }
 }

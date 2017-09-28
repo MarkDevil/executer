@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
 import com.mark.test.framework.core.task.PrintOnceTask;
 import com.mark.test.framework.core.task.SynDataBaseTask;
-import com.mark.test.framework.utils.SchedulerManager;
+import com.mark.test.framework.util.SchedulerManager;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
