@@ -1,7 +1,8 @@
 package com.mark.test.framework.utils;
 
-import com.google.common.collect.Maps;
+
 import org.apache.commons.beanutils.BeanUtils;
+import org.testng.collections.Maps;
 
 import java.lang.reflect.Field;
 import java.util.Map;

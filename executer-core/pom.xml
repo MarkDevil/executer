@@ -91,22 +91,13 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.directory.studio</groupId>
-            <artifactId>org.apache.commons.collections</artifactId>
-            <version>3.2.1</version>
-        </dependency>
 
-        <dependency>
-            <groupId>com.mark.test.framework</groupId>
-            <artifactId>executer-api</artifactId>
-            <version>0.0.1</version>
-        </dependency>
         <dependency>
             <groupId>com.mark.test.framework</groupId>
             <artifactId>executer-utils</artifactId>
             <version>0.0.1</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

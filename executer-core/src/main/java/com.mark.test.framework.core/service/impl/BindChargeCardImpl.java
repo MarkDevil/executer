@@ -23,17 +23,20 @@ import java.util.List;
 @Service("bindChargeCardImpl")
 @Transactional
 public class BindChargeCardImpl implements IBindChargeCard {
-    Logger logger = LoggerFactory.getLogger(BindChargeCardImpl.class);
+    private Logger logger = LoggerFactory.getLogger(BindChargeCardImpl.class);
+
+    private final BusinessApplyMapper businessApplyMapper;
+
+    private final AccountInfoMapper accountInfoMapper;
+
+    private final OpenAgreementDetermineMapper openAgreementDetermineMapper;
 
     @Autowired
-    private BusinessApplyMapper businessApplyMapper;
-
-    @Autowired
-    private AccountInfoMapper accountInfoMapper;
-
-    @Autowired
-    private OpenAgreementDetermineMapper openAgreementDetermineMapper;
-
+    public BindChargeCardImpl(BusinessApplyMapper businessApplyMapper, AccountInfoMapper accountInfoMapper, OpenAgreementDetermineMapper openAgreementDetermineMapper) {
+        this.businessApplyMapper = businessApplyMapper;
+        this.accountInfoMapper = accountInfoMapper;
+        this.openAgreementDetermineMapper = openAgreementDetermineMapper;
+    }
 
 
     /**
@@ -80,7 +83,7 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * @param userid
      * @return
      */
-    public boolean checkAccountInfo(String userid){
+    private boolean checkAccountInfo(String userid){
         List<AccountInfo> accountInfos = accountInfoMapper.selectAccountsByUserId(userid);
         return accountInfos.size() > 0;
     }
@@ -101,7 +104,7 @@ public class BindChargeCardImpl implements IBindChargeCard {
       * @param applyNo
      * @return
      */
-    public BusinessApply getBussinessApply(String applyNo){
+    private BusinessApply getBussinessApply(String applyNo){
         return businessApplyMapper.selectByPrimaryKey(applyNo);
     }
 
@@ -144,8 +147,8 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * @param userid
      * @return
      */
-    public AccountInfo populateAccoutInfo(String userid,String accountType,String accountno,
-                                          String accountName,String bankname,String cardType){
+    private AccountInfo populateAccoutInfo(String userid, String accountType, String accountno,
+                                           String accountName, String bankname, String cardType){
         AccountInfo accountInfo = new AccountInfo();
         accountInfo.setSerialno(CommUtils.getRandomNo("ser"));
         accountInfo.setUserid(userid);
@@ -182,7 +185,7 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * @param userid
      * @return
      */
-    public OpenAgreementDetermine populateOpenAgreement(String userid,String bankCardNo,String source){
+    private OpenAgreementDetermine populateOpenAgreement(String userid, String bankCardNo, String source){
         OpenAgreementDetermine openAgreementDetermine = new OpenAgreementDetermine();
         openAgreementDetermine.setReqno(CommUtils.getRandomNo("req"));
         openAgreementDetermine.setOrderno(CommUtils.getRandomNo("ord"));
