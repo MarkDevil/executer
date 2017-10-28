@@ -61,7 +61,8 @@ public class FtpUtils {
             }
             System.out.println("open FTP success:" + this.server + ";port:" + this.port + ";name:" + this.userName
                     + ";pwd:" + this.userPassword);
-            ftpClient.setFileType(FTP.BINARY_FILE_TYPE); // 设置上传模式.binally  or ascii
+            // 设置上传模式.binally  or ascii
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
             return true;
         } catch (Exception ex) {
             this.close();

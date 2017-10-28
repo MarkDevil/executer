@@ -25,4 +25,10 @@ public class LoginController {
     public ModelAndView nav(){
         return new ModelAndView("navPage");
     }
+
+    @RequestMapping(value = "/monitor")
+    @ResponseBody
+    public ModelAndView monitor(){
+        return new ModelAndView("monitor");
+    }
 }

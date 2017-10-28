@@ -18,17 +18,29 @@
     <link href="<c:url value="/resources/css/video-js.css"/>" rel="stylesheet" type="text/css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap-select.min.css"/>">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="<c:url value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css"/>">
     <title>Nav testing tool</title>
 </head>
 <body>
     <ul id="myTab" class="nav nav-tabs">
-        <li class="active">
-            <a href="#home" data-toggle="tab">
+
+        <li class="dropdown">
+            <a href="#" id="testTool" class="dropdown-toggle"
+               data-toggle="dropdown">
                 测试工具集
+                <b class="caret"></b>
             </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                <li><a data-toggle="tab" onclick="openMonitor()">系统信息监控</a></li>
+                <li><a href="#"  data-toggle="tab">系统信息</a></li>
+            </ul>
         </li>
-        <li><a href="#psbc" data-toggle="tab">中邮银行</a></li>
+
+
+        <li>
+            <a href="#psbc" data-toggle="tab">中邮银行</a>
+        </li>
+
         <li class="dropdown">
             <a href="#" id="myTabDrop1" class="dropdown-toggle"
                data-toggle="dropdown">厦门国际
@@ -40,6 +52,7 @@
             </ul>
         </li>
     </ul>
+
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="home">
             <h1>厦门银行修改三方状态</h1>
@@ -107,10 +120,9 @@
                 </tr>
                 </thead>
                 <tbody></tbody>
-
             </table>
         </div>
-        <div class="tab-pane fade" id="psbc">
+        <div id="psbc" class="tab-pane fade" >
 
             <form id="form_db" autocomplete="on">
                 <table>
@@ -182,6 +194,19 @@
         <div class="tab-pane fade" id="ejb">
             <p>Enterprise Java Beans</p>
         </div>
+
+
+    </div>
+
+    <div id="monitor" class="tab-pane focus">
+        <table id="bt-table1" data-toggle="table" class="table table-hover">
+            <thead>
+            <tr>
+                <th data-field="id">编号</th>
+                <th data-field="name">姓名</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -229,6 +254,10 @@
 
         });
 
+        function openMonitor() {
+            window.location.href = "/executer-web/monitor";
+
+        }
 
 
 

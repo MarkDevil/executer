@@ -73,7 +73,7 @@ public class HttpUtils {
             long startTime = System.currentTimeMillis();
             Response response = okHttpClient.newCall(request).execute();
             long escapseTime = System.currentTimeMillis() - startTime;
-            logger.info(String.format("\n[Escapse Time ] : %s ms \n[Return message ] : %s" ,
+            logger.info(String.format("%n[Escapse Time ] : %s ms %n[Return message ] : %s" ,
                     escapseTime,response.toString()));
             if (response.isSuccessful()){
                 return response.toString();

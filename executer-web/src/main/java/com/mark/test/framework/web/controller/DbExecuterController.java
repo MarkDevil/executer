@@ -30,9 +30,10 @@ public class DbExecuterController {
     @ResponseBody
     public List executerDb(@RequestParam Map reqPara){
         List<Map<String,Object>> ret;
-        logger.info("请求参数为: {},{}",reqPara.toString(),reqPara.get("sql"));
+        logger.info("请求参数为: {} \n 执行sql为:{}",reqPara.toString(),reqPara.get("sql"));
         iDbExecuter.runsql(reqPara,reqPara.get("sql").toString());
         ret = iDbExecuter.query(reqPara,reqPara.get("sql").toString());
+        logger.info("执行sql返回结果为：{}",ret);
         return ret;
     }
 }
