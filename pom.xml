@@ -307,6 +307,12 @@
                 <version>1.2</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>3.5.7</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

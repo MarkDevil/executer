@@ -20,6 +20,7 @@ public class ExecuterTimeInterceptor extends HandlerInterceptorAdapter{
 
     private static final String START_TIME_NAME = "_startTime_";
 
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Date now = new Date();
         request.setAttribute(START_TIME_NAME, now.getTime());
@@ -28,6 +29,7 @@ public class ExecuterTimeInterceptor extends HandlerInterceptorAdapter{
         return true;
     }
 
+    @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
         try {

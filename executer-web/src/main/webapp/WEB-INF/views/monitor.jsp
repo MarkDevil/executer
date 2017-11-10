@@ -10,47 +10,50 @@ To change this template use File | Settings | File Templates.
 <html>
 <head>
     <title>System monitor</title>
-
-</head>
-<body>
     <script src="<c:url value="/resources/js/third/echarts/echarts.min.js"/>"></script>
     <script src="<c:url value="/resources/js/third/echarts/shine.js"/>"></script>
+</head>
+<body>
     <div id="main" style="height: 500px"></div>
-
-    <script type="text/javascript">
-        var mychart = echarts.init(document.getElementById("main"));
-
-        var option = {
-            tooltip: {
-                show: true
-            },
-            legend: {
-                data:['销量']
-            },
-            xAxis : [
-                {
-                    type : 'category',
-                    data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value'
-                }
-            ],
-            series : [
-                {
-                    "name":"销量",
-                    "type":"bar",
-                    "data":[5, 20, 40, 10, 10, 20]
-                }
-            ]
-        };
-
-        mychart.setOption(option);
-
-    </script>
 </body>
+
+<script type="text/javascript">
+    let xValues = [1,2,3,4,5,6];
+    let mychart = echarts.init(document.getElementById("main"));
+    let option = {
+        tooltip: {
+            show: true
+        },
+        legend: {
+            data:['销量']
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                "name":"销量",
+                "type":"bar",
+                "data":xValues
+            }
+        ]
+    };
+    mychart.setOption(option);
+
+
+
+
+
+</script>
+
 
 
 

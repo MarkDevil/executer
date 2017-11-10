@@ -19,7 +19,6 @@ executer-web/target/
 executer-agent/.classpath
 executer-agent/.project
 executer-agent/.settings/
-executer-agent/src/main/resources/
 executer-agent/src/test/
 executer-api/.classpath
 executer-api/.project
@@ -35,3 +34,6 @@ executer-web/.project
 executer-web/.settings/
 test-output/
 test.json
+/executer-api/.settings/
+/executer-agent/.settings/
+!/executer-agent/src/main/resources/

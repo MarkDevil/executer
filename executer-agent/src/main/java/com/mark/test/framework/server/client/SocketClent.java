@@ -31,7 +31,8 @@ public class SocketClent {
             String readline;
             while(true){
                 BufferedReader sin=new BufferedReader(new InputStreamReader(System.in));
-                readline=sin.readLine(); //从系统标准输入读入一字符串
+                //从系统标准输入读入一字符串
+                readline=sin.readLine();
                 //若从标准输入读入的字符串为 "bye"则停止循环
                 os.println(readline);
                 //将从系统标准输入读入的字符串输出到Server
@@ -46,7 +47,8 @@ public class SocketClent {
             } //继续循环
 
         }catch(Exception e) {
-            System.out.println("Error"+e); //出错，则打印出错信息
+            //出错，则打印出错信息
+            System.out.println("Error"+e);
         }
     }
 

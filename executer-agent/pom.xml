@@ -43,6 +43,13 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>

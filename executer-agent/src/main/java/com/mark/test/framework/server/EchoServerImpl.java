@@ -20,6 +20,6 @@ public class EchoServerImpl extends AbstractServer{
 
 
     public static void main(String[] args) {
-        new EchoServerImpl().startServer(Integer.parseInt(args[0]));
+        new EchoServerImpl().startServer(11112);
     }
 }

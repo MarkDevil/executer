@@ -221,7 +221,7 @@
 
     <script>
         function invoke(formid,url){
-            var form = $('#'+ formid).formSerialize();
+            let form = $('#' + formid).formSerialize();
             console.log(form);
             $.ajax({
                 url:url,
@@ -256,7 +256,6 @@
 
         function openMonitor() {
             window.location.href = "/executer-web/monitor";
-
         }
 
 
