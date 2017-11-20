@@ -30,7 +30,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 @Controller
 @RequestMapping(value = "/api")
 public class SchedulerController {
-    Logger logger = LoggerFactory.getLogger(SchedulerController.class);
+    private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
     private PrintLogScheduleTask printLogScheduleTask = new PrintLogScheduleTask();
 
     @RequestMapping(value = "/schedule",method = RequestMethod.GET)

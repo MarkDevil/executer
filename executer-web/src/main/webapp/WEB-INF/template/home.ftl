@@ -10,7 +10,9 @@
         <@commmacro.commonHeader></@commmacro.commonHeader>
     </header>
 
-    <a><@commmacro.commonLeft></@commmacro.commonLeft></a>
+    <a>
+        <@commmacro.commonLeft />
+    </a>
 
 
 

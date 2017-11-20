@@ -15,6 +15,7 @@ public class PrintLogScheduleTask implements Job {
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());
     private static String _prefix = "mark-test";
 
+    @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         this.printName();
     }

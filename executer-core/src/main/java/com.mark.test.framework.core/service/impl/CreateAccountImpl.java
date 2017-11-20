@@ -30,12 +30,12 @@ import java.util.*;
 /**
  * Created by mark .
  * Data   : 2017/8/25
- * Author : mark
  * Desc   :
+ * @author mark
  */
 @Service
-public class createAccountImpl implements ICreateAccount {
-    private Logger logger = LoggerFactory.getLogger(createAccountImpl.class);
+public class CreateAccountImpl implements ICreateAccount {
+    private Logger logger = LoggerFactory.getLogger(CreateAccountImpl.class);
 
     private List<IomAddressDomain> addressDomainList = Lists.newArrayList();
     private List<IomReqApplicationDomain> businessapplyList = Lists.newArrayList();
