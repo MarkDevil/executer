@@ -13,10 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.collections.Lists;
 import org.testng.collections.Maps;
@@ -91,6 +88,27 @@ public class GatewayController {
             retlist.add(requestDto);
         }
         return retlist;
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET,value = "/testData")
+    @ResponseBody
+    public JSONObject getTestData(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("1","mark");
+        jsonObject.put("2","jack");
+
+        return jsonObject;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/testDataPara")
+    @ResponseBody
+    public JSONObject getTestDataPara(@RequestParam String id,@RequestParam String name){
+        logger.info("id is {} \t name is {}",id,name);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("1","mark");
+        jsonObject.put("2","jack");
+        return jsonObject;
     }
 
     @RequestMapping(value = "/sign",method = RequestMethod.POST)

@@ -17,7 +17,9 @@ public class LoginController {
     @RequestMapping(value = "/")
     @ResponseBody
     public ModelAndView index(){
-        return new ModelAndView("navPage");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("home");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/nav")
