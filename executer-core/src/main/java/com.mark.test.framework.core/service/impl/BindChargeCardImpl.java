@@ -43,7 +43,8 @@ public class BindChargeCardImpl implements IBindChargeCard {
      * 给指定用户绑定银行卡
      * @param applyno
      */
-    public void bindChargeCard(String applyno,String bankCardNo) {
+    @Override
+    public void bindChargeCard(String applyno, String bankCardNo) {
 
         BusinessApply businessApply = this.getBussinessApply(applyno);
         if (businessApply == null || businessApply.equals("")){

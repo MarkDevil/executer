@@ -19,7 +19,7 @@
 
 
         <!--jdbc的数据库连接 -->
-        <jdbcConnection driverClass="${driver}" connectionURL="${url}" userId="${username}" password="${password}">
+        <jdbcConnection driverClass="${driver}" connectionURL="${url_test}" userId="${user_test}" password="${password_test}">
         </jdbcConnection>
 
 
@@ -87,7 +87,7 @@
 
 
 
-        <table tableName="business_apply" schema="hb" >
+        <table tableName="user_info" schema="hb" >
 
             <!-- optional   , only for mybatis3 runtime
                  自动生成的键值（identity,或者序列值）

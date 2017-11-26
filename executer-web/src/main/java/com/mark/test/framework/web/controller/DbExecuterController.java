@@ -23,7 +23,7 @@ import java.util.Map;
 public class DbExecuterController {
     Logger logger = LoggerFactory.getLogger(DbExecuterController.class);
 
-    @Autowired
+    @Autowired(required = false)
     private IDbExecuter iDbExecuter;
 
     @RequestMapping(value = "/exec")

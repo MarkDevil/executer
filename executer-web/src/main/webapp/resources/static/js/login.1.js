@@ -46,8 +46,8 @@ $(function(){
             element.parent('div').append(error);  
         },
         submitHandler : function(form) {
-			$.post(base_url + "/login", $("#loginForm").serialize(), function(data, status) {
-				if (data.code == "200") {
+			$.post(base_url + "/login.ftl", $("#loginForm").serialize(), function(data, status) {
+				if (data.code === "200") {
 					ComAlert.show(1, "登陆成功", function(){
 						window.location.href = base_url;
 					});

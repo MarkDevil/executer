@@ -2,10 +2,8 @@ package com.mark.test.framework.core.constat;
 
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
 import com.mark.test.framework.util.DbFactory;
-import org.apache.commons.dbcp.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -34,8 +32,8 @@ public class DbFactoryC {
     @Value("${password_87}")
     private String passwd87;
 
-    @Autowired
-    public BasicDataSource db;
+//    @Autowired
+//    public BasicDataSource db;
 
 
     @PostConstruct
@@ -76,7 +74,7 @@ public class DbFactoryC {
                 break;
             case "local":
                 dbinstance.setDriver("com.mysql.jdbc.Driver");
-                dbinstance.setUrl("jdbc:mysql://localhost:3306/marktest?characterEncoding=utf8&useSSL=false");
+                dbinstance.setUrl("jdbc:mysql://localhost:3307/test56?characterEncoding=utf8&useSSL=false");
                 dbinstance.setUserName("root");
                 dbinstance.setPassword("root");
                 logger.info("本地测试数据库信息 :{}",dbinstance.toString());

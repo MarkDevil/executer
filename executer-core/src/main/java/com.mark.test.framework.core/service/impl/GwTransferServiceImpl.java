@@ -18,6 +18,7 @@ public class GwTransferServiceImpl implements GwTransferService {
     @Autowired(required = false)
     private GwTransfersMapper gwTransfermaper;
 
+    @Override
     public GwTransfers queryGwTransfers(long id) {
         return gwTransfermaper.selectByPrimaryKey(id);
     }
