@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by mark .
@@ -82,5 +85,17 @@ public class CommUtils {
         } else {
             return null;
         }
+    }
+
+
+    public static <T> List<T> compare(T[] t1, T[] t2) {
+        List<T> list1 = Arrays.asList(t1);
+        List<T> list2 = new ArrayList<T>();
+        for (T t : t2) {
+            if (!list1.contains(t)) {
+                list2.add(t);
+            }
+        }
+        return list2;
     }
 }

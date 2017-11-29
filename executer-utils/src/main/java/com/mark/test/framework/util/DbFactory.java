@@ -30,23 +30,26 @@ public class DbFactory {
 	private static final Logger logger = LoggerFactory.getLogger(DbFactory.class);
 	private JdbcTemplate jdbcTemplate;
 	private Connection connection;
+	private static final String MYSQLDRIVER = "com.mysql.jdbc.Driver";
+	private static final String ORACLEDRIVER = "oracle.jdbc.driver.OracleDriver";
+
 
 	public DbFactory(SQLConnectionDTO config) {
 		String url = config.getUrl();
 		String userName = config.getUserName();
 		String password = config.getPassword();
-		String driver = config.getDriver();
 
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setUsername(userName);
 		dataSource.setPassword(password);
 		dataSource.setUrl(url);
-		if (driver.contains("mysql")){
+		if (url.contains("mysql")){
 			logger.info("Init mysql instance successfully");
-		}else if (driver.contains("oracle")){
+			dataSource.setDriverClassName(MYSQLDRIVER);
+		}else if (url.contains("oracle")){
 			logger.info("Init oracle instance successfully");
+			dataSource.setDriverClassName(ORACLEDRIVER);
 		}
-		dataSource.setDriverClassName(driver);
 		dataSource.setMaxIdle(5);
 		dataSource.setDefaultAutoCommit(true);
 		dataSource.setMinIdle(1);
@@ -138,7 +141,7 @@ public class DbFactory {
 			}
 		});
 		
-		logger.info("SQL Query result: " + JSON.toJSONString(dataList));
+		logger.debug("SQL Query result: " + JSON.toJSONString(dataList));
 		return dataList;
 	}
 
@@ -173,5 +176,10 @@ public class DbFactory {
 	@Override
 	public int hashCode() {
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
 	}
 }
