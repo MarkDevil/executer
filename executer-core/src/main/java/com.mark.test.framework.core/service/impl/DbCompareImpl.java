@@ -60,7 +60,7 @@ public class DbCompareImpl implements IDbCompare{
      * @param dbCompareRequestDto
      * @return
      */
-    public List<Map<String, Object>> queryTables(DbCompareRequestDto dbCompareRequestDto, String type){
+    private List<Map<String, Object>> queryTables(DbCompareRequestDto dbCompareRequestDto, String type){
         List<Map<String,Object>> retlist;
         SQLConnectionDTO sourceDbCfg = new SQLConnectionDTO();
         sourceDbCfg.setUrl("jdbc:mysql://"+ dbCompareRequestDto.getSourceDbIp() +":"+
@@ -95,7 +95,7 @@ public class DbCompareImpl implements IDbCompare{
      * @param inList
      * @return
      */
-    public List<String> parseMapToList(List<Map<String,Object>> inList){
+    private List<String> parseMapToList(List<Map<String, Object>> inList){
         List<String> retlist = Lists.newArrayList();
         for (Map<String,Object> sourceMap :inList){
             Object[] sourceTables = sourceMap.values().toArray();
