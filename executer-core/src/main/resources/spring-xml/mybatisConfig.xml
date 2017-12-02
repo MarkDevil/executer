@@ -4,9 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--<aop:aspectj-autoproxy/>-->
-    <context:annotation-config/>
-    <context:property-placeholder ignore-unresolvable="true" location="classpath*:/*.properties" />
+
+    <context:property-placeholder ignore-unresolvable="true" location="classpath*:*.properties" />
 
     <!--老数据库-->
     <bean id="devDataSource" class="org.apache.commons.dbcp.BasicDataSource" lazy-init="true" destroy-method="close">

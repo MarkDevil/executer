@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUser{
 
     }
 
-    @Autowired
+    @Autowired(required = false)
     public UserServiceImpl(UserInfoMapper userInfoMapper) {
         this.userInfoMapper = userInfoMapper;
     }

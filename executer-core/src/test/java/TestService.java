@@ -1,4 +1,3 @@
-import com.mark.test.framework.core.task.SynDataBaseTask;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,8 +19,8 @@ public class TestService {
 
     @Test
     public void testSynDatabase(){
-        SynDataBaseTask synDataBaseTask = new SynDataBaseTask();
-        synDataBaseTask.run();
+//        SynDataBaseTask synDataBaseTask = new SynDataBaseTask();
+//        synDataBaseTask.run();
     }
 
 

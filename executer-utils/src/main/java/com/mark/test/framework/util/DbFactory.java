@@ -44,10 +44,10 @@ public class DbFactory {
 		dataSource.setPassword(password);
 		dataSource.setUrl(url);
 		if (url.contains("mysql")){
-			logger.info("Init mysql instance successfully");
+			logger.debug("Init mysql instance successfully");
 			dataSource.setDriverClassName(MYSQLDRIVER);
 		}else if (url.contains("oracle")){
-			logger.info("Init oracle instance successfully");
+			logger.debug("Init oracle instance successfully");
 			dataSource.setDriverClassName(ORACLEDRIVER);
 		}
 		dataSource.setMaxIdle(5);

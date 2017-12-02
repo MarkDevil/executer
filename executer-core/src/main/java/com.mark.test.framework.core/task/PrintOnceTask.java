@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class PrintOnceTask implements Job{
     private Logger logger = LoggerFactory.getLogger(PrintOnceTask.class);
+
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         logger.info("执行一次任务");

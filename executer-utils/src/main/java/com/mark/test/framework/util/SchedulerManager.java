@@ -1,12 +1,9 @@
 package com.mark.test.framework.util;
 
 
-import com.mark.test.framework.util.task.PrintHelloTask;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
-
-import java.util.List;
 
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -14,7 +11,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 /**
  * Created by Mark on 2017/7/3.
  */
-public class SchedulerManager implements Job {
+public class SchedulerManager {
     private static SchedulerFactory gSchedulerFactory;
     private static Scheduler scheduler;
     private static String JOB_GROUP_NAME = "MARK-GROUP";
@@ -126,30 +123,26 @@ public class SchedulerManager implements Job {
     }
 
 
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        logger.info("测试定时任务");
-    }
 
-    public static void main(String[] args) {
-
-        final SchedulerManager schedulerManager = new SchedulerManager();
-        schedulerManager.addScheJob(SchedulerManager.class,2, DateBuilder.IntervalUnit.SECOND);
-        schedulerManager.addScheJob(PrintHelloTask.class,"* * * * * ?");
-
-        new Thread(new Runnable() {
-            public void run() {
-                while (true){
-                    try {
-                        List<JobExecutionContext> list = scheduler.getCurrentlyExecutingJobs();
-                        if (list.size()>0){
-                            logger.info("Running jobs is {}",list.get(0).getJobDetail());
-                        }
-                    } catch (SchedulerException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        }).start();
-    }
+//    public static void main(String[] args) {
+//
+//        final SchedulerManager schedulerManager = new SchedulerManager();
+//        schedulerManager.addScheJob(PrintHelloTask.class,"* * * * * ?");
+//
+//        new Thread(new Runnable() {
+//            public void run() {
+//                while (true){
+//                    try {
+//                        List<JobExecutionContext> list = scheduler.getCurrentlyExecutingJobs();
+//                        if (list.size()>0){
+//                            logger.info("Running jobs is {}",list.get(0).getJobDetail());
+//                        }
+//                    } catch (SchedulerException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//            }
+//        }).start();
+//    }
 }

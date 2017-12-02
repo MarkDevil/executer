@@ -1,6 +1,7 @@
 package com.mark.test.framework.core.task;
 
 import com.mark.test.framework.core.constat.DbFactoryC;
+import com.mark.test.framework.core.service.impl.DbCompareImpl;
 import com.mark.test.framework.util.DbFactory;
 import com.mark.test.framework.util.FileUtils;
 import org.quartz.Job;
@@ -8,6 +9,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
@@ -20,9 +22,14 @@ import java.util.List;
 
 public class SynDataBaseTask implements Job {
 
-    Logger logger = LoggerFactory.getLogger(SynDataBaseTask.class);
-    final String filepath = "/Users/mark/tool/shell";
+
+    private DbCompareImpl dbCompare;
+    private Logger logger = LoggerFactory.getLogger(SynDataBaseTask.class);
+    private final String filepath = "/Users/mark/tool/shell";
     private DbFactory dbins = new DbFactoryC().buildDbInstance("local");
+
+
+
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -44,6 +51,11 @@ public class SynDataBaseTask implements Job {
             }
 
         }
+    }
+
+    @Scheduled(fixedRate = 10000)
+    private void sysDataBase(){
+        logger.info("执行同步定时任务task .....");
     }
 
     public void run(){

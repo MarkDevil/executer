@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置触发器-->
+    <bean id="stdScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+        <property name="autoStartup" value="true"/>
+    </bean>
+
+    <!--定时任务bean-->
+    <bean id="synDataBaseTaskNew" class="com.mark.test.framework.core.task.SynDataBaseTaskNew"/>
+
+    <!--指定定时任务触发器cron-->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="sysDataBaseJobDetail"/>
+        <property name="cronExpression" value="0 0 7 * * ?"/><!-- 每隔1秒钟触发一次 -->
+    </bean>
+
+    <!--定时任务配置信息-->
+    <bean id="sysDataBaseJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="synDataBaseTaskNew"/>
+        <property name="targetMethod" value="run"/>
+        <property name="concurrent" value="false"/>
+        <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+    </bean>
+
+</beans>
