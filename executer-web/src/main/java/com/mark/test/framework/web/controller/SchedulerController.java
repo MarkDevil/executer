@@ -1,15 +1,17 @@
 package com.mark.test.framework.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mark.test.framework.api.dto.ScheduleRequestDto;
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
 import com.mark.test.framework.core.task.PrintOnceTask;
 import com.mark.test.framework.core.task.SynDataBaseTask;
-import com.mark.test.framework.util.SchedulerManager;
+import com.mark.test.framework.core.utils.SchedulerManager;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,12 +33,11 @@ import static org.quartz.TriggerBuilder.newTrigger;
 @RequestMapping(value = "/api")
 public class SchedulerController {
     private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
-    private PrintLogScheduleTask printLogScheduleTask = new PrintLogScheduleTask();
 
-    @RequestMapping(value = "/schedule",method = RequestMethod.GET)
+    @RequestMapping(value = "/schedule",method = RequestMethod.POST)
     @ResponseBody
-    public String invokeSchedule() {
-        logger.info("Start invoke task ...");
+    public String invokeSchedule(@RequestBody ScheduleRequestDto scheduleRequestDto) {
+        logger.info("Start invoke task ... , 请求参数为 ：" + scheduleRequestDto);
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         try {
             Scheduler scheduler = schedulerFactory.getScheduler();
