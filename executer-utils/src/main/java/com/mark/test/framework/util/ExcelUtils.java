@@ -7,13 +7,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.sax.BodyContentHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -84,7 +86,7 @@ public class ExcelUtils {
      * @param sheet
      * @return
      */
-    public static String readExcel(String fileDir,String sheet) {
+    public static String readExcel(String fileDir,String sheet,int columnIndex) {
         FileInputStream inputStream;
         XSSFWorkbook xssfWorkbook;
         List<String> titleList = Lists.newLinkedList();
@@ -94,20 +96,26 @@ public class ExcelUtils {
             int sheets = xssfWorkbook.getNumberOfSheets();
             logger.info("sheet number : {} " , sheets);
             XSSFSheet xssfSheet = xssfWorkbook.getSheet(sheet);
-
             Iterator<Row> it = xssfSheet.rowIterator();
             while (it.hasNext()){
                 Row row = it.next();
+                String columnvalue = row.getCell(columnIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue();
+                logger.info("Column : {}",columnvalue);
                 Iterator<Cell> cells = row.cellIterator();
                 while (cells.hasNext()){
                     Cell cell = cells.next();
-                    if(!cell.getStringCellValue().isEmpty()){
-                        logger.info("cell的值是 :{},cell的位置是 :{}",cell.getStringCellValue(),cell.getAddress());
-                        logger.info(String.valueOf(row.getRowNum()+1) + "," + cell.getAddress());
-                        titleList.add(cell.getColumnIndex(),cell.getStringCellValue());
-                    }else {
-                        logger.info("test");
+                    try {
+                        if(!cell.getStringCellValue().isEmpty()){
+//                            logger.info("cell的值是 :{},cell的位置是 :{}",cell.getStringCellValue(),cell.getAddress());
+//                            logger.info(String.valueOf(row.getRowNum()+1) + "," + cell.getAddress());
+                            titleList.add(cell.getColumnIndex(),cell.getStringCellValue());
+                        }else {
+                            logger.info("test");
+                        }
+                    }catch (Exception ex){
+                        logger.warn("不是string类型数据");
                     }
+
                 }
 
             }
@@ -120,8 +128,33 @@ public class ExcelUtils {
         return "ok";
     }
 
+    /**
+     *
+     * @param filepath
+     * @return
+     */
+    private static String readFile(String filepath){
+        AutoDetectParser parser = new AutoDetectParser();
+        BodyContentHandler handler = new BodyContentHandler();
+        Metadata metadata = new Metadata();
+        try (InputStream stream = new FileInputStream(new File(filepath))) {
+            parser.parse(stream, handler, metadata);
+            String resultStr = handler.toString();
+            logger.info("处理execl文本信息：{}",resultStr);
+            if (!resultStr.isEmpty()){
+                FileWriter fileWriter = new FileWriter("ratelt.txt");
+                fileWriter.append(resultStr);
+            }
+            return resultStr;
+        } catch (IOException | TikaException | SAXException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
-        readExcel("/Users/mark/Desktop/随手记贷后需求/随手记测算表-20171212终稿.xlsx","test");
+        readExcel("/Users/mark/Desktop/随手记贷后需求/随手记测算表-20171212终稿.xlsx","test",0);
+//        readFile("/Users/mark/Desktop/随手记贷后需求/随手记测算表-20171212终稿.xlsx");
     }
 
 

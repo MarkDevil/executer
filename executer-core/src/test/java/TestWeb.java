@@ -1,4 +1,3 @@
-import com.mark.test.framework.core.task.PrintLogScheduleTask;
 import com.mark.test.framework.core.utils.SchedulerManager;
 import com.mark.test.framework.util.WebDriverFactory;
 import org.junit.After;
@@ -45,7 +44,7 @@ public class TestWeb {
 
     @Test
     public void testTask(){
-        new SchedulerManager().addScheJob(PrintLogScheduleTask.class,"*/5 * * * * ?");
+        new SchedulerManager().addScheJob("PrintLogScheduleTask","*/5 * * * * ?");
     }
 
 

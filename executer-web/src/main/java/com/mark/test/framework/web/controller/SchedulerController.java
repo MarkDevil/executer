@@ -3,7 +3,6 @@ package com.mark.test.framework.web.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.mark.test.framework.api.dto.ScheduleRequestDto;
 import com.mark.test.framework.core.task.PrintLogScheduleTask;
-import com.mark.test.framework.core.task.PrintOnceTask;
 import com.mark.test.framework.core.task.SynDataBaseTask;
 import com.mark.test.framework.core.utils.SchedulerManager;
 import org.quartz.*;
@@ -28,6 +27,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
  * Created by mark .
  * Data : 2017/3/16
  * Desc :
+ * @author mark
  */
 @Controller
 @RequestMapping(value = "/api")
@@ -63,7 +63,7 @@ public class SchedulerController {
     @ResponseBody
     public Map invoke1time(){
         final SchedulerManager schedulerManager = new SchedulerManager();
-        schedulerManager.runNowOnce(PrintOnceTask.class);
+        schedulerManager.runNowOnce("PrintOnceTask");
         JSONObject ret = new JSONObject();
         ret.put("retmsg","ok");
         ret.put("retcode","00");
