@@ -153,8 +153,7 @@ public class ExcelUtils {
     }
 
     public static void main(String[] args) {
-        readExcel("/Users/mark/Desktop/随手记贷后需求/随手记测算表-20171212终稿.xlsx","test",0);
-//        readFile("/Users/mark/Desktop/随手记贷后需求/随手记测算表-20171212终稿.xlsx");
+
     }
 
 
