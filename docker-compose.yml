@@ -1,0 +1,12 @@
+
+  executer:
+    container_name: executer
+    image: executer:lastest
+    ports:
+      - "8082:8080"
+    restart: always
+    extra_hosts:
+      - "mysql-server:192.168.51.161"
+    dns:
+      - "8.8.8.8"
+    mem_limit: 1g
