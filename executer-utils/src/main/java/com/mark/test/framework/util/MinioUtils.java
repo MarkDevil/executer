@@ -31,9 +31,7 @@ public class MinioUtils {
     static {
         try {
             minioClient = new MinioClient(endpoint,accessKey,secretKey);
-        } catch (InvalidEndpointException e) {
-            e.printStackTrace();
-        } catch (InvalidPortException e) {
+        } catch (InvalidEndpointException | InvalidPortException e) {
             e.printStackTrace();
         }
     }
@@ -54,13 +52,9 @@ public class MinioUtils {
                 minioClient.putObject(bucket,fileobj.getName(),fileobj.getAbsolutePath());
             }
 
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (InvalidKeyException | NoSuchAlgorithmException | XmlPullParserException e) {
             e.printStackTrace();
         } catch (NoResponseException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (InsufficientDataException e) {
             e.printStackTrace();
