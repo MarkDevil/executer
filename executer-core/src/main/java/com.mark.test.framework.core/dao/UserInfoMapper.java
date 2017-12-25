@@ -44,9 +44,9 @@ public interface UserInfoMapper {
      * @mbggenerated
      */
     @Select({
-        "select",
-        "id, name, passwd",
-        "from user_info",
+        "select ",
+        "id, name, passwd ",
+        "from user_info ",
         "where id = #{id,jdbcType=INTEGER}"
     })
     @ResultMap("BaseResultMap")
@@ -55,7 +55,7 @@ public interface UserInfoMapper {
 
     @Select({
             "select",
-            "id, name, passwd",
+            "name, passwd",
             "from user_info",
             "where name = #{name,jdbcType=VARCHAR}"
     })

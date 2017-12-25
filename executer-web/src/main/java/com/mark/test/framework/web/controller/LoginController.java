@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,13 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
     Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-
-    private final UserServiceImpl userService;
-
     @Autowired
-    public LoginController(UserServiceImpl userService) {
-        this.userService = userService;
-    }
+    private UserServiceImpl userService;
+
+
 
     @RequestMapping(value = "/")
     @ResponseBody
@@ -34,10 +30,18 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/home")
+    @ResponseBody
+    public ModelAndView home(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("home");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/nav")
     @ResponseBody
     public ModelAndView nav(){
-        return new ModelAndView("navPage");
+        return new ModelAndView("navpage");
     }
 
     @RequestMapping(value = "/monitor")
@@ -47,9 +51,9 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "/User")
+    @RequestMapping(value = "/user")
     @ResponseBody
-    public String user(@RequestParam String name){
+    public String user(String name){
         UserDto user = userService.getUser(name);
         if (user != null){
             return String.format("User %s is exsit",user.getName());

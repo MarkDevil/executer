@@ -1,4 +1,0 @@
-executer:
-    image: tomcat-mark:0.1
-    ports:
-        - "8123:8080"

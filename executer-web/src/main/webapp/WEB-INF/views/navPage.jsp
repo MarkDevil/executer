@@ -255,7 +255,7 @@
         });
 
         function openMonitor() {
-            window.location.href = "/executer-web/monitor";
+            window.location.href = "/executer-web/monitor.ftl";
         }
 
 
