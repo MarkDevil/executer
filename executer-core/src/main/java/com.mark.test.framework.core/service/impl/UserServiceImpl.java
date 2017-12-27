@@ -31,7 +31,7 @@ public class UserServiceImpl implements IUser{
 
     @Override
     public boolean isExsitUser(String name) {
-        logger.info("DataSource : ", DataSourceContextHolder.getDataSourceType());
+        logger.info("DataSource : {}", DataSourceContextHolder.getDataSourceType());
         return this.getUser(name) != null;
     }
 
@@ -41,6 +41,5 @@ public class UserServiceImpl implements IUser{
         logger.info("DataSource : {}", DataSourceContextHolder.getDataSourceType());
         return userInfoMapper.selectByName(name);
     }
-
 
 }

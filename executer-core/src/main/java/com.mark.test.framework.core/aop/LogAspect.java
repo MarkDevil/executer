@@ -6,31 +6,30 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-
-import java.beans.JavaBean;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by mark .
  * Data   : 2017/12/25
- * Author : mark
+ * @author : mark
  * Desc   :
  */
 @Aspect
+@Component
 public class LogAspect {
-    Logger logger = LoggerFactory.getLogger(LogAspect.class);
+    private Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
     @Pointcut(value = "execution(* *..service..*.*(..))")
     public void aspect(){}
 
     @After("aspect()")
     public void afterPointcut(){
-        logger.info("point cut finished");
+        logger.info("Point cut finished");
     }
 
     @Before("aspect()")
     public void beforePointcut(){
-        logger.info("beforePointcut");
+        logger.info("Before Pointcut");
     }
 
 

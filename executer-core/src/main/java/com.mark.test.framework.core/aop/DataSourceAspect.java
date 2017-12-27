@@ -11,7 +11,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -19,12 +18,13 @@ import java.lang.reflect.Method;
 /**
  * Created by mark .
  * Data   : 2017/12/25
- * Author : mark
  * Desc   :
+ * @author mark
  */
 @Aspect
+@Component
 public class DataSourceAspect {
-    Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
+    private Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
 
     @Pointcut(value = "execution(* *..service..*.*(..))")
     public void aspect(){}
@@ -37,7 +37,7 @@ public class DataSourceAspect {
      * @throws Exception
      */
     @Before("aspect()")
-    public void intercept(JoinPoint point) throws Exception {
+    public void intercept(JoinPoint point) {
         logger.info("[Aspect] : {}",point.toString());
         Class<?> target = point.getTarget().getClass();
         MethodSignature signature = (MethodSignature) point.getSignature();
@@ -50,7 +50,7 @@ public class DataSourceAspect {
 
     @After("aspect()")
     public void afterPointcut(){
-        logger.info("point cut finished");
+//        logger.info("point cut finished");
     }
 
 
