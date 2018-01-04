@@ -16,7 +16,7 @@ public class SchedulerManager {
     private static Scheduler scheduler;
     private static String JOB_GROUP_NAME = "MARK-GROUP";
     private static String TRIGGER_GROUP_NAME = "MARK-TRIGGER";
-    private static String PACKAGENAME = "com.mark.test.framework.core.task.";
+    private static final String PACKAGENAME = "com.mark.test.framework.core.task.";
     private static Logger logger = org.slf4j.LoggerFactory.getLogger(SchedulerManager.class);
 
     static {
@@ -24,6 +24,7 @@ public class SchedulerManager {
             gSchedulerFactory = new StdSchedulerFactory();
             scheduler = gSchedulerFactory.getScheduler();
         } catch (SchedulerException e) {
+            logger.error("[{}] - 实例化Schedule对象失败....",SchedulerManager.class.getSimpleName());
             e.printStackTrace();
         }
     }
@@ -104,13 +105,12 @@ public class SchedulerManager {
 
     /**
      * 新增定时任务job
-     * @param taskname       定时任务实现类
+     * @param taskname  定时任务实现类
      * @param interval  时间间隔
      * @param unitType  时间间隔单位
      */
     public void addScheJob(String taskname,int interval,DateBuilder.IntervalUnit unitType){
         try {
-
             scheduler.scheduleJob(this.getJobDetail(taskname), this.getIntervalTrigger(interval,unitType));
             scheduler.start();
             if (scheduler.isStarted()){
@@ -131,6 +131,7 @@ public class SchedulerManager {
         try {
             scheduler = gSchedulerFactory.getScheduler();
             JobDetail jobDetail = this.getJobDetail(taskName);
+            assert jobDetail != null;
             logger.info("Job key : {}",jobDetail.getKey().toString());
             scheduler.scheduleJob(jobDetail,TriggerBuilder.newTrigger().withSchedule(SimpleScheduleBuilder.simpleSchedule().withMisfireHandlingInstructionFireNow()).build());
             scheduler.start();
@@ -141,8 +142,7 @@ public class SchedulerManager {
 
 
 
-    public static void main(String[] args) throws SchedulerException {
-        scheduler = gSchedulerFactory.getScheduler();
+    public static void main(String[] args) {
         SchedulerManager schedulerManager = new SchedulerManager();
         schedulerManager.runNowOnce("PrintOnceTask");
 

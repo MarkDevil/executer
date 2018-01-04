@@ -16,6 +16,24 @@ public class ScheduleRequestDto {
     private String identify;
     private String triggerType;
     private Map<String,Object> interval;
+    private String triggerName;
+    private String triggerGroup;
+
+    public String getTriggerName() {
+        return triggerName;
+    }
+
+    public void setTriggerName(String triggerName) {
+        this.triggerName = triggerName;
+    }
+
+    public String getTriggerGroup() {
+        return triggerGroup;
+    }
+
+    public void setTriggerGroup(String triggerGroup) {
+        this.triggerGroup = triggerGroup;
+    }
 
     public String getJobClassName() {
         return jobClassName;

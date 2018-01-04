@@ -42,9 +42,9 @@ public class SchedulerController {
         try {
             Scheduler scheduler = schedulerFactory.getScheduler();
             JobDetail jobDetail = newJob(PrintLogScheduleTask.class).
-                    withIdentity("testTask").build();
+                    withIdentity(scheduleRequestDto.getIdentify()).build();
             Trigger trigger = newTrigger()
-                    .withIdentity("trigger1", "group1")
+                    .withIdentity(scheduleRequestDto.getTriggerName(), scheduleRequestDto.getTriggerGroup())
                     .startNow()
                     .withSchedule(simpleSchedule()
                             .withIntervalInSeconds(40)
