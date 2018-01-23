@@ -17,8 +17,8 @@ import java.io.IOException;
 /**
  * Created by mark .
  * Data   : 2017/8/24
- * Author : mark
  * Desc   :
+ * @author mark
  */
 
 public class FtpUtils {
@@ -30,7 +30,7 @@ public class FtpUtils {
     private String userName;
     private String userPassword;
 
-    public FtpUtils(String server, int port, String userName, String userPassword) {
+    private FtpUtils(String server, int port, String userName, String userPassword) {
         this.server = server;
         this.port = port;
         this.userName = userName;

@@ -88,6 +88,7 @@ public class DbFactory {
 		logger.info("Execute SQL to query result: " + sql);
 		list = jdbcTemplate.query(sql,
 				new RowMapper<Map<String, Object>>() {
+					@Override
 					public Map<String, Object> mapRow(ResultSet resultSet, int rowIdex) throws SQLException {
 						Map<String, Object> map = new HashMap<String, Object>();
 						ResultSetMetaData metaData = resultSet.getMetaData();

@@ -13,7 +13,7 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> -->
     <link rel="stylesheet" href="${request.contextPath}/resources/static/plugins/ionicons-2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="${request.contextPath}/resources/static/adminlte/dist/css/AdminLTE-local.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/resources/static/adminlte/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="${request.contextPath}/resources/static/adminlte/dist/css/skins/_all-skins.min.css">
 
@@ -86,10 +86,7 @@
             <li class="header">常用模块</li>
             <li class="nav-click <#if pageName == "projectList">active</#if>" ><a href="${request.contextPath}/project"><i class="fa fa-circle-o text-red"></i> <span>项目管理</span></a></li>
             <li class="nav-click <#if pageName == "datatype">active</#if>" ><a href="${request.contextPath}/datatype"><i class="fa fa-circle-o text-red"></i> <span>数据类型管理</span></a></li>
-            <#if XXL_API_LOGIN_IDENTITY.type == 1>
-                <li class="nav-click <#if pageName == "bizList">active</#if>" ><a href="${request.contextPath}/biz"><i class="fa fa-circle-o text-red"></i> <span>业务线管理</span></a></li>
-                <li class="nav-click <#if pageName == "userList">active</#if>" ><a href="${request.contextPath}/user"><i class="fa fa-circle-o text-red"></i> <span>用户管理</span></a></li>
-            </#if>
+
         </ul>
     </section>
     <!-- /.sidebar -->
@@ -98,12 +95,21 @@
 
 
 <#macro commonFooter >
-<footer class="main-footer">
-    Powered by <b>API管理平台</b> 1.1
-    <div class="pull-right hidden-xs">
-        <strong>Copyright &copy; 2015-${.now?string('yyyy')} &nbsp;
-        </strong><!-- All rights reserved. -->
-    </div>
-</footer>
+    <footer class="main-footer">
+        <a>Powered by <b>API管理平台</b> 1.1</a>
+        &nbsp;
+        <a style="right: 5px;">Copyright &copy; 2015-${.now?string('yyyy')}</a>
+
+    </footer>
+
+    <style>
+        footer.main-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: deepskyblue;
+        }
+
+    </style>
 </#macro>
 

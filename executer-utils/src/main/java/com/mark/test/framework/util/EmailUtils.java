@@ -35,7 +35,6 @@ public class EmailUtils {
         email = new SimpleEmail();
         this.buildSender();
     }
-
     public static void main(String[] args) throws EmailException {
 
 
@@ -46,6 +45,7 @@ public class EmailUtils {
                     try {
                         new EmailUtils().sendMail();
                     } catch (EmailException e) {
+                        logger.error("发送邮件失败请检查");
                         e.printStackTrace();
                     }
                 }

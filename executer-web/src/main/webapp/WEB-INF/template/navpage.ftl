@@ -9,39 +9,43 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="${request.contextPath}/resources/css/bootstrap/bootstrap-select.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css"/>
-    <title>Nav testing tool</title>
+    <title>银行渠道测试工具</title>
 </head>
 <body>
-<ul id="myTab" class="nav nav-tabs navbar navbar-inverse">
-
-    <li class="dropdown">
-        <a href="#" id="testTool" class="dropdown-toggle"
-           data-toggle="dropdown">
-            测试工具集
-            <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-            <li><a data-toggle="tab" onclick="openMonitor()">系统信息监控</a></li>
-            <li><a href="#"  data-toggle="tab">系统信息</a></li>
-        </ul>
-    </li>
 
 
-    <li>
-        <a href="#psbc" data-toggle="tab">中邮银行</a>
-    </li>
+<div class="container">
+    <ul id="myTab" class="nav nav-justified navbar-inverse" style="width: auto" >
 
-    <li class="dropdown">
-        <a href="#" id="myTabDrop1" class="dropdown-toggle"
-           data-toggle="dropdown">厦门国际
-            <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-            <li><a href="#jmeter"  data-toggle="tab">bootStrap数据测试</a></li>
-            <li><a href="#ejb"  data-toggle="tab">ejb</a></li>
-        </ul>
-    </li>
-</ul>
+        <li class="dropdown">
+            <a href="#" id="testTool" class="dropdown-toggle"
+               data-toggle="dropdown">
+                测试工具集
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                <li><a data-toggle="tab" onclick="openMonitor()">系统信息监控</a></li>
+                <li><a href="#"  data-toggle="tab" onclick="openMonitor()">系统信息</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#psbc" data-toggle="tab">中邮银行</a>
+        </li>
+
+        <li class="dropdown">
+            <a href="#" id="myTabDrop1" class="dropdown-toggle"
+               data-toggle="dropdown">厦门国际
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                <li><a href="#jmeter"  data-toggle="tab">bootStrap数据测试</a></li>
+                <li><a href="#ejb"  data-toggle="tab">ejb</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
 
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade in active" id="home">
@@ -93,8 +97,8 @@
 
                     <tr style="text-align: left">
                         <td></td>
-                        <td><input type="button" value="更新三方状态" onclick="updateThirdStatus()">&nbsp;&nbsp;
-                            <input type="button" value="刷新数据" onclick="refreshTable()">
+                        <td><input type="button" class="button" value="更新三方状态" onclick="updateThirdStatus()">&nbsp;&nbsp;
+                            <input type="button" class="button" value="刷新数据" onclick="refreshTable()">
                         </td>
 
                     </tr>
