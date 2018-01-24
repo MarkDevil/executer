@@ -47,7 +47,7 @@
     <!--拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**" />
+            <mvc:mapping path="/executer-web/api/*" />
             <ref bean="timeInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

@@ -48,7 +48,7 @@ public class SchedulerManager {
      * @return
      */
     private JobDetail getJobDetail(String jobname){
-        Class clz = null;
+        Class clz;
         try {
             clz = this.getTaskClass(jobname);
             assert clz != null;
@@ -129,7 +129,6 @@ public class SchedulerManager {
     public void runNowOnce(String taskName){
         assert taskName != null;
         try {
-            scheduler = gSchedulerFactory.getScheduler();
             JobDetail jobDetail = this.getJobDetail(taskName);
             assert jobDetail != null;
             logger.info("Job key : {}",jobDetail.getKey().toString());

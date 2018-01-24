@@ -16,11 +16,11 @@
             <p class="login-box-msg">测试API管理平台</p>
             <div class="form-group has-feedback">
                 <input type="text" name="userName" class="form-control" placeholder="请输入登陆账号" value="admin" >
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"/>
             </div>
             <div class="form-group has-feedback">
                 <input type="password" name="password" class="form-control" placeholder="请输入登陆密码" value="123456" >
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span class="glyphicon glyphicon-lock form-control-feedback"/>
             </div>
             <div class="row">
                 <div class="col-xs-8">

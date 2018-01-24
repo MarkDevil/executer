@@ -13,41 +13,48 @@
 </head>
 <body>
 
+<h1 style="margin-left: 30px">后台管理系统</h1>
+<div class="container-fluid" >
+    <div class="col-lg-12">
+        <nav class="navbar nav-justified navbar-inverse">
 
-<div class="container">
-    <ul id="myTab" class="nav nav-justified navbar-inverse" style="width: auto" >
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"/>
+                    <span class="icon-bar"/>
+                    <span class="icon-bar"/>
+                </button>
+            </div>
 
-        <li class="dropdown">
-            <a href="#" id="testTool" class="dropdown-toggle"
-               data-toggle="dropdown">
-                测试工具集
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                <li><a data-toggle="tab" onclick="openMonitor()">系统信息监控</a></li>
-                <li><a href="#"  data-toggle="tab" onclick="openMonitor()">系统信息</a></li>
-            </ul>
-        </li>
+            <div id="navbar-menu" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" id="dropdownMenu1"
+                                    data-toggle="dropdown">
+                                测试工具集
+                                <span class="caret"/>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation"><a role="menuitem" tabindex="0" onclick="openMonitor()" href="#">系统信息监控</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="1" onclick="openMonitor()" href="#">系统信息</a></li>
+                            </ul>
+                        </li>
+                    <li>
+                        <a href="#" onclick="display()" >中邮测试工具</a>
+                    </li>
+                    <li><a href="#" onclick="display()">厦门测试工具</a></li>
+                </ul>
+            </div>
 
-        <li>
-            <a href="#psbc" data-toggle="tab">中邮银行</a>
-        </li>
+        </nav>
+    </div>
 
-        <li class="dropdown">
-            <a href="#" id="myTabDrop1" class="dropdown-toggle"
-               data-toggle="dropdown">厦门国际
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                <li><a href="#jmeter"  data-toggle="tab">bootStrap数据测试</a></li>
-                <li><a href="#ejb"  data-toggle="tab">ejb</a></li>
-            </ul>
-        </li>
-    </ul>
 </div>
 
 
-<div id="myTabContent" class="tab-content">
+<div id="myTabContent" class="tab-content" hidden="hidden" style="margin-left: 30px">
     <div class="tab-pane fade in active" id="home">
         <h1>厦门银行修改三方状态</h1>
         <div>
@@ -182,16 +189,6 @@
 
 </div>
 
-<div id="monitor" class="tab-pane focus">
-    <table id="bt-table1" data-toggle="table" class="table table-hover">
-        <thead>
-        <tr>
-            <th data-field="id">编号</th>
-            <th data-field="name">姓名</th>
-        </tr>
-        </thead>
-    </table>
-</div>
 
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="${request.contextPath}/resources/js/third/bootstrap/bootstrap-select.min.js" ></script>
@@ -241,6 +238,10 @@
 
     function openMonitor() {
         window.location.href = "/executer-web/monitor.ftl";
+    }
+
+    function display() {
+        $('#myTabContent').removeAttr('hidden');
     }
 
 </script>
