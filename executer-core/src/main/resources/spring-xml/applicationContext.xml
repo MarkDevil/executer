@@ -10,5 +10,6 @@
     <import resource="mybatisConfig.xml"/>
     <import resource="spring-quartz.xml"/>
     <import resource="spring-aop.xml"/>
+    <import resource="spring-redis.xml"/>
 
 </beans>

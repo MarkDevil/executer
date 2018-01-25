@@ -35,10 +35,6 @@ public class ThreadUtils {
         return this;
     }
 
-
-
-
-
     public void hello(Integer integer,String name){
         logger.info("hello - " + name);
     }
