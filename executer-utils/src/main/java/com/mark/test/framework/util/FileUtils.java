@@ -51,8 +51,20 @@ public class FileUtils {
         }else {
             throw new RuntimeException("Directory is not exited");
         }
-//        logger.info("获取到的文件列表是:{}",directoryList);
         return arraylist;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<String> readFileByLine(String path,String encode){
+        try {
+            return org.apache.commons.io.FileUtils.readLines(new File(path),encode);
+        } catch (IOException e) {
+            logger.error("读取文件失败");
+            e.printStackTrace();
+        }
     }
 
 
