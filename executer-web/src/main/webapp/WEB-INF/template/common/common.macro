@@ -49,16 +49,16 @@
     <script src="${request.contextPath}/resources/static/js/common.1.js"></script>
     <!-- jQuery 2.1.4 -->
 
-    <script>var base_url = '${request.contextPath}';</script>
+    <script>const base_url = '${request.contextPath}';</script>
 
 </#macro>
 
 
 <#macro commonHeader>
-    <header class="main-header">
+    <header class="main-header navbar-header">
         <a href="${request.contextPath}/" class="logo">
-            <span class="logo-mini"><b></b>测试</span>
-            <span class="logo-lg"><b></b>API管理平台</span>
+            <span class="logo-mini">测试</span>
+            <span class="logo-lg">API管理平台</span>
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">切换导航</span></a>
@@ -98,18 +98,8 @@
     <footer class="main-footer">
         <a>Powered by <b>API管理平台</b> 1.1</a>
         &nbsp;
-        <a style="right: 5px;">Copyright &copy; 2015-${.now?string('yyyy')}</a>
+        <a>Copyright &copy; 2015-${.now?string('yyyy')}</a>
 
     </footer>
-
-    <style>
-        footer.main-footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: deepskyblue;
-        }
-
-    </style>
 </#macro>
 

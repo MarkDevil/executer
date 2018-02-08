@@ -37,3 +37,8 @@ test.json
 /executer-api/.settings/
 /executer-agent/.settings/
 !/executer-agent/src/main/resources/
+/.settings/
+.settings/
+executer-agent/src/main/java/com/mark/test/framework/server/node/
+executer-agent/src/main/resources/
+ratelt.txt

@@ -2,7 +2,6 @@ package com.mark.test.framework.util;
 
 
 import com.google.common.collect.Lists;
-import com.mark.test.framework.api.dto.SQLConnectionDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +22,8 @@ import java.util.List;
 public class FileUtils {
 
     public final static Logger logger  = LoggerFactory.getLogger(FileUtils.class);
-    public static List<String> arraylist = Lists.newLinkedList();
-    public static List<String> directoryList = Lists.newLinkedList();
+    private static List<String> arraylist = Lists.newLinkedList();
+    private static List<String> directoryList = Lists.newLinkedList();
 
     /**
      * 获取指定目录下所有文件
@@ -55,7 +54,9 @@ public class FileUtils {
     }
 
     /**
-     *
+     * 按行读取文件
+     * @param path
+     * @param encode
      * @return
      */
     public List<String> readFileByLine(String path,String encode){
@@ -65,7 +66,25 @@ public class FileUtils {
             logger.error("读取文件失败");
             e.printStackTrace();
         }
+        return null;
     }
+
+    /**
+     * 根据给出的文件写入数据
+     * @param path
+     * @param data
+     * @param encoding
+     * @param isAppend
+     */
+    public void writeToFile(String path,String data,String encoding,boolean isAppend){
+        try {
+            org.apache.commons.io.FileUtils.writeStringToFile(new File(path),data,encoding,isAppend);
+        } catch (IOException e) {
+            logger.info("");
+            e.printStackTrace();
+        }
+    }
+
 
 
     /***
@@ -109,17 +128,22 @@ public class FileUtils {
     }
 
     public static void main(String[] args) {
-        String hbadmin_changelist = "/Users/mark/hbFinancial/hbadmin-change-list";
-        String testPath = "/Users/mark/tool/shell";
-        SQLConnectionDTO sqlConnectionDTO = new SQLConnectionDTO();
-        sqlConnectionDTO.setUrl("jdbc:mysql://localhost:3307/hb?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull");
-        sqlConnectionDTO.setDriver("com.mysql.jdbc.Driver");
-        sqlConnectionDTO.setUserName("root");
-        sqlConnectionDTO.setPassword("root");
-        DbFactory mySQLDb = new DbFactory(sqlConnectionDTO);
-        List<String> retlist = FileUtils.getFileList(testPath);
-        logger.info("\nFound file list: \n {} \n", retlist.toString());
-        mySQLDb.executeSqlFile(retlist);
+        FileUtils fileUtils = new FileUtils();
+        List<String> strings = fileUtils.readFileByLine("/Users/mark/Desktop/大桔线下提前结清/大桔贷后文件/WaitPaymenthg.txt","utf-8");
+
+        logger.info(strings.toString());
+
+//        String hbadmin_changelist = "/Users/mark/hbFinancial/hbadmin-change-list";
+//        String testPath = "/Users/mark/tool/shell";
+//        SQLConnectionDTO sqlConnectionDTO = new SQLConnectionDTO();
+//        sqlConnectionDTO.setUrl("jdbc:mysql://localhost:3307/hb?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull");
+//        sqlConnectionDTO.setDriver("com.mysql.jdbc.Driver");
+//        sqlConnectionDTO.setUserName("root");
+//        sqlConnectionDTO.setPassword("root");
+//        DbFactory mySQLDb = new DbFactory(sqlConnectionDTO);
+//        List<String> retlist = FileUtils.getFileList(testPath);
+//        logger.info("\nFound file list: \n {} \n", retlist.toString());
+//        mySQLDb.executeSqlFile(retlist);
 //        for (String filepath: retlist) {
 //            List<String> sqls = FileUtils.readSqlFile(filepath);
 //            logger.debug("\n [文件目录为]：\n {} , \n [返回的SQL]: \n {}",filepath,sqls.toString());
