@@ -1,4 +1,4 @@
-package com.mark.test.framework.util;
+package com.mark.test.framework.util.loaddata;
 
 
 import com.google.common.collect.Lists;

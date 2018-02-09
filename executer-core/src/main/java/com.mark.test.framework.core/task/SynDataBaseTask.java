@@ -3,7 +3,7 @@ package com.mark.test.framework.core.task;
 import com.mark.test.framework.core.constat.DbFactoryC;
 import com.mark.test.framework.core.service.impl.DbCompareImpl;
 import com.mark.test.framework.util.DbFactory;
-import com.mark.test.framework.util.FileUtils;
+import com.mark.test.framework.util.loaddata.FileUtils;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

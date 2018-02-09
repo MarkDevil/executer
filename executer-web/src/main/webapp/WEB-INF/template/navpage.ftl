@@ -17,7 +17,6 @@
 <div class="container container-fluid " style="width: auto" >
     <div class="col-lg-12" style="width: 100%">
         <nav class="navbar nav-justified navbar-inverse">
-
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -57,7 +56,6 @@
                     </li>
                 </ul>
             </div>
-
         </nav>
     </div>
 </div>
@@ -121,16 +119,6 @@
                     </table>
                 </form>
             </div>
-        <table id="logsTable" class="display dataTable" cellspacing="0" width="95%">
-            <thead>
-            <tr>
-                <th>BatchNo</th>
-                <th>dbsql</th>
-                <th>createTime</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
     </div>
 
     <div id="psbc" class="tab-content" hidden="hidden" >
@@ -196,7 +184,7 @@
 
 </div>
 
-    <@netCommon.commonFooter></@netCommon.commonFooter>
+<@netCommon.commonFooter></@netCommon.commonFooter>
 
 
 <script src="https://code.jquery.com/jquery.js"></script>
