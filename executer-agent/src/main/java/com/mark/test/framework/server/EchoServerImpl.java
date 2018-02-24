@@ -19,7 +19,7 @@ public class EchoServerImpl extends AbstractServer{
 
 
 
-    public static void main(String[] args) {
-        new EchoServerImpl().startServer(11112);
-    }
+//    public static void main(String[] args) {
+//        new EchoServerImpl().startServer(11112);
+//    }
 }

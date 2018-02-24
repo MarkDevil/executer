@@ -8,7 +8,6 @@
 .gitignore
 .idea/
 /executer-web/src/main/resources/docker/executer-web.war
-executer-api/src/main/resources/
 executer-api/src/test/
 executer-api/target/
 executer-core/target/
@@ -36,9 +35,7 @@ test-output/
 test.json
 /executer-api/.settings/
 /executer-agent/.settings/
-!/executer-agent/src/main/resources/
 /.settings/
 .settings/
-executer-agent/src/main/java/com/mark/test/framework/server/node/
-executer-agent/src/main/resources/
 ratelt.txt
+

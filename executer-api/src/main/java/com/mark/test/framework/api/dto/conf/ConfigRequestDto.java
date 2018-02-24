@@ -6,9 +6,6 @@ import org.hibernate.validator.constraints.NotBlank;
 /**
  * Created by mark .
  * Data   : 2018/2/9
- *
- * @Author : mark
- * Desc   :
  */
 
 public class ConfigRequestDto {
