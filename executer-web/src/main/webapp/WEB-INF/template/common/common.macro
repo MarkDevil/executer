@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="${request.contextPath}/resources/static/adminlte/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="${request.contextPath}/resources/static/adminlte/dist/css/skins/_all-skins.min.css">
+    <link href="${request.contextPath}/resources/css/main-footer.css" rel="stylesheet" type="text/css">
 
     <link rel="shortcut icon" href="${request.contextPath}/resources/img/favicon.ico" />
 
@@ -49,7 +50,16 @@
     <#-- common -->
     <script src="${request.contextPath}/resources/static/js/xxl.alert.1.js"></script>
     <script src="${request.contextPath}/resources/static/js/common.1.js"></script>
-    <!-- jQuery 2.1.4 -->
+
+    <script src="${request.contextPath}/resources/js/third/bootstrap/bootstrap-select.min.js" ></script>
+    <script src="${request.contextPath}/resources/js/third/bootstrap/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" ></script>
+    <script src="${request.contextPath}/resources/js/third/video/videojs-ie8.min.js"></script>
+    <script src="${request.contextPath}/resources/js/third/video/video.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery.form/4.2.1/jquery.form.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
 
     <script>const base_url = '${request.contextPath}';</script>
 
@@ -97,7 +107,7 @@
 
 
 <#macro commonFooter >
-    <footer class="main-footer">
+    <footer class="main-footer-mark">
         <a>Powered by <b>API管理平台</b> 1.1</a>
         &nbsp;
         <a>Copyright &copy; 2015-${.now?string('yyyy')}</a>

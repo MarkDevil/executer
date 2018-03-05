@@ -1,9 +1,20 @@
 
-.main-footer{
-    background-color:dodgerblue;
-    color:black;
+.main-footer-mark{
+    background-color:black;
+    /*color:black;*/
     position:fixed;
     bottom:0;
     text-align:center;
     width: 100%;
+    height: 20px;
+}
+
+.nav-mark {
+    background-color: #0d6aad;
+    width: 100%;
+}
+
+.tab-content-mark{
+    position: fixed;
+    top: 40px;
 }
