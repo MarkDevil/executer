@@ -45,14 +45,14 @@ $(function(){
         errorPlacement : function(error, element) {  
             element.parent('div').append(error);  
         },
-        submitHandler : function(form) {
-			$.post(base_url + "/login.ftl", $("#loginForm").serialize(), function(data, status) {
-				if (data.code === "200") {
+        submitHandler : function() {
+			$.post(base_url + "/login", $("#loginForm").serialize(), function(data, status) {
+				if (data.toLocaleString() === "yes") {
 					ComAlert.show(1, "登陆成功", function(){
-						window.location.href = base_url;
+						window.location.href = base_url+ '/nav';
 					});
 				} else {
-					ComAlert.show(2, data.msg);
+					ComAlert.show(2, "登录失败" + data.toLocaleString());
 				}
 			});
 		}

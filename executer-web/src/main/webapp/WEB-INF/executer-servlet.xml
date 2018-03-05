@@ -47,6 +47,13 @@
     <!--拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
+            <mvc:mapping path="/api/**" />
+            <mvc:mapping path="/nav" />
+            <mvc:mapping path="/home" />
+            <mvc:mapping path="/monitor/**" />
+            <bean class="com.mark.test.framework.web.common.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
             <mvc:mapping path="/executer-web/api/*" />
             <ref bean="timeInterceptor"/>
         </mvc:interceptor>

@@ -1,8 +1,8 @@
 <html>
 <head>
     <title>测试平台</title>
-<#import "common/common.macro" as commmacro>
-<@commmacro.commonStyle></@commmacro.commonStyle>
+    <#import "common/common.macro" as commmacro>
+    <@commmacro.commonStyle></@commmacro.commonStyle>
 </head>
 
 <body>
@@ -13,7 +13,6 @@
     <a>
         <@commmacro.commonLeft 'projectList' />
     </a>
-
 
 
     <footer>

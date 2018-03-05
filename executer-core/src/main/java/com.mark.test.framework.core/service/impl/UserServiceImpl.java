@@ -37,7 +37,6 @@ public class UserServiceImpl implements IUser{
 
     @Override
     public UserDto getUser(String name) {
-//        DataSourceContextHolder.setDataSourceType("testDataSource");
         logger.info("DataSource : {}", DataSourceContextHolder.getDataSourceType());
         return userInfoMapper.selectByName(name);
     }

@@ -7,8 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * Created by Mark on 2017/7/9.
@@ -22,7 +27,7 @@ public class LoginController {
 
 
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/tologin")
     @ResponseBody
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView();
@@ -51,14 +56,27 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "/user")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public String user(String name){
-        UserDto user = userService.getUser(name);
+    public String user(@RequestParam Map request , HttpSession session){
+        logger.info("请求信息：{}",request.toString());
+        String username = (String) request.get("userName");
+        UserDto user = userService.getUser(username);
         if (user != null){
-            return String.format("User %s is exsit",user.getName());
+            session.setAttribute("username",username);
+            return "yes";
         }else {
-            return "User is not exsit";
+            return "redirect:/tologin";
         }
     }
+
+
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    @ResponseBody
+    public String user(HttpSession session){
+        //清除Session
+        session.invalidate();
+        return "redirect:/tologin";
+    }
+
 }
