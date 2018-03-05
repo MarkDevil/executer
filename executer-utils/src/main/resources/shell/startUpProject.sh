@@ -1,4 +1,6 @@
 # 启动脚本
+# start 启动参数，启动指定工程项目
+# clean 删除指定目录的日志文件
 #!/bin/sh
 cmds=$1
 echo $cmds
