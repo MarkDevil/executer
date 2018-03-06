@@ -27,7 +27,7 @@ public class LoginController {
 
 
 
-    @RequestMapping(value = "/tologin")
+    @RequestMapping(value = {"/tologin","/"})
     @ResponseBody
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView();

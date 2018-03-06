@@ -1,23 +1,23 @@
 <html>
 <head>
     <title>测试平台</title>
-    <#import "common/common.macro" as commmacro>
-    <@commmacro.commonStyle></@commmacro.commonStyle>
+    <#import "common/common.macro" as comm>
+    <@comm.commonStyle></@comm.commonStyle>
 </head>
 
 <body>
     <header>
-        <@commmacro.commonHeader></@commmacro.commonHeader>
+        <@comm.commonHeader></@comm.commonHeader>
     </header>
 
     <a>
-        <@commmacro.commonLeft 'projectList' />
+        <@comm.commonLeft 'projectList' />
     </a>
 
 
     <footer>
-        <@commmacro.commonFooter></@commmacro.commonFooter>
+        <@comm.commonFooter></@comm.commonFooter>
     </footer>
-    <@commmacro.commonScript />
+    <@comm.commonScript />
 </body>
 </html>

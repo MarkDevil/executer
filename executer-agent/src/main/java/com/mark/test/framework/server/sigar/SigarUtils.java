@@ -18,27 +18,25 @@ import java.io.File;
 
 public class SigarUtils {
     private static Logger logger = LoggerFactory.getLogger(SigarUtils.class);
-    public static Sigar sigar = initSigar();
+    private static String sigarpath = "/Users/mark/tool/sigar/";
+    public static Sigar sigar = initSigar(sigarpath);
 
     /**
      * 初始化Sigar配置
      * @return
      */
-    private static Sigar initSigar() {
+    private static Sigar initSigar(String sigarPath) {
         try {
             //此处只为得到依赖库文件的目录，可根据实际项目自定义
-            String file = SigarUtils.class.getClassLoader().getResource("sigar/libsigar-amd64-linux.so").getFile();
-            logger.info(file);
-            File classPath = new File(file).getParentFile();
+            String classPath = new File(sigarPath).getPath();
             String path = System.getProperty("java.library.path");
-            String sigarLibPath = classPath.getCanonicalPath();
-            logger.info(sigarLibPath);
+            logger.info(classPath);
             //为防止java.library.path重复加，此处判断了一下
-            if (!path.contains(sigarLibPath)) {
+            if (!path.contains(classPath)) {
                 if (isOSWin()) {
-                    path += ";" + sigarLibPath;
+                    path += ";" + classPath;
                 } else {
-                    path += ":" + sigarLibPath;
+                    path += ":" + classPath;
                     logger.info("path: {}", path);
                 }
                 System.setProperty("java.library.path", path);

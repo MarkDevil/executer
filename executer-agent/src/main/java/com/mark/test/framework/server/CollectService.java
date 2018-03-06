@@ -20,22 +20,12 @@ public class CollectService {
     private static Sigar sigarin = SigarUtils.sigar;
 
     public static void main(String[] args) throws SigarException {
-        if (args.length <=0){
-            System.out.println("输入参数异常");
-            return;
-        }
-
-        if ("cpu".equalsIgnoreCase(args[0])){
-            while (true){
-                if (sigarin.getCpu().equals("")){
-                    break;
-                }
-                logger.info(Arrays.toString(sigarin.getCpuInfoList()));
-                logger.info(String.valueOf(sigarin.getCpu()));
-            }
-        }
-
-
+//        if (args.length <=0){
+//            System.out.println("输入参数异常");
+//            return;
+//        }
+        logger.info(Arrays.toString(sigarin.getCpuInfoList()));
+        logger.info(String.valueOf(sigarin.getCpu()));
 
     }
 
