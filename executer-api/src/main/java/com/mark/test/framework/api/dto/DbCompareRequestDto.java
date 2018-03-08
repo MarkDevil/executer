@@ -2,6 +2,8 @@ package com.mark.test.framework.api.dto;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import java.io.Serializable;
+
 /**
  * Created by mark .
  * Data   : 2017/11/29
@@ -9,7 +11,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
  * Desc   :
  */
 
-public class DbCompareRequestDto {
+public class DbCompareRequestDto implements Serializable {
 
     private String sourceDbName;
     private String sourceDbIp;

@@ -1,5 +1,6 @@
 package com.mark.test.framework.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -14,29 +15,37 @@ import java.util.List;
 /**
  * Created by mark .
  * Data   : 2017/8/8
- * Author : mark
+ * @Author : mark
  * Desc   :
  */
 
 public class ZookeeperUtils {
     private static Logger logger = LoggerFactory.getLogger(ZookeeperUtils.class);
-    private static String zkPath = "/test";
+    private static String zkRootPath = "/";
     private static CuratorFramework client;
 
-    private ZookeeperUtils() {
+    private ZookeeperUtils(String hosts) {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
         client = CuratorFrameworkFactory.builder().
-                connectString("192.168.51.161:2181,192.168.51.161:2182,192.168.51.161:2183").retryPolicy(retryPolicy).
-                sessionTimeoutMs(1000 * 6).connectionTimeoutMs(1000 * 6).build();
+                connectString(hosts).retryPolicy(retryPolicy).build();
         client.start();
     }
 
 
+    public static CuratorFramework getZKClient(){
+        return client;
+    }
 
-    public boolean createNode(){
+
+    /**
+     * 创建节点
+     * @param zkPath
+     * @return
+     */
+    public boolean createNode(String zkPath){
         String retMsg;
         try {
-            logger.info("检查节点是否存在" + String.valueOf(client.checkExists().forPath(zkPath)));
+            logger.info("检查节点是否存在" + String.valueOf(client.checkExists().forPath(this.getPath(zkPath))));
             if (client.checkExists().forPath(zkPath) != null){
                 logger.warn("节点已存在，进行查询数据");
                 return false;
@@ -46,9 +55,6 @@ public class ZookeeperUtils {
             if (retMsg!= null){
                 return true;
             }
-        } catch (KeeperException | InterruptedException e) {
-            e.printStackTrace();
-            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -56,55 +62,64 @@ public class ZookeeperUtils {
         return false;
     }
 
-    public String getNode(){
-        byte[] childs;
-        try {
-            childs = client.getData().forPath(zkPath);
-            String retmsg = new String(childs);
-            logger.info("获取到的节点数据为：{}",retmsg);
-            return retmsg;
-        } catch (Exception e) {
-            logger.warn("当前节点不存在 {}, {}",e.getCause(),e.getMessage());
-        }
-        return null;
-    }
 
-    public void setNode(String nodename){
+
+    public void setNode(String zkPath){
         try {
-            client.setData().forPath(zkPath + nodename,"Value changed".getBytes());
-        } catch (KeeperException | InterruptedException e) {
-            e.printStackTrace();
+            client.setData().forPath(this.getPath(zkPath));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteNode(String nodename){
+    /**
+     * 删除所有数据
+     * @param zkPath
+     */
+    public void deleteNode(String zkPath){
         try {
-            client.delete().deletingChildrenIfNeeded().forPath(zkPath + nodename);
+            client.delete().deletingChildrenIfNeeded().forPath(this.getPath(zkPath));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public List<String> listNode(){
+    /**
+     * 列出指定路径的节点
+     * @param zkPath
+     * @return
+     */
+    public List<String> listNode(String zkPath){
         List<String> retlist;
         try {
-            retlist = client.getChildren().forPath(zkPath);
+            retlist = client.getChildren().forPath(this.getPath(zkPath));
             logger.info("子节点是：{}",retlist);
             return retlist;
+        } catch (KeeperException.NoNodeException e) {
+            logger.warn("{} 节点未找到",zkPath);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 获取路径
+     * @param path
+     * @return
+     */
+    private String getPath(String path) {
+        path = path == null ? "/" : path.trim();
+        if (!StringUtils.startsWith(path, "/")) {
+            path = "/" + path;
+        }
+        return path;
     }
 
     public static void main(String[] args) throws Exception {
-        ZookeeperUtils zookeeperUtils = new ZookeeperUtils();
-        zookeeperUtils.listNode();
-        zookeeperUtils.setNode("/test10000000000");
-        logger.info(new String(client.getData().forPath(zkPath + "/test10000000000")));
 
+        ZookeeperUtils zookeeperUtils = new ZookeeperUtils("192.168.18.45:2181");
+        zookeeperUtils.listNode("/dubbo");
 
     }
 }
