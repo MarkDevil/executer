@@ -10,6 +10,7 @@ import org.apache.zookeeper.KeeperException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,16 +92,25 @@ public class ZookeeperUtils {
      */
     public List<String> listNode(String zkPath){
         List<String> retlist;
+        List<String> alllist = new ArrayList<>();
         try {
             retlist = client.getChildren().forPath(this.getPath(zkPath));
-            logger.info("子节点是：{}",retlist);
-            return retlist;
+            if (retlist.size() == 0){
+                return retlist;
+            }else {
+                for (String ret:retlist) {
+                    alllist.add(zkPath + this.getPath(ret));
+                    this.listNode(zkPath + this.getPath(ret));
+                }
+            }
+
         } catch (KeeperException.NoNodeException e) {
             logger.warn("{} 节点未找到",zkPath);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        logger.debug(alllist.toString());
+        return alllist;
     }
 
     /**
@@ -119,7 +129,7 @@ public class ZookeeperUtils {
     public static void main(String[] args) throws Exception {
 
         ZookeeperUtils zookeeperUtils = new ZookeeperUtils("192.168.18.45:2181");
-        zookeeperUtils.listNode("/dubbo");
+        logger.info(String.valueOf(zookeeperUtils.listNode("/dubbo")));
 
     }
 }
