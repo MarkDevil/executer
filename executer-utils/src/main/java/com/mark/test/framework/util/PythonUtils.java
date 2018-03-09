@@ -32,26 +32,22 @@ public class PythonUtils {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = bufferedReader.readLine())!= null){
-                logger.info(line);
+                logger.info("【返回信息】：" + line);
             }
             bufferedReader.close();
             process.waitFor();
 
-        } catch (IOException e) {
-            logger.error("执行python命令失败,请检查");
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             logger.error("执行python命令失败,请检查");
             e.printStackTrace();
         }
     }
 
 
-
-
     public static void main(String[] args) {
 //        PythonUtils.runPy("python /Users/mark/tool/datax/bin/datax.py /Users/Shared/gitWorkspace/executer/test.json");
         logger.info(PythonUtils.class.getResource("/shell/syscChangeList.sh").getPath());
         PythonUtils.runPy("sh " + PythonUtils.class.getResource("/shell/syscChangeList.sh").getPath());
+        PythonUtils.runPy("which is git");
     }
 }
