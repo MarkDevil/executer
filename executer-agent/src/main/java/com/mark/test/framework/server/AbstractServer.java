@@ -31,6 +31,7 @@ public abstract class AbstractServer {
         try {
             ServerSocket socket = new ServerSocket(port);
             while (true){
+                this.printStartFinished();
                 Socket client = socket.accept();
                 HandlerService handlerService = new HandlerService(client);
                 Thread thread = new Thread(handlerService);

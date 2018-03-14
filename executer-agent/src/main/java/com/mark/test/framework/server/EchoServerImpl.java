@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public class EchoServerImpl extends AbstractServer{
     private static Logger logger = LoggerFactory.getLogger(EchoServerImpl.class);
+
     @Override
     public void start() {
         logger.info("I replace the message");
@@ -19,7 +20,7 @@ public class EchoServerImpl extends AbstractServer{
 
 
 
-//    public static void main(String[] args) {
-//        new EchoServerImpl().startServer(11112);
-//    }
+    public static void main(String[] args) {
+        new EchoServerImpl().startServer(8877);
+    }
 }

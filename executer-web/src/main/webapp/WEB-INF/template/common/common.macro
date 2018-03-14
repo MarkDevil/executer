@@ -60,8 +60,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
 
-
-    <script>const base_url = '${request.contextPath}';</script>
+    <script>const base_url = "${request.contextPath}"</script>
 
 </#macro>
 

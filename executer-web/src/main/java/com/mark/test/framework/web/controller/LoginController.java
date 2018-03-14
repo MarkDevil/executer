@@ -55,6 +55,12 @@ public class LoginController {
         return new ModelAndView("monitor");
     }
 
+    @RequestMapping(value = "/api")
+    @ResponseBody
+    public ModelAndView api(){
+        return new ModelAndView("api");
+    }
+
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody

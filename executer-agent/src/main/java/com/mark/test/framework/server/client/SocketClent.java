@@ -3,9 +3,10 @@ package com.mark.test.framework.server.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 /**
@@ -16,47 +17,81 @@ import java.net.Socket;
  */
 
 public class SocketClent {
-    Logger logger = LoggerFactory.getLogger(SocketClent.class);
+    static Logger logger = LoggerFactory.getLogger(SocketClent.class);
+    private static Socket socket;
+    private static volatile SocketClent socketClent;
 
-    public static void init(){
+
+
+    private SocketClent(){
         try {
-            Socket socket = new Socket("127.0.0.1", 11112);
-
-            //由系统标准输入设备构造BufferedReader对象
-            PrintWriter os=new PrintWriter(socket.getOutputStream());
-            //由Socket对象得到输出流，并构造PrintWriter对象
-            BufferedReader is=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //由Socket对象得到输入流，并构造相应的BufferedReader对象
-
-            String readline;
-            while(true){
-                BufferedReader sin=new BufferedReader(new InputStreamReader(System.in));
-                //从系统标准输入读入一字符串
-                readline=sin.readLine();
-                //若从标准输入读入的字符串为 "bye"则停止循环
-                os.println(readline);
-                //将从系统标准输入读入的字符串输出到Server
-                os.write(readline);
-                os.flush();
-                //刷新输出流，使Server马上收到该字符串
-                System.out.println("Client:"+readline);
-                //在系统标准输出上打印读入的字符串
-                System.out.println("Server:"+is.readLine());
-                //从Server读入一字符串，并打印到标准输出上
-//                readline=sin.readLine(); //从系统标准输入读入一字符串
-            } //继续循环
-
-        }catch(Exception e) {
-            //出错，则打印出错信息
-            System.out.println("Error"+e);
+            if (socket == null){
+                socket = new Socket("localhost", 8877);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public void sendMsg(String msg){
-
+    public static synchronized SocketClent getInstance(){
+        if (socketClent == null){
+            synchronized (SocketClent.class){
+                if (socketClent == null){
+                    socketClent = new SocketClent();
+                }
+            }
+        }
+        return socketClent;
     }
 
-//    public static void main(String[] args) {
-//        init();
-//    }
+    /**
+     * 关闭
+     */
+    public void closeClient(){
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 向socket服务器发送消息
+     * @param msg
+     * @throws IOException
+     */
+    public void sendMsg(String msg) throws IOException {
+        OutputStream outputStream = socket.getOutputStream();
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+        BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+        bufferedWriter.write(msg);
+        logger.info("消息已经发送");
+        bufferedWriter.flush();
+        bufferedWriter.close();
+        if (!socket.isClosed()){
+            socket.close();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        String msg = "00000604<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<tx>" +
+                "  <HEAD>" +
+                "    <TRANSRNO>GH0004</TRANSRNO>" +
+                "    <BANKCODE>0302</BANKCODE>" +
+                "    <TRANSORGNO>1102</TRANSORGNO>" +
+                "    <SERIALNUMBER>11000223</SERIALNUMBER>" +
+                "    <TRANSRDATE>192</TRANSRDATE>" +
+                "  </HEAD>" +
+                "  <BODY>" +
+                "    <SEQ>XAS07058</SEQ>" +
+                "    <CERTID>110101190001011535</CERTID>" +
+                "  </BODY>" +
+                "</tx>";
+        SocketClent socketClent = SocketClent.getInstance();
+        SocketClent socketClent1 = SocketClent.getInstance();
+        logger.info(String.valueOf(socketClent.equals(socketClent1)));
+        socketClent.sendMsg(msg);
+    }
 }

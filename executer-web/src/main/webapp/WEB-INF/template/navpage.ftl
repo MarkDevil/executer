@@ -5,13 +5,14 @@
     <title>银行渠道测试工具</title>
 </head>
 <body>
-    <div class="row">
+
     <div class="container">
         <nav class="navbar navbar-default navbar-fixed-top nav-mark" role="navigation">
             <div class="navbar-header">
                 <div class="navbar-brand">信审测试工具</div>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"/>
                     <span class="icon-bar"/>
                     <span class="icon-bar"/>
                     <span class="icon-bar"/>
@@ -38,13 +39,16 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" onclick="display('psbc')">中邮测试工具</a>
+                        <a href="#" onclick="displayPage('psbc')">中邮测试工具</a>
                     </li>
                     <li>
-                        <a href="#" onclick="display('xib')">厦门测试工具</a>
+                        <a href="#" onclick="displayPage('xib')">厦门测试工具</a>
                     </li>
                     <li>
                         <a>信审绑卡工具</a>
+                    </li>
+                    <li>
+                        <a href="api">api请求工具</a>
                     </li>
                 </ul>
             </div>
@@ -174,65 +178,10 @@
 
         </div>
 
-
-    <@netCommon.commonScript></@netCommon.commonScript>
-    <script>
-        function invoke(formid,url){
-            let form = $('#' + formid).formSerialize();
-            console.log(form);
-            $.ajax({
-                type:"post",
-                url:url,
-                data:form,
-                cache:false,//false是不缓存，true为缓存
-                async:true,//true为异步，false为同步
-                beforeSend:function(){
-                    //请求前
-                },
-                success:function(result){
-                    console.log(result);
-                    confirm("调用成功");
-                },
-                complete:function(){
-                    //请求结束时
-                    confirm("结果返回成功");
-                },
-                error:function(){
-                    //请求失败时
-                    alert("请求失败");
-                }
-            });
-
-        }
-
-        $.ajax({
-            type:"get",
-            url:"/executer-web/api/testDataList",
-            dataType:"json",
-            success: function (data) {
-                $("#bt-table").bootstrapTable('load',data);
-            }
-
-        });
-
-        function openMonitor() {
-            window.location.href = "/executer-web/monitor.ftl";
-        }
-
-        function display(bank) {
-            let tabContents = document.getElementsByClassName("tab-content");
-            for(let i=0; i<tabContents.length; i++){
-                let tab = tabContents[i];
-                if (tab.getAttribute("id") !== bank){
-                    tab.setAttribute('hidden','hidden');
-                }else {
-                    tab.removeAttribute("hidden")
-                }
-            }
-        }
-    </script>
-
     <@netCommon.commonFooter></@netCommon.commonFooter>
+    <@netCommon.commonScript></@netCommon.commonScript>
+    <script src="${request.contextPath}/resources/static/js/navPage.js"></script>
+
 </body>
 
 </html>

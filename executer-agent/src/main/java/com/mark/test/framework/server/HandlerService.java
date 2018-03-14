@@ -27,6 +27,7 @@ public class HandlerService implements Runnable {
     @Override
     public void run() {
         try {
+            logger.info("处理线程启动成功");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             logger.info("处理消息 ： {}",bufferedReader.readLine());
         } catch (IOException e) {
