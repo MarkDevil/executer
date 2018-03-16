@@ -18,6 +18,31 @@ import java.util.Map;
 public class HttpUtils {
     private static Logger logger = LoggerFactory.getLogger(HttpUtils.class);
     private static final MediaType JSONTYPE = MediaType.parse("application/json; charset=utf-8");
+    private static final MediaType XMLTYPE = MediaType.parse("text/xml; charset=utf-8");
+
+
+    /**
+     * post 请求body为xml
+     * @param url
+     * @param param
+     * @return
+     */
+    public static String postXml(String url,String param){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = RequestBody.create(XMLTYPE,param);
+        Request request = new Request.Builder().url(url)
+                .post(requestBody)
+                .build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            ResponseBody responseBody = response.body();
+            logger.info("返回信息为{}",responseBody.string());
+            return responseBody.string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * post请求body为JSON

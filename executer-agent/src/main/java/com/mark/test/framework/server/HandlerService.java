@@ -38,7 +38,6 @@ public class HandlerService implements Runnable {
                 rest.append(data);
             }
             logger.info("处理消息 ： {}",rest);
-
         } catch (IOException e) {
             e.printStackTrace();
         }finally {

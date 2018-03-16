@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by mark .
  * Data   : 2017/8/11
- * Author : mark
+ * @Author : mark
  * Desc   :
  */
 
@@ -21,6 +21,7 @@ public class EchoServerImpl extends AbstractServer{
 
 
     public static void main(String[] args) {
-        new EchoServerImpl().startServer(8877);
+        EchoServerImpl echoServer = new EchoServerImpl();
+        echoServer.startServer(8877);
     }
 }
