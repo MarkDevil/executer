@@ -17,10 +17,6 @@ import java.util.Map;
 
 public class SignUtils {
 
-//    测试环境可使用下面的key和secret：
-//    yanfa
-//    0b6bd65156c9457eb0ea5ad3d5a21f9e
-//    所有请求都使用 POST 方式发送
 
     /**
      * 签名算法
