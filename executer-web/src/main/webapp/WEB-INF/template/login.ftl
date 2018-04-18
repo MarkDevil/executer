@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="${request.contextPath}/resources/static/adminlte/plugins/iCheck/square/blue.css">
 </head>
 <body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a><b>测试平台</b>API</a>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>测试API管理平台</h1>
+            <p>用户接口测试的API测试平台</p>
         </div>
+    </div>
+    <div class="login-box">
         <form id="loginForm" method="post" >
             <div class="login-box-body">
                 <p class="login-box-msg">测试管理平台</p>
@@ -26,10 +29,10 @@
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
-                                <input type="checkbox" name="ifRemember" > Remember Me
+                                <input type="checkbox" name="ifRemember"> Remember Me
                             </label>
                         </div>
-                    </div><!-- /.col -->
+                    </div>
                     <div class="col-xs-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">登陆</button>
                     </div>
