@@ -20,11 +20,10 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
-    Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private UserServiceImpl userService;
-
 
 
     @RequestMapping(value = {"/tologin","/"})

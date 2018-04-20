@@ -15,9 +15,9 @@
     </a>
 
 
-    <footer>
+    <div>
         <@comm.commonFooter></@comm.commonFooter>
-    </footer>
+    </div>
     <@comm.commonScript />
 </body>
 </html>

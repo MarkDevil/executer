@@ -8,12 +8,15 @@
 
 <body>
 
-<@netCommon.commonFooter></@netCommon.commonFooter>
+<div>
+    <@netCommon.commonHeader></@netCommon.commonHeader>
+</div>
 
-<script>
-    <@netCommon.commonScript></@netCommon.commonScript>
-</script>
+<div>
+    <@netCommon.commonFooter></@netCommon.commonFooter>
+</div>
 
+<@netCommon.commonScript></@netCommon.commonScript>
 </body>
 
 </html>

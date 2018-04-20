@@ -41,13 +41,14 @@ function openMonitor() {
     window.location.href = "/executer-web/monitor.ftl";
 }
 
+
 function displayPage(bank) {
     let tabContents = document.getElementsByClassName("tab-content");
-    for(let i=0; i<tabContents.length; i++){
+    for (let i = 0; i < tabContents.length; i++) {
         let tab = tabContents[i];
-        if (tab.getAttribute("id") !== bank){
-            tab.setAttribute('hidden','hidden');
-        }else {
+        if (tab.getAttribute("id") !== bank) {
+            tab.setAttribute("hidden", "hidden");
+        } else {
             tab.removeAttribute("hidden");
         }
     }

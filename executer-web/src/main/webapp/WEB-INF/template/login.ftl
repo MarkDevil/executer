@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>测试API管理平台</title>
-<#import "common/common.macro" as netCommon>
-<@netCommon.commonStyle />
+    <#import "common/common.macro" as netCommon>
+    <@netCommon.commonStyle />
     <link rel="stylesheet" href="${request.contextPath}/resources/static/adminlte/plugins/iCheck/square/blue.css">
 </head>
 <body class="hold-transition login-page">
