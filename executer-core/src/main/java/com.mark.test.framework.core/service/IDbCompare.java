@@ -1,6 +1,7 @@
 package com.mark.test.framework.core.service;
 
 import com.mark.test.framework.api.dto.DbCompareRequestDto;
+import com.mark.test.framework.core.dto.DbCompareResponseDto;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ import java.util.List;
  */
 public interface IDbCompare {
 
-    List<String> compareDb(DbCompareRequestDto dbCompareRequestDto);
+    List<DbCompareResponseDto> compareDb(DbCompareRequestDto dbCompareRequestDto);
 }

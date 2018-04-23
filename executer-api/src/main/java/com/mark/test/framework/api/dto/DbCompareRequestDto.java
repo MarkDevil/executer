@@ -13,11 +13,14 @@ import java.io.Serializable;
 
 public class DbCompareRequestDto implements Serializable {
 
+    //原数据
     private String sourceDbName;
     private String sourceDbIp;
     private String sourceDbPort;
     private String sourceDbUser;
     private String sourceDbPasswd;
+
+    //目标数据
     private String targetDbName;
     private String targetDbIp;
     private String targetDbPort;

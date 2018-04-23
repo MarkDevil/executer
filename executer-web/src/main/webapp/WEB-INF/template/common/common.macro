@@ -88,13 +88,16 @@
                         <a href="#" type="button" onclick="openMonitor()">中邮测试工具</a>
                     </li>
                     <li>
-                        <a href="#" type="button" onclick="openMonitor()">厦门测试工具</a>
+                        <a href="#" type="button">厦门测试工具</a>
                     </li>
                     <li>
                         <a>信审绑卡工具</a>
                     </li>
                     <li>
                         <a href="api">api请求工具</a>
+                    </li>
+                    <li>
+                        <a href="dbcompare">数据库比对工具</a>
                     </li>
                 </ul>
             </div>

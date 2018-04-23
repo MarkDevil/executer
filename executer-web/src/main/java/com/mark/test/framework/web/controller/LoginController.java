@@ -61,6 +61,13 @@ public class LoginController {
     }
 
 
+    @RequestMapping(value = "/dbcompare")
+    @ResponseBody
+    public ModelAndView dbcompare(){
+        return new ModelAndView("dbcompare");
+    }
+
+
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public String user(@RequestParam Map request , HttpSession session){

@@ -3,12 +3,14 @@ package com.mark.test.framework.core.service.impl;
 import com.google.common.collect.Lists;
 import com.mark.test.framework.api.dto.DbCompareRequestDto;
 import com.mark.test.framework.api.dto.SQLConnectionDTO;
+import com.mark.test.framework.core.dto.DbCompareResponseDto;
 import com.mark.test.framework.core.service.IDbCompare;
 import com.mark.test.framework.util.DbFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,16 +24,20 @@ import java.util.Map;
 public class DbCompareImpl implements IDbCompare{
 
     private static Logger logger = LoggerFactory.getLogger(DbCompareImpl.class);
+    private DbCompareResponseDto sourceResponse = new DbCompareResponseDto();
+    private DbCompareResponseDto targetResponse = new DbCompareResponseDto();
+    private List<DbCompareResponseDto> retlist = Lists.newArrayList();
 
     @Override
-    public List<String> compareDb(DbCompareRequestDto dbCompareRequestDto) {
-        List<String> missTables = Lists.newLinkedList();
+    public List<DbCompareResponseDto> compareDb(DbCompareRequestDto dbCompareRequestDto) {
+        List<String> targetmissTables = Lists.newLinkedList();
+        List<String> sourcemissTables = Lists.newLinkedList();
 
         assert dbCompareRequestDto != null;
         List<Map<String,Object>> sourceList = this.queryTables(dbCompareRequestDto,"source");
-        List<Map<String,Object>> targetList = this.queryTables(dbCompareRequestDto,"11111");
+        List<Map<String,Object>> targetList = this.queryTables(dbCompareRequestDto,"target");
         if (sourceList.size() != targetList.size()){
-            logger.info("源数据库与目标数据库数据表数据不相同");
+            logger.info("源数据库与目标数据库数据表长度不相同");
         }
         List<String> sourceTableList = this.parseMapToList(sourceList);
         List<String> targetTableList = this.parseMapToList(targetList);
@@ -39,21 +45,27 @@ public class DbCompareImpl implements IDbCompare{
         logger.info("查询到source表为: {}",sourceTableList.size());
         logger.info("查询到target表为: {}",targetTableList.size());
 
-        for (String stable:sourceTableList){
-            if (!targetTableList.contains(stable)){
-                missTables.add(stable);
+        for (String sourcetable:sourceTableList){
+            if (!targetTableList.contains(sourcetable)){
+                targetmissTables.add(sourcetable);
             }
         }
-
-        String sourceIp = dbCompareRequestDto.getSourceDbIp();
-        String targetIp = dbCompareRequestDto.getSourceDbIp();
-        if (sourceTableList.size() > targetTableList.size()){
-            logger.info("\n【目标数据库】"+ targetIp +"缺少相应的数据库表：{}",missTables);
-        }else {
-            logger.info("\n【源数据库】"+ sourceIp + "缺少相应的数据库表：{}",missTables);
+        for (String targetTable : targetTableList){
+            if (!sourceTableList.contains(targetTable)){
+                sourcemissTables.add(targetTable);
+            }
         }
-
-        return missTables;
+        String sourceIp = dbCompareRequestDto.getSourceDbIp();
+        String targetIp = dbCompareRequestDto.getTargetDbIp();
+        logger.info("\n【目标数据库】"+ targetIp +"缺少相应的数据库表：{}",targetmissTables);
+        logger.info("\n【源数据库】"+ sourceIp + "缺少相应的数据库表：{}",sourcemissTables);
+        sourceResponse.setIp(sourceIp);
+        sourceResponse.setTables(sourcemissTables);
+        targetResponse.setIp(targetIp);
+        targetResponse.setTables(targetmissTables);
+        retlist.add(sourceResponse);
+        retlist.add(targetResponse);
+        return retlist;
     }
 
     /**
@@ -84,9 +96,14 @@ public class DbCompareImpl implements IDbCompare{
 
         if ("source".equalsIgnoreCase(type)){
             retlist = sourceDb.queryForList(queryTable);
-
         }else {
             retlist = targetDb.queryForList(queryTable);
+        }
+        try {
+            sourceDb.getConnection().close();
+            targetDb.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return retlist;
     }
@@ -107,9 +124,5 @@ public class DbCompareImpl implements IDbCompare{
         }
         return retlist;
     }
-
-
-
-
 
 }

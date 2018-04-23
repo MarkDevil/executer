@@ -14,22 +14,24 @@
             <p>无数可复用的组件</p>
     </div>
 </div>
-<div>
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-6" id="cpu" style="height: 300px"></div>
-            <div class="col-lg-6" id="memory" style="height: 300px"></div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-6" id="net" style="height: 300px"></div>
-            <div class="col-lg-6" id="disk" style="height: 300px"></div>
-        </div>
+<div class="row">
+    <div class="container">
+        <div class="col-lg-6" id="cpu" style="height: 300px"></div>
+        <div class="col-lg-6" id="memory" style="height: 300px"></div>
     </div>
 
 </div>
+
+<div class="row">
+    <div class="container">
+        <div class="col-lg-6" id="net" style="height: 300px"></div>
+        <div class="col-lg-6" id="disk" style="height: 300px"></div>
+    </div>
+</div>
+
+
+
 
 
 <@comm.commonFooter></@comm.commonFooter>

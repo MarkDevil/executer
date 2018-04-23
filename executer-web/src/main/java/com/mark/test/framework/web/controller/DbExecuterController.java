@@ -1,6 +1,7 @@
 package com.mark.test.framework.web.controller;
 
 import com.mark.test.framework.api.dto.DbCompareRequestDto;
+import com.mark.test.framework.core.dto.DbCompareResponseDto;
 import com.mark.test.framework.core.service.IDbExecuter;
 import com.mark.test.framework.core.service.impl.DbCompareImpl;
 import org.slf4j.Logger;
@@ -49,7 +50,7 @@ public class DbExecuterController {
 
     @RequestMapping(value = "/compare",method = RequestMethod.POST)
     @ResponseBody
-    public List<String> compareTable(DbCompareRequestDto dbCompareRequestDto){
+    public List<DbCompareResponseDto> compareTable(DbCompareRequestDto dbCompareRequestDto){
         return dbCompare.compareDb(dbCompareRequestDto);
     }
 }
