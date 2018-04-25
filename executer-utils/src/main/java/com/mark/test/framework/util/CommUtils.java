@@ -1,13 +1,14 @@
 package com.mark.test.framework.util;
 
+import com.offbytwo.jenkins.JenkinsServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by mark .
@@ -98,4 +99,29 @@ public class CommUtils {
         }
         return list2;
     }
+
+    /**
+     * 生成UUID值
+     * @return
+     */
+    public static String getUUId(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
+
+    /**
+     *
+     * @param jobname
+     * @return
+     */
+    public static String getJenkinsJob(String jobname) throws URISyntaxException, IOException {
+        JenkinsServer jenkinsServer = new JenkinsServer(new URI("http://192.168.18.85:8888/"),"mmf007","123456");
+        logger.info(String.valueOf(jenkinsServer.getJob(jobname).getDisplayName()));
+        return "ok";
+    }
+
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        CommUtils.getJenkinsJob("bjtest-45-manage");
+    }
+
 }
