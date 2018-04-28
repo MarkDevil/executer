@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.mark.test.framework.api.dto.conf.ConfigRequestDto;
 import com.mark.test.framework.core.service.impl.AbstractConfigureServiceImpl;
 import com.mark.test.framework.core.service.impl.ConfigureServiceImpl;
+import com.mark.test.framework.util.loaddata.ProptiesReader;
 import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ public class ConfigureController {
     @Qualifier("abstractConfigureServiceImpl")
     @Autowired
     private AbstractConfigureServiceImpl abstractConfigureService;
+
 
     @RequestMapping(value = "/readConf",method = RequestMethod.POST)
     @ResponseBody
@@ -80,6 +82,16 @@ public class ConfigureController {
             ex.printStackTrace();
             return (JSONObject) new JSONObject().put("ret","failed");
         }
+        return (JSONObject) new JSONObject().put("ret","ok");
+    }
+
+    @RequestMapping(value = "/reload",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject reload(@RequestBody ConfigRequestDto configRequestDto){
+        logger.info("请求参数为：{}",configRequestDto.toString());
+//        Map<String,Object> kv = new HashMap<>();
+        ProptiesReader proptiesReader = new ProptiesReader(configRequestDto.getFilePath(),configRequestDto.getFileName());
+        proptiesReader.loadData();
         return (JSONObject) new JSONObject().put("ret","ok");
     }
 

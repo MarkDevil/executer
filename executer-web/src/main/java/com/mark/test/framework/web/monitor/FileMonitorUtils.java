@@ -1,11 +1,12 @@
-package com.mark.test.framework.util;
+package com.mark.test.framework.web.monitor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.*;
 import java.util.Properties;
 
@@ -13,22 +14,24 @@ import java.util.Properties;
  * Created by mark .
  * Data   : 2018/4/27
  */
-
+@Service
 public class FileMonitorUtils {
     private static Logger logger = LoggerFactory.getLogger(FileMonitorUtils.class);
-    private static String filename = "test.properties";
-    private static ClassPathResource classPathResource = new ClassPathResource(filename);
-    private static Properties properties;
+    private static String filename = "db.properties";
+    private static String filepath = "/Users/Shared/gitWorkspace/executer/executer-core/src/main/resources/";
+//    private static ClassPathResource classPathResource = new ClassPathResource(filename);
+    private static Properties properties = new Properties();
     private static WatchService watchService;
 
 
     static {
         try {
             watchService = FileSystems.getDefault().newWatchService();
-            Paths.get(classPathResource.getFile().getParent()).register(watchService,
+            Paths.get(filepath).register(watchService,
                     StandardWatchEventKinds.ENTRY_MODIFY,
                     StandardWatchEventKinds.ENTRY_DELETE);
-            properties = PropertiesLoaderUtils.loadProperties(classPathResource);
+            properties.load(new InputStreamReader(new FileInputStream(filepath +filename)));
+            logger.info(properties.getProperty("password_test").toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,8 +43,9 @@ public class FileMonitorUtils {
                     for (WatchEvent watchEvent:watchKey.pollEvents()){
                         if (watchEvent.context().toString().equalsIgnoreCase(filename)){
                             logger.info("触发重新加载事件");
-                            properties = PropertiesLoaderUtils.loadProperties(classPathResource);
-                            logger.info(properties.toString());
+//                            properties = PropertiesLoaderUtils.loadProperties(classPathResource);
+                            properties.load(new InputStreamReader(new FileInputStream(filepath + filename)));
+                            logger.info(properties.getProperty("password_test").toString());
                             break;
                         }
                     }
@@ -66,7 +70,6 @@ public class FileMonitorUtils {
             }
         }));
     }
-
 
     public static void main(String[] args) {
         new FileMonitorUtils();

@@ -5,10 +5,7 @@ package com.mark.test.framework.util.loaddata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Properties;
@@ -25,14 +22,12 @@ public class ProptiesReader{
     private Logger logger = LoggerFactory.getLogger(ProptiesReader.class);
     private String properPath;
     private String filename;
+    private Properties properties = new Properties();
 
     public ProptiesReader(String filepath, String filename){
         this.properPath = filepath;
         this.filename = filename;
     }
-
-    private Properties properties = new Properties();
-
 
     /**
      * 加载指定配置文件
@@ -42,6 +37,7 @@ public class ProptiesReader{
         this.readPropFile();
         return this;
     }
+
 
     private Properties readPropFile(){
         if (properPath== null || filename == null){
