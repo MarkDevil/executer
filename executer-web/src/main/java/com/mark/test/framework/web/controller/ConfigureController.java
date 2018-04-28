@@ -2,19 +2,24 @@ package com.mark.test.framework.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mark.test.framework.api.dto.conf.ConfigRequestDto;
-import com.mark.test.framework.core.service.IConfigureService;
+import com.mark.test.framework.core.service.impl.AbstractConfigureServiceImpl;
+import com.mark.test.framework.core.service.impl.ConfigureServiceImpl;
 import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.File;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mark .
@@ -29,8 +34,13 @@ public class ConfigureController {
 
     private Logger logger = LoggerFactory.getLogger(ConfigureController.class);
 
+    @Qualifier("configureServiceImpl")
     @Autowired
-    private IConfigureService iConfigureService;
+    private ConfigureServiceImpl configureService;
+
+    @Qualifier("abstractConfigureServiceImpl")
+    @Autowired
+    private AbstractConfigureServiceImpl abstractConfigureService;
 
     @RequestMapping(value = "/readConf",method = RequestMethod.POST)
     @ResponseBody
@@ -38,7 +48,7 @@ public class ConfigureController {
         logger.info("请求参数为：{}",configRequestDto.toString());
         String filePath = configRequestDto.getFilePath();
         String fileName = configRequestDto.getFileName();
-        Object[] retobj = iConfigureService.getProperties(filePath,fileName);
+        Object[] retobj = abstractConfigureService.getProperties(filePath,fileName);
         return Arrays.asList(retobj);
     }
 
@@ -47,7 +57,7 @@ public class ConfigureController {
     @ResponseBody
     public JSONObject setValue(@RequestBody @NotBlank ConfigRequestDto configRequestDto){
         logger.info("请求参数为：{}",configRequestDto.toString());
-        iConfigureService.setPropertyValue(
+        abstractConfigureService.setPropertyValue(
                 configRequestDto.getFilePath(),
                 configRequestDto.getFileName(),
                 configRequestDto.getKey(),
@@ -55,4 +65,23 @@ public class ConfigureController {
                 );
         return (JSONObject) new JSONObject().put("ret","ok");
     }
+
+
+    @RequestMapping(value = "/set",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject set(@RequestBody ConfigRequestDto configRequestDto){
+        logger.info("请求参数为：{}",configRequestDto.toString());
+        Map<String,Object> kv = new HashMap<>();
+        kv.put(configRequestDto.getKey(),configRequestDto.getNewValue());
+        try {
+            configureService.setProperty(
+                    new File(configRequestDto.getFilePath() + configRequestDto.getFileName()),kv);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return (JSONObject) new JSONObject().put("ret","failed");
+        }
+        return (JSONObject) new JSONObject().put("ret","ok");
+    }
+
+
 }

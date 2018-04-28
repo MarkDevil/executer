@@ -14,9 +14,9 @@ public class ConfigRequestDto {
     private String filePath;
     @NotBlank
     private String fileName;
-
+    @NotBlank
     private String key;
-
+    @NotBlank
     private String newValue;
 
     public String getFilePath() {

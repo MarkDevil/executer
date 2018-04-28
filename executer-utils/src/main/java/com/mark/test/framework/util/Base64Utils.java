@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * Created by mark .
  * Data   : 2018/3/30
+ * @author mark
  */
 
 public class Base64Utils {
