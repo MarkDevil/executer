@@ -116,7 +116,7 @@ public class CommUtils {
      */
     public static String getJenkinsJob(String jobname) throws URISyntaxException, IOException {
         JenkinsServer jenkinsServer = new JenkinsServer(new URI("http://192.168.18.85:8888/"),"mmf007","123456");
-        logger.info(String.valueOf(jenkinsServer.getJob(jobname).getDisplayName()));
+        logger.info(String.valueOf(jenkinsServer.getJob(jobname).toString()));
         return "ok";
     }
 
