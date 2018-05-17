@@ -38,12 +38,12 @@
 
 
         <li>
-            <a href="#psbc" data-toggle="tab">中邮银行</a>
+            <a href="#psbc" data-toggle="tab">中国邮政</a>
         </li>
 
         <li class="dropdown">
             <a href="#" id="myTabDrop1" class="dropdown-toggle"
-               data-toggle="dropdown">厦门国际
+               data-toggle="dropdown">厦门
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
@@ -55,7 +55,7 @@
 
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="home">
-            <h1>厦门银行修改三方状态</h1>
+            <h1>厦门修改三方状态</h1>
             <div>
                 <form id="form1" method="post" autocomplete="on">
                     <table>

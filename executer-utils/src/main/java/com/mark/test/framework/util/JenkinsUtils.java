@@ -2,6 +2,8 @@ package com.mark.test.framework.util;
 
 import com.offbytwo.jenkins.JenkinsServer;
 import com.offbytwo.jenkins.JenkinsTriggerHelper;
+import com.offbytwo.jenkins.model.BuildResult;
+import com.offbytwo.jenkins.model.BuildWithDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,8 +48,11 @@ public class JenkinsUtils {
      */
     public static boolean triggerJob(String jobname){
         assert jobname!=null;
+        BuildWithDetails buildWithDetails;
+        BuildResult buildResult;
         try {
-            jenkinsTriggerHelper.triggerJobAndWaitUntilFinished(jobname);
+            buildWithDetails = jenkinsTriggerHelper.triggerJobAndWaitUntilFinished(jobname);
+            buildResult = buildWithDetails.getResult();
             return true;
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
