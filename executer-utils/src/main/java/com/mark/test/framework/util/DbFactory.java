@@ -27,52 +27,53 @@ import java.util.Map;
 
 
 public class DbFactory {
-	private static final Logger logger = LoggerFactory.getLogger(DbFactory.class);
-	private JdbcTemplate jdbcTemplate;
-	private Connection connection;
-	private static final String MYSQLDRIVER = "com.mysql.jdbc.Driver";
-	private static final String ORACLEDRIVER = "oracle.jdbc.driver.OracleDriver";
+    private static final Logger logger = LoggerFactory.getLogger(DbFactory.class);
+    private JdbcTemplate jdbcTemplate;
+    private Connection connection;
+    private static final String MYSQLDRIVER = "com.mysql.jdbc.Driver";
+    private static final String ORACLEDRIVER = "oracle.jdbc.driver.OracleDriver";
 
 
-	public DbFactory(SQLConnectionDTO config) {
-		String url = config.getUrl();
-		String userName = config.getUserName();
-		String password = config.getPassword();
+    public DbFactory(SQLConnectionDTO config) {
+        String url = config.getUrl();
+        String userName = config.getUserName();
+        String password = config.getPassword();
 
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUsername(userName);
-		dataSource.setPassword(password);
-		dataSource.setUrl(url);
-		if (url.contains("mysql")){
-			logger.debug("Init mysql instance successfully");
-			dataSource.setDriverClassName(MYSQLDRIVER);
-		}else if (url.contains("oracle")){
-			logger.debug("Init oracle instance successfully");
-			dataSource.setDriverClassName(ORACLEDRIVER);
-		}
-		dataSource.setMaxIdle(5);
-		dataSource.setDefaultAutoCommit(true);
-		dataSource.setMinIdle(1);
-		try {
-			connection = dataSource.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUsername(userName);
+        dataSource.setPassword(password);
+        dataSource.setUrl(url);
+        if (url.contains("mysql")) {
+            logger.debug("Init mysql instance successfully");
+            dataSource.setDriverClassName(MYSQLDRIVER);
+        } else if (url.contains("oracle")) {
+            logger.debug("Init oracle instance successfully");
+            dataSource.setDriverClassName(ORACLEDRIVER);
+        }
+        dataSource.setMaxIdle(5);
+        dataSource.setDefaultAutoCommit(true);
+        dataSource.setMinIdle(1);
+        try {
+            connection = dataSource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
-	/**
-	 * 返回连接对象
-	 * @return
+    /**
+     * 返回连接对象
+     *
+     * @return
      */
-	public Connection getConnection(){
-		return connection;
-	}
+    public Connection getConnection() {
+        return connection;
+    }
 
-	public void execute(String sql){
-		logger.info("Execute sql: " + sql);
-		jdbcTemplate.execute(sql);
-	}
+    public void execute(String sql) {
+        logger.info("Execute sql: " + sql);
+        jdbcTemplate.execute(sql);
+    }
 
 //	/**
 //	 * 执行多个sql
@@ -83,104 +84,105 @@ public class DbFactory {
 //		jdbcTemplate.batchUpdate(sqlArray);
 //	}
 
-	public Map<String, Object> queryOne(String sql) {
-		List<Map<String, Object>> list = null;
-		logger.info("Execute SQL to query result: " + sql);
-		list = jdbcTemplate.query(sql,
-				new RowMapper<Map<String, Object>>() {
-					@Override
-					public Map<String, Object> mapRow(ResultSet resultSet, int rowIdex) throws SQLException {
-						Map<String, Object> map = new HashMap<String, Object>();
-						ResultSetMetaData metaData = resultSet.getMetaData();
-						int colCount = metaData.getColumnCount();
-						for (int index = 1; index <= colCount; index++) {
-							String key = metaData.getColumnName(index);
-							String value = resultSet.getString(index);
-							if (value == null){
-								value = "null";
-							}
-							map.put(key, value);
-						}
-						return map;
-					}
-				});
-		
-		if (list == null || list.size() == 0) {
-			throw new RuntimeException("no result return from sql query");
-		}
-		
-		if (list.size() != 1) {
-			throw new RuntimeException("found multiple result from the sql query");
-		}
-		
-		logger.info("SQL query result: " + JSON.toJSONString(list.get(0)));
-		return list.get(0);
-	}
+    public Map<String, Object> queryOne(String sql) {
+        List<Map<String, Object>> list = null;
+        logger.info("Execute SQL to query result: " + sql);
+        list = jdbcTemplate.query(sql,
+                new RowMapper<Map<String, Object>>() {
+                    @Override
+                    public Map<String, Object> mapRow(ResultSet resultSet, int rowIdex) throws SQLException {
+                        Map<String, Object> map = new HashMap<String, Object>();
+                        ResultSetMetaData metaData = resultSet.getMetaData();
+                        int colCount = metaData.getColumnCount();
+                        for (int index = 1; index <= colCount; index++) {
+                            String key = metaData.getColumnName(index);
+                            String value = resultSet.getString(index);
+                            if (value == null) {
+                                value = "null";
+                            }
+                            map.put(key, value);
+                        }
+                        return map;
+                    }
+                });
 
-	public void queryForList(String sql, Class<?> classId) {
+        if (list == null || list.size() == 0) {
+            throw new RuntimeException("no result return from sql query");
+        }
 
-	}
+        if (list.size() != 1) {
+            throw new RuntimeException("found multiple result from the sql query");
+        }
 
-	public List<Map<String, Object>> queryForList(String sql) {
-		final List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>();
-		logger.info("Execute SQL to query: " + sql);
-		jdbcTemplate.query(sql, new RowCallbackHandler() {
-			public void processRow(ResultSet row) throws SQLException {
-				Map<String, Object> rowMap = new HashMap<String, Object>();
-				ResultSetMetaData metaData = row.getMetaData();
-				int columnCount = metaData.getColumnCount();
-				for (int index = 1; index <= columnCount; index++) {
-					String key = metaData.getColumnName(index);
-					String value = row.getString(index);
-					if (value == null) {
-						value = "null";
-					}
-					rowMap.put(key, value);
-				}
+        logger.info("SQL query result: " + JSON.toJSONString(list.get(0)));
+        return list.get(0);
+    }
 
-				dataList.add(rowMap);
-			}
-		});
-		
-		logger.debug("SQL Query result: " + JSON.toJSONString(dataList));
-		return dataList;
-	}
+    public void queryForList(String sql, Class<?> classId) {
 
-	/**
-	 * 执行指定文件的sql
-	 * @param filepaths
+    }
+
+    public List<Map<String, Object>> queryForList(String sql) {
+        final List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>();
+        logger.info("Execute SQL to query: " + sql);
+        jdbcTemplate.query(sql, new RowCallbackHandler() {
+            public void processRow(ResultSet row) throws SQLException {
+                Map<String, Object> rowMap = new HashMap<String, Object>();
+                ResultSetMetaData metaData = row.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                for (int index = 1; index <= columnCount; index++) {
+                    String key = metaData.getColumnName(index);
+                    String value = row.getString(index);
+                    if (value == null) {
+                        value = "null";
+                    }
+                    rowMap.put(key, value);
+                }
+
+                dataList.add(rowMap);
+            }
+        });
+
+        logger.debug("SQL Query result: " + JSON.toJSONString(dataList));
+        return dataList;
+    }
+
+    /**
+     * 执行指定文件的sql
+     *
+     * @param filepaths
      */
-	public void executeSqlFile(List<String> filepaths){
-		List<String> faillist = Lists.newLinkedList();
-		ScriptRunner scriptRunner = new ScriptRunner(this.getConnection());
-		Resources.setCharset(Charset.forName("utf8"));
-		scriptRunner.setLogWriter(null);
-		scriptRunner.setAutoCommit(true);
-		scriptRunner.setSendFullScript(true);
-		scriptRunner.setEscapeProcessing(true);
-		for (String f: filepaths) {
-			try {
-				logger.info("开始执行数据库文件: [{}]", f);
-				File file = new File(f);
-				FileReader fileReader = new FileReader(file);
-				scriptRunner.runScript(fileReader);
-			} catch (IOException e) {
-				logger.error("读取文件异常 :{}",f);
-				faillist.add(f);
-				e.printStackTrace();
-			}
-		}
-		logger.info("读取失败的文件为:{}",faillist);
-		scriptRunner.closeConnection();
-	}
+    public void executeSqlFile(List<String> filepaths) {
+        List<String> faillist = Lists.newLinkedList();
+        ScriptRunner scriptRunner = new ScriptRunner(this.getConnection());
+        Resources.setCharset(Charset.forName("utf8"));
+        scriptRunner.setLogWriter(null);
+        scriptRunner.setAutoCommit(true);
+        scriptRunner.setSendFullScript(true);
+        scriptRunner.setEscapeProcessing(true);
+        for (String f : filepaths) {
+            try {
+                logger.info("开始执行数据库文件: [{}]", f);
+                File file = new File(f);
+                FileReader fileReader = new FileReader(file);
+                scriptRunner.runScript(fileReader);
+            } catch (IOException e) {
+                logger.error("读取文件异常 :{}", f);
+                faillist.add(f);
+                e.printStackTrace();
+            }
+        }
+        logger.info("读取失败的文件为:{}", faillist);
+        scriptRunner.closeConnection();
+    }
 
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
