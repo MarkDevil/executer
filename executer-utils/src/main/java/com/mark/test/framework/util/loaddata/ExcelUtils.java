@@ -1,6 +1,7 @@
 package com.mark.test.framework.util.loaddata;
 
 import com.google.common.collect.Lists;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -16,9 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by MingfengMa .
@@ -30,7 +29,6 @@ import java.util.Objects;
 public class ExcelUtils {
     private HSSFWorkbook workbook = null;
     private static Logger logger = LoggerFactory.getLogger(ExcelUtils.class);
-
 
     /**
      * 创建excel文件
@@ -49,7 +47,7 @@ public class ExcelUtils {
         Sheet sheet = workbook.createSheet(sheetName);
         FileOutputStream outputStream = null;
         try {
-            Row row = workbook.getSheet(sheetName).createRow(0);
+            Row row = sheet.createRow(0);
             for (int i = 0 ; i<titleRow.length;i++){
                 Cell cell = row.createCell(i);
                 cell.setCellValue(titleRow[i]);
@@ -82,50 +80,57 @@ public class ExcelUtils {
 
     /**
      * 根据文件目录和表读取数据
+     *
      * @param fileDir
      * @param sheet
      * @return
      */
-    public static String readExcel(String fileDir,String sheet,int columnIndex) {
+    public static List<Map<String, Object>> readExcel(String fileDir, String sheet) {
+
         FileInputStream inputStream;
-        XSSFWorkbook xssfWorkbook;
+        HSSFWorkbook hssfWorkbook;
         List<String> titleList = Lists.newLinkedList();
+        List<Map<String, Object>> retDataList = Lists.newLinkedList();
         try {
             inputStream = new FileInputStream(new File(fileDir));
-            xssfWorkbook = new XSSFWorkbook(inputStream);
-            int sheets = xssfWorkbook.getNumberOfSheets();
-            logger.info("sheet number : {} " , sheets);
-            XSSFSheet xssfSheet = xssfWorkbook.getSheet(sheet);
+            hssfWorkbook = new HSSFWorkbook(inputStream);
+            int sheets = hssfWorkbook.getNumberOfSheets();
+            logger.info("sheet number : {} ", sheets);
+            HSSFSheet xssfSheet = hssfWorkbook.getSheet(sheet);
             Iterator<Row> it = xssfSheet.rowIterator();
-            while (it.hasNext()){
+            xssfSheet.getRow(0).cellIterator().forEachRemaining(
+                    cell -> titleList.add(cell.getColumnIndex(),
+                            cell.getStringCellValue()));
+            while (it.hasNext()) {
+                Map<String, Object> cellData = new HashMap<>();
                 Row row = it.next();
-                String columnvalue = row.getCell(columnIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue();
-                logger.info("Column : {}",columnvalue);
+                logger.info("开始读取第{}行", row.getRowNum());
+                //跳过表头
+                if (row.getRowNum() == 0) {
+                    continue;
+                }
                 Iterator<Cell> cells = row.cellIterator();
-                while (cells.hasNext()){
+                while (cells.hasNext()) {
                     Cell cell = cells.next();
                     try {
-                        if(!cell.getStringCellValue().isEmpty()){
-//                            logger.info("cell的值是 :{},cell的位置是 :{}",cell.getStringCellValue(),cell.getAddress());
-//                            logger.info(String.valueOf(row.getRowNum()+1) + "," + cell.getAddress());
-                            titleList.add(cell.getColumnIndex(),cell.getStringCellValue());
-                        }else {
-                            logger.info("test");
+                        if (!cell.getStringCellValue().isEmpty()) {
+                            logger.info("cell的值是 :{} \t cell的位置是 :{}", cell.getStringCellValue(), cell.getAddress());
+                            cellData.put(titleList.get(cell.getColumnIndex()), cell.getStringCellValue());
+                        } else {
+                            logger.debug("cell值为空");
                         }
-                    }catch (Exception ex){
-                        logger.warn("不是string类型数据");
+                    } catch (Exception ex) {
+                        logger.debug("不是string类型数据:{} ,实际类型为：{}", cell.getAddress(), cell.getCellTypeEnum().name());
                     }
-
                 }
-
+                retDataList.add(cellData);
             }
-
-            logger.info("Title name list are : {}",titleList);
+            logger.info("\n表头数据:{}\n返回行数据:{}", titleList, retDataList);
+            return retDataList;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-
-        return "ok";
     }
 
     /**
