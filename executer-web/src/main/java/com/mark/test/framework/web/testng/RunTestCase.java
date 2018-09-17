@@ -22,7 +22,7 @@ public class RunTestCase {
 
     public void run(String xmlname){
         List<String> suites = new ArrayList<String>();
-        suites.add(this.getClass().getClassLoader().getResource("testSuits").getPath()+ xmlname + ".xml");
+        suites.add(this.getClass().getResource("testSuits").getPath()+ xmlname + ".xml");
         testNG.setTestSuites(suites);
         testNG.addListener(testListenerAdapter);
         testNG.run();

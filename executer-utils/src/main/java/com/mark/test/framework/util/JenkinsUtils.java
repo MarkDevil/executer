@@ -23,7 +23,7 @@ public class JenkinsUtils {
 
     static {
         try {
-            jenkinsServer  = new JenkinsServer(new URI("http://192.168.18.85:8888/"),"mmf007","123456");
+            jenkinsServer  = new JenkinsServer(new URI("zzzzz:8888/"),"mmf007","123456");
             jenkinsTriggerHelper = new JenkinsTriggerHelper(jenkinsServer);
         } catch (URISyntaxException e) {
             logger.error("创建jenkins客户端失败");

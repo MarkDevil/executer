@@ -19,7 +19,7 @@ import java.util.concurrent.*;
 public class ThreadUtils {
     private static Logger logger = LoggerFactory.getLogger(ThreadUtils.class);
     private static final int PROCESSORS = Runtime.getRuntime().availableProcessors();
-    private static ThreadPoolExecutor threadPoolExecutor = ThreadUtils.getThreadPool();
+//    private static ThreadPoolExecutor threadPoolExecutor = ThreadUtils.getThreadPool();
     private int threadNum;
     private int clientNum;
 
@@ -40,21 +40,21 @@ public class ThreadUtils {
     }
 
 
-    public static ThreadPoolExecutor getThreadPoolExecuter(){
-        return threadPoolExecutor;
-    }
+//    public static ThreadPoolExecutor getThreadPoolExecuter(){
+//        return threadPoolExecutor;
+//    }
 
-    /**
-     * 创建线程池服务
-     * @author  Mark
-     * @return
-     */
-    private static ThreadPoolExecutor getThreadPool(){
-        return new ThreadPoolExecutor(
-                PROCESSORS, PROCESSORS * 2,
-                30000, TimeUnit.MILLISECONDS,
-                new LinkedBlockingDeque<Runnable>(), new NamedThreadFactory("Executer-"));
-    }
+//    /**
+//     * 创建线程池服务
+//     * @author  Mark
+//     * @return
+//     */
+//    private static ThreadPoolExecutor getThreadPool(){
+//        return new ThreadPoolExecutor(
+//                PROCESSORS, PROCESSORS * 2,
+//                30000, TimeUnit.MILLISECONDS,
+//                new LinkedBlockingDeque<Runnable>(), new NamedThreadFactory("Executer-"));
+//    }
 
 
 
@@ -65,7 +65,6 @@ public class ThreadUtils {
      * @param method    传入所需要的方法
      */
     private void executeThread(final Class claz, String method, final Object... params){
-
         assert claz!=null && method != null;
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         final List<Runnable> runnables = new ArrayList<>();
@@ -148,16 +147,16 @@ public class ThreadUtils {
      * @author mark
      * @param type 根据类型选择关闭策略 0-对应立即关闭  其他为执行完毕
      */
-    private void shutDownThreadPool(String type){
-        if (!threadPoolExecutor.isShutdown()){
-            if ("0".equalsIgnoreCase(type)){
-                threadPoolExecutor.shutdownNow();
-            }
-            threadPoolExecutor.shutdown();
-        }else{
-            logger.info("The thread pool is already shutdown");
-        }
-    }
+//    private void shutDownThreadPool(String type){
+//        if (!threadPoolExecutor.isShutdown()){
+//            if ("0".equalsIgnoreCase(type)){
+//                threadPoolExecutor.shutdownNow();
+//            }
+//            threadPoolExecutor.shutdown();
+//        }else{
+//            logger.info("The thread pool is already shutdown");
+//        }
+//    }
 
 
 

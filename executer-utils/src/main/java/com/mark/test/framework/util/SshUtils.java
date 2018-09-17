@@ -16,7 +16,7 @@ public class SshUtils {
     private static Logger logger = LoggerFactory.getLogger(SshUtils.class);
     private static JSch jSch;
     private static Session session;
-    private static String rsaPrivateKey = "/Users/bitmain/.ssh/id_rsa";
+    private static String rsaPrivateKey = "/Users/mark/.ssh/id_rsa";
 
     private SshUtils() {
         jSch = new JSch();

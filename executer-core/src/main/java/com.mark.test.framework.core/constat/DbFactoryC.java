@@ -53,23 +53,23 @@ public class DbFactoryC {
         switch (dbServer) {
             case "psbc":
                 dbinstance.setDriver("com.mysql.jdbc.Driver");
-                dbinstance.setUrl("jdbc:mysql://192.168.18.45:3306/hb?characterEncoding=utf8&useSSL=false");
+                dbinstance.setUrl("jdbc:mysql://localhost:3306/hb?characterEncoding=utf8&useSSL=false");
                 dbinstance.setUserName("root");
                 dbinstance.setPassword("root");
-                logger.info("创建中邮数据库信息 :{}",dbinstance.toString());
+                logger.info("创建 :{}",dbinstance.toString());
                 break;
             case "xib":
                 dbinstance.setDriver(mysqldriver);
                 dbinstance.setUrl(url87);
                 dbinstance.setUserName(user87);
                 dbinstance.setPassword(passwd87);
-                logger.info("创建厦门数据库信息 :{}",dbinstance.toString());
+                logger.info("创建 :{}",dbinstance.toString());
                 break;
             case "dev":
                 dbinstance.setDriver("com.mysql.jdbc.Driver");
-                dbinstance.setUrl("jdbc:mysql://10.150.20.91:3306/hb?characterEncoding=utf8&useSSL=false");
+                dbinstance.setUrl("jdbc:mysql://localhost:3306/hb?characterEncoding=utf8&useSSL=false");
                 dbinstance.setUserName("devbj");
-                dbinstance.setPassword("gb8tVSJCSw!kUPnE");
+                dbinstance.setPassword("xxx");
                 logger.info("开发数据库信息 :{}",dbinstance.toString());
                 break;
             case "local":

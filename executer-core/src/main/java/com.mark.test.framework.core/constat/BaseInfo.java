@@ -9,9 +9,9 @@ package com.mark.test.framework.core.constat;
 
 public class BaseInfo {
     //业务标识
-    private String key = "yanfa";
+    private String key = "xx";
     //测试秘钥
-    private String secret = "0b6bd65156c9457eb0ea5ad3d5a21f9e";
+    private String secret = "xx";
 
     public String getKey() {
         return key;

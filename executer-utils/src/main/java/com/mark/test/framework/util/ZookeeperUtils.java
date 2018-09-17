@@ -128,7 +128,7 @@ public class ZookeeperUtils {
 
     public static void main(String[] args) throws Exception {
 
-        ZookeeperUtils zookeeperUtils = new ZookeeperUtils("192.168.18.45:2181");
+        ZookeeperUtils zookeeperUtils = new ZookeeperUtils("127.0.0.1:2181");
         logger.info(String.valueOf(zookeeperUtils.listNode("/dubbo")));
 
     }

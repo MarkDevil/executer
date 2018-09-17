@@ -77,7 +77,7 @@ public class DataSourceAspect {
                 DataSourceContextHolder.setDataSourceType(source.value());
             }
         } catch (Exception e) {
-            System.out.println(clazz + ":" + e.getMessage());
+           logger.info(clazz + ":" + e.getMessage());
         }
     }
 }

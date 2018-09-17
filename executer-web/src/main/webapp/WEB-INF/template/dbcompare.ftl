@@ -33,7 +33,7 @@
                         <label for="目标数据库名"/>
                         <input type="text" class="form-control" name="targetDbName" placeholder="目标数据库名" value="hb" size="60">
                         <label for="目标数据库ip"/>
-                        <input type="text" class="form-control" name="targetDbIp" placeholder="目标数据库ip" value="192.168.18.45" size="60">
+                        <input type="text" class="form-control" name="targetDbIp" placeholder="目标数据库ip" value="localhost" size="60">
                         <label for="目标数据库port"/>
                         <input type="text" class="form-control" name="targetDbPort" placeholder="目标数据库port" value="3307" size="60">
                         <label for="目标数据库user"/>

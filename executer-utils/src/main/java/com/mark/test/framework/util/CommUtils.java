@@ -115,13 +115,12 @@ public class CommUtils {
      * @return
      */
     public static String getJenkinsJob(String jobname) throws URISyntaxException, IOException {
-        JenkinsServer jenkinsServer = new JenkinsServer(new URI("http://192.168.18.85:8888/"),"mmf007","123456");
+        JenkinsServer jenkinsServer = new JenkinsServer(new URI("http://localshot:8888/"),"mmf007","123456");
         logger.info(String.valueOf(jenkinsServer.getJob(jobname).toString()));
         return "ok";
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        CommUtils.getJenkinsJob("bjtest-45-manage");
     }
 
 }

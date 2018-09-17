@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>中邮绑卡操作</title>
+    <title>绑卡操作</title>
     <!-- 引入 Bootstrap -->
     <link href="<c:url value="/resources/css/bootstrap/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
@@ -21,7 +21,7 @@
 <body>
 
     <div class="container-fluid pull-left col-lg-12">
-        <h1>中邮信审系统绑卡工具</h1>
+        <h1>绑卡工具</h1>
         <form id="bindForm" action="<c:url value="/api/BindChargeCard"/>" method="post" style="align-self: baseline">
             <fieldset>
                 <div class="form-group " style="padding-left: 15px">
@@ -48,9 +48,6 @@
             </div>
         </form>
         <br>
-        <address style="padding-left: 15px " contenteditable="true"><strong>马铭锋</strong><br />
-            厚本金融<br />
-            <abbr title="email">Email:</abbr> mamingfeng@houbank.cn</address>
     </div>
 
     <div class="container-fluid col-lg-12" >
