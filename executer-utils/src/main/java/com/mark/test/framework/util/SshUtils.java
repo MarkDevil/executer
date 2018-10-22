@@ -21,8 +21,8 @@ public class SshUtils {
     private SshUtils() {
         jSch = new JSch();
         try {
-            session = jSch.getSession("mingfeng.ma", "10.39.1.2");
-            session.setPassword("Crystal@08102");
+            session = jSch.getSession("mingfeng.ma", "localhost");
+            session.setPassword("mmf");
             session.setConfig("StrictHostKeyChecking","no");
             session.connect(5000);
             if (session.isConnected()){
@@ -65,6 +65,7 @@ public class SshUtils {
             in.close();
         } catch (JSchException | IOException e) {
             e.printStackTrace();
+            session.disconnect();
         }finally {
             session.disconnect();
         }
