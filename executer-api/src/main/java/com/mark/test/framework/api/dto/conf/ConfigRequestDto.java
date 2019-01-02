@@ -1,6 +1,7 @@
 package com.mark.test.framework.api.dto.conf;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -54,6 +55,6 @@ public class ConfigRequestDto {
 
     @Override
     public String toString() {
-        return ReflectionToStringBuilder.toString(this);
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
     }
 }

@@ -11,13 +11,5 @@
     <!--<bean id="dataSourceAspect" class="com.mark.test.framework.core.aop.DataSourceAspect" />-->
     <!--<bean id="logAspect" class="com.mark.test.framework.core.aop.LogAspect"/>-->
 
-    <!--<aop:config>-->
-        <!--<aop:aspect ref="dataSourceAspect">-->
-            <!--&lt;!&ndash; 拦截所有service方法 &ndash;&gt;-->
-            <!--<aop:pointcut id="dataSourcePointcut"-->
-                          <!--expression="execution(* com.mark.test.framework.*.*(..))"/>-->
-            <!--<aop:before pointcut-ref="dataSourcePointcut" method="intercept" />-->
-        <!--</aop:aspect>-->
-    <!--</aop:config>-->
 
 </beans>
