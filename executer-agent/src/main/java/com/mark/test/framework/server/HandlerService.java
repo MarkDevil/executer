@@ -38,6 +38,7 @@ public class HandlerService implements Runnable {
             bufferedWriter =new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
             bufferedWriter.write("服务端返回信息");
             bufferedWriter.flush();
+            //必须shutdown连接池才能将消息发送出去
             client.shutdownOutput();
         } catch (IOException e) {
             e.printStackTrace();
