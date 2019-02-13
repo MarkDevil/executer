@@ -3,17 +3,14 @@ package com.mark.test.framework.server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 /**
  * Created by mark .
  * Data   : 2017/8/11
  * Author : mark
- * Desc   :
+ * Desc   : 线程池处理Socket请求
  */
 
 public class HandlerService implements Runnable {
@@ -37,7 +34,11 @@ public class HandlerService implements Runnable {
             while ((data = bufferedReader.readLine())!=null){
                 rest.append(data);
             }
-            logger.info("处理消息 ： {}",rest);
+            logger.info("接收到的消息为 ： {}",rest);
+            bufferedWriter =new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+            bufferedWriter.write("服务端返回信息");
+            bufferedWriter.flush();
+            client.shutdownOutput();
         } catch (IOException e) {
             e.printStackTrace();
         }finally {

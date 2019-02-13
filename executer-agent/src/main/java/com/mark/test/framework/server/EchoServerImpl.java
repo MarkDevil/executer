@@ -18,8 +18,6 @@ public class EchoServerImpl extends AbstractServer{
         logger.info("I replace the message");
     }
 
-
-
     public static void main(String[] args) {
         EchoServerImpl echoServer = new EchoServerImpl();
         echoServer.startServer(8877);

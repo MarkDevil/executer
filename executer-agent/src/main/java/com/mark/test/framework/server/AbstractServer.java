@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
  * Created by mark .
  * Data   : 2017/8/11
  * Author : mark
- * Desc   : 模板方法
+ * Desc   : 抽象服务器
  */
 
 public abstract class AbstractServer {
@@ -40,8 +40,11 @@ public abstract class AbstractServer {
                 Socket client = socket.accept();
                 HandlerService handlerService = new HandlerService(client);
                 Future future = executorService.submit(handlerService);
-                if (future.isDone()){
-                    logger.info("线程" + Thread.currentThread().getName() + "执行成功,返回结果为:{}",future.get());
+                while (true){
+                    if (future.isDone()){
+                        logger.info("线程" + Thread.currentThread().getName() + "执行成功,返回结果为:{}",future.get());
+                        break;
+                    }
                 }
             }
         } catch (IOException | InterruptedException | ExecutionException e) {
@@ -49,11 +52,4 @@ public abstract class AbstractServer {
         }
 
     }
-
-    public void stopServer(){
-
-    }
-
-
-
 }
