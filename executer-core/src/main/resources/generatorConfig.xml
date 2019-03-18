@@ -14,7 +14,8 @@
 
         <!-- optional，旨在创建class时，对注释进行控制 -->
         <commentGenerator>
-            <property name="suppressDate" value="true" />
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
 
@@ -35,13 +36,13 @@
         -->
         <javaModelGenerator targetPackage="com.mark.test.framework.core" targetProject="src/main/java/">
             <!-- 是否对model添加 构造函数 -->
-            <property name="constructorBased" value="true"/>
+            <property name="constructorBased" value="false"/>
 
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
 
             <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
-            <property name="immutable" value="true"/>
+            <!--<property name="immutable" value="true"/>-->
 
             <!-- 给Model添加一个父类 -->
             <!--<property name="rootClass" value="com.foo.louis.Hello"/>-->
@@ -87,7 +88,9 @@
 
 
 
-        <table tableName="user_info" schema="hb" >
+        <table tableName="user_info" schema="hb" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
 
             <!-- optional   , only for mybatis3 runtime
                  自动生成的键值（identity,或者序列值）
