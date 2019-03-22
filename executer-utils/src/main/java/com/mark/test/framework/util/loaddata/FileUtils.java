@@ -129,7 +129,7 @@ public class FileUtils {
 
     public static void main(String[] args) {
         FileUtils fileUtils = new FileUtils();
-        List<String> strings = fileUtils.readFileByLine("/Users/mark/Desktop/大桔线下提前结清/大桔贷后文件/WaitPaymenthg.txt","utf-8");
+        List<String> strings = fileUtils.readFileByLine("/Users/mark/Desktop/大桔贷后文件/WaitPaymenthg.txt","utf-8");
 
         logger.info(strings.toString());
 
