@@ -6,6 +6,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.tika.exception.TikaException;
@@ -155,6 +156,41 @@ public class ExcelUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 支持写入office2007以上
+     * @param filePath
+     * @param datas
+     */
+    public static void writeCell(String filePath, List<LinkedHashMap> datas) {
+        FileOutputStream os = null;
+        try {
+            XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(filePath));
+            XSSFSheet sheet = wb.getSheetAt(0);
+            for (int i=1; i <= datas.size();i++){
+                XSSFRow row = sheet.createRow(i);
+                Map<String,Object> data = datas.get(i-1);
+                logger.info("数据:{} ",data.toString());
+                for (int col=0; col< data.size(); col++){
+                    Object[] vals = data.values().toArray();
+                    String colVal = vals[col].toString();
+                    logger.info("列值为:{}",colVal);
+                    row.createCell(col).setCellValue(colVal);
+                }
+            }
+            os = new FileOutputStream(filePath);
+            wb.write(os);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                os.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {
