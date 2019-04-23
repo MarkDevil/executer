@@ -1,3 +1,278 @@
+GET http://localhost:8080/testng/run
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T121728.200.json
+
+###
+
+GET http://localhost:8080/testng/run
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T112757.200.json
+
+###
+
+GET http://localhost:8080/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T112750.404.html
+
+###
+
+GET http://localhost:8080/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T112626.200.json
+
+###
+
+GET http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T112103.200.html
+
+###
+
+GET http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T111924.200.html
+
+###
+
+POST http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T111917.200.html
+
+###
+
+POST http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T111736.200.html
+
+###
+
+GET http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T111710.200.html
+
+###
+
+GET http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T111657.200.html
+
+###
+
+GET http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T111156.200.html
+
+###
+
+GET http://localhost:8080/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T111131.404.html
+
+###
+
+GET http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T111126.404.html
+
+###
+
+GET http://localhost:8080/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T110834.200.json
+
+###
+
+GET http://localhost:8080/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T110814.200.json
+
+###
+
+GET http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T110521.200.html
+
+###
+
+GET http://localhost:8080/api/testng
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T110411.200.html
+
+###
+
+GET http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T110400.404.html
+
+###
+
+GET http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T110213.200.html
+
+###
+
+GET http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T110119.200.html
+
+###
+
+GET http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T110030.200.html
+
+###
+
+GET http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T105900.200.html
+
+###
+
+POST http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T105741.200.html
+
+###
+
+POST http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T105728.200.html
+
+###
+
+POST http://localhost:8080/api/runTest
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{     "filePath":"mark",        "fileName":"test",        "key":"key",        "newValue":"test"  }
+
+<> 2019-03-16T105710.200.html
+
+###
+
 POST http://localhost:8080/conf/restTest
 Accept: */*
 Cache-Control: no-cache

@@ -27,6 +27,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
  * Created by mark .
  * Data : 2017/3/16
  * Desc :
+ *
  * @author mark
  */
 @Controller
@@ -34,7 +35,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 public class SchedulerController {
     private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
 
-    @RequestMapping(value = "/schedule",method = RequestMethod.POST)
+    @RequestMapping(value = "/schedule", method = RequestMethod.POST)
     @ResponseBody
     public String invokeSchedule(@RequestBody ScheduleRequestDto scheduleRequestDto) {
         logger.info("Start invoke task ... , 请求参数为 ：" + scheduleRequestDto);
@@ -50,7 +51,7 @@ public class SchedulerController {
                             .withIntervalInSeconds(40)
                             .repeatForever())
                     .build();
-            scheduler.scheduleJob(jobDetail,trigger);
+            scheduler.scheduleJob(jobDetail, trigger);
             scheduler.start();
 
         } catch (SchedulerException e) {
@@ -59,32 +60,32 @@ public class SchedulerController {
         return "start successfully";
     }
 
-    @RequestMapping(value = "/schedule/onetime",method = RequestMethod.GET)
+    @RequestMapping(value = "/schedule/onetime", method = RequestMethod.GET)
     @ResponseBody
-    public Map invoke1time(){
+    public Map invoke1time() {
         final SchedulerManager schedulerManager = new SchedulerManager();
         schedulerManager.runNowOnce("PrintOnceTask");
         JSONObject ret = new JSONObject();
-        ret.put("retmsg","ok");
-        ret.put("retcode","00");
+        ret.put("retmsg", "ok");
+        ret.put("retcode", "00");
         return ret;
     }
 
-    @RequestMapping(value = "/schedule/sysData",method = RequestMethod.GET)
+    @RequestMapping(value = "/schedule/sysData", method = RequestMethod.GET)
     @ResponseBody
-        public ModelAndView sysData(){
-        Map<String,Object> ret = Maps.newHashMap();
+    public ModelAndView sysData() {
+        Map<String, Object> ret = Maps.newHashMap();
         ModelAndView view;
         try {
             SynDataBaseTask synDataBaseTask = new SynDataBaseTask();
             synDataBaseTask.run();
-        }catch (Exception ex){
-            ret.put("operatid","同步数据");
-            view = new ModelAndView("failed",ret);
+        } catch (Exception ex) {
+            ret.put("operatid", "同步数据");
+            view = new ModelAndView("failed", ret);
             return view;
         }
-        ret.put("operatid","同步数据");
-        view = new ModelAndView("Successfully",ret);
+        ret.put("operatid", "同步数据");
+        view = new ModelAndView("Successfully", ret);
         return view;
 
     }
