@@ -1,15 +1,10 @@
 package com.mark.test.framework.web.testng;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.testng.IReporter;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mark .
