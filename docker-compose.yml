@@ -1,4 +1,6 @@
+version: 2
 
+services:
   executer:
     container_name: executer
     image: executer:lastest
